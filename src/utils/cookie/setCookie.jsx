@@ -24,4 +24,4 @@ export default function setCookie(name, value, options = {}) {
 }
 
 // Example of use:
-setCookie("user", "John", { secure: true, "max-age": 3600 });
+// setCookie("user", "John", { secure: true, "max-age": 3600 });

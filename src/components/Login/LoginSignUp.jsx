@@ -1,28 +1,35 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { IoIosArrowRoundBack } from "react-icons/io";
 
-export default function LoginHeader() {
+export default function LoginSignUp() {
+  const navigate = useNavigate();
   return (
-    <LoginHeaderDiv>
-      <IoIosArrowRoundBack size={28} />
-      로그인
-    </LoginHeaderDiv>
+    <SignupCheck>
+      아직 회원이 아니신가요?
+      <SignUpButton
+        onClick={() => {
+          navigate("/signup");
+        }}
+      >
+        회원가입
+      </SignUpButton>
+    </SignupCheck>
   );
 }
 
-const LoginHeaderDiv = styled.div`
+const SignupCheck = styled.div`
   display: flex;
-  align-items: center;
+  position: absolute;
+  bottom: 53px;
+  left: 97px;
   justify-content: center;
-  position: relative;
-  font-size: 20px;
-  height: 56px;
-  font-weight: bold;
+  font-size: 14px;
+  color: var(--Grayscale-5);
 
-  svg {
-    position: absolute;
-    left: 32px;
-    color: var(--Grayscale-40);
+  a {
+    color: var(--Orange-10);
   }
 `;
+
+const SignUpButton = styled.button``;
