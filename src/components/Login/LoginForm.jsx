@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useRouter } from "next/router";
+import { useNavigate } from "react-router-dom";
 import styled, { css } from "styled-components";
 
 import Input from "../userMolcules/Input";
-import ModalCheckIt from "../userMolcules/modalCheckIt";
+import ModalCheckIt from "../userMolcules/ModalCheckIt";
 
 import useToggle from "../../hooks/useToggle";
 
-import getAccessToken from "../../utils/getAccessToken";
-import setAccesstoken from "../../utils/setAccesstoken";
+import getAccessToken from "../../utils/token/getAccessToken";
+import setAccessToken from "../../utils/token/setAccessToken";
 
 export default function LoginForm() {
   const [emailError, setEmailError] = useState(false); // 각종 에러 문구
@@ -29,14 +29,13 @@ export default function LoginForm() {
     login(loginData);
   };
 
-  const router = useRouter();
-
+  const navigate = useNavigate();
   useEffect(() => {
     const AccessToken = getAccessToken();
     if (AccessToken !== null) {
-      router.push("/");
+      navigate.push("/");
     }
-  }, [router]);
+  }, [navigate]);
 
   // ----api 관련 함수 필요----
 

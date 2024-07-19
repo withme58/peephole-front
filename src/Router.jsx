@@ -1,12 +1,12 @@
-import React from "react";
-import Router from "./Router";
-import GlobalStyle from "./styles/GlobalStyle";
+import { Routes, Route } from "react-router-dom";
+import LoginPage from "./pages/Login/LoginPage";
+import MainPage from "./pages/Main/MainPage";
 
-export default function App() {
+export default function Router() {
   return (
-    <>
-      <GlobalStyle />
-      <Router />
-    </>
+    <Routes>
+      <Route path="/" element={<MainPage />}></Route>
+      <Route path="/login" element={<LoginPage />}></Route>
+    </Routes>
   );
 }

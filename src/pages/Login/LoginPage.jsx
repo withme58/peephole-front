@@ -3,7 +3,7 @@ import styled from "styled-components";
 import LoginHeader from "../../components/Login/LoginHeader";
 import LoginForm from "../../components/Login/LoginForm";
 import LoginFind from "../../components/Login/LoginFind";
-import LoginSignUp from "../../components/Login/LoginSignUp";
+import LoginSignUp from "../../components/Login/LoginToSignUp";
 
 export default function LoginPage() {
   return (

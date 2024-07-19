@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useForm, UseFormRegister } from "react-hook-form";
+import { IoMdEyeOff } from "react-icons/io";
+import { IoMdEye } from "react-icons/io";
 
-import Image from "next/image";
 import styled from "styled-components";
 
 export default function Input(
@@ -68,23 +69,7 @@ export default function Input(
               name={name}
             />
             <div className={S.imageWrap} onClick={handlepassword}>
-              {password ? (
-                <Image
-                  src={
-                    "/images/icons/icon-eyesOff-filledGray_9FA6B2-w24-h24.svg"
-                  }
-                  alt="off"
-                  fill
-                />
-              ) : (
-                <Image
-                  src={
-                    "/images/icons/icon-eyesOn-filledGray_9FA6B2-w24-h24.svg"
-                  }
-                  alt="on"
-                  fill
-                />
-              )}
+              {password ? <IoMdEyeOff /> : <IoMdEye />}
             </div>
           </div>
           {errorMessage &&
