@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { CiLocationArrow1 } from "react-icons/ci";
 
+// 나중에 api로 받아올 데이터
 const mockfriends = [
   { name: "김철수", id: 1 },
   { name: "김영희", id: 2 },

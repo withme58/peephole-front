@@ -27,11 +27,9 @@ export default function Input(
   return (
     <>
       {data !== "password" ? (
-        <div className={S.inputWrap}>
-          <label className={S.label} htmlFor={data}>
-            {title}
-          </label>
-          <input
+        <InputWrap>
+          <Label htmlFor={data}>{title}</Label>
+          <TextInput
             {...hookform}
             onBlur={handleBlur}
             type={data === "이메일" ? "email" : "text"}
@@ -39,24 +37,22 @@ export default function Input(
             placeholder={placeholder}
             value={value}
             onFocus={handleFocus}
-            className={`${S.input} ${errorMessage ? S.errorMessage : ""}`}
+            $ErrorMessage={!!errorMessage}
             name={name}
             disabled={disabled}
             defaultValue={defaultValue}
           />
           {errorMessage && data === "이메일" && (
-            <div className={S.errorMessage}>{data} 형식으로 작성해 주세요.</div>
+            <ErrorMessage>{data} 형식으로 작성해 주세요.</ErrorMessage>
           )}
           {errorMessage && data === "닉네임" && (
-            <div className={S.errorMessage}>10자 이하로 작성해주세요.</div>
+            <ErrorMessage>10자 이하로 작성해주세요.</ErrorMessage>
           )}
-        </div>
+        </InputWrap>
       ) : (
-        <div className={S.inputWrap}>
-          <label className={S.label} htmlFor={data + title}>
-            {title}
-          </label>
-          <div className={S.inputInner}>
+        <InputWrap>
+          <Label htmlFor={data + title}>{title}</Label>
+          <InputInner>
             <input
               {...hookform}
               type={password ? "password" : "text"}
@@ -65,65 +61,69 @@ export default function Input(
               onBlur={handleBlur}
               value={value}
               onFocus={handleFocus}
-              className={`${S.input} ${errorMessage ? S.errorMessage : ""}`}
+              $ErrorMessage={!!errorMessage}
               name={name}
             />
-            <div className={S.imageWrap} onClick={handlepassword}>
+            <ImageWrap onClick={handlepassword}>
               {password ? <IoMdEyeOff /> : <IoMdEye />}
-            </div>
-          </div>
+            </ImageWrap>
+          </InputInner>
           {errorMessage &&
             (title === "비밀번호" ? (
-              <div className={S.errorMessage}>8자 이상 입력해 주세요.</div>
+              <ErrorMessage>8자 이상 입력해 주세요.</ErrorMessage>
             ) : (
-              <div className={S.errorMessage}>비밀번호를 확인해 주세요.</div>
+              <ErrorMessage>비밀번호를 확인해 주세요.</ErrorMessage>
             ))}
-        </div>
+        </InputWrap>
       )}
     </>
   );
 }
 
-const S = {
-  inputWrap: styled.div`
-    width: 100%;
-    max-width: 52rem;
-    height: 7.7rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.8rem;
-  `,
-  inputInner: styled.div`
-    position: relative;
-  `,
-  label: styled.label`
-    color: ${({ theme }) => theme.color.black_333236};
-    font-size: 1.6rem;
-    font-weight: 400;
-  `,
-  input: styled.input`
-    width: 100%;
-    padding: 15px 16px;
-    border-radius: 8px;
-    border: ${(props) =>
-      props.$errorMessage
-        ? "1px solid var(--red-D6173A, #D6173A)"
-        : "1px solid var(--violet-5534DA), #5534DA"};
-    background: ${({ theme }) => theme.color.white_FFFFFF};
-    font-size: 1.6rem;
-    font-weight: 400;
-    line-height: normal;
-  `,
-  imageWrap: styled.div`
-    width: 2rem;
-    height: 2rem;
-    position: absolute;
-    top: 1.2rem;
-    right: 1.6rem;
-    cursor: pointer;
-  `,
-  errorMessage: styled.div`
-    color: ${({ theme }) => theme.color.red_D6173A};
-    font-size: 1.4rem;
-  `,
-};
+const InputWrap = styled.div`
+  width: 100%;
+  max-width: 52rem;
+  height: 7.7rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+`;
+
+const InputInner = styled.div`
+  position: relative;
+  background: var(--light-gray);
+`;
+
+const Label = styled.label`
+  color: var(--light-gray);
+  font-size: 1.6rem;
+  font-weight: 400;
+`;
+
+const TextInput = styled.input`
+  width: 100%;
+  padding: 15px 16px;
+  border-radius: 8px;
+  border: ${(props) =>
+    props.$errorMessage
+      ? "2px solid var(--point-warning)"
+      : "2px solid var(--moss-green)"};
+  background: #fff;
+  font-size: 1.6rem;
+  font-weight: 400;
+  line-height: normal;
+`;
+
+const ImageWrap = styled.div`
+  width: 2rem;
+  height: 2rem;
+  position: absolute;
+  top: 1.2rem;
+  right: 1.6rem;
+  cursor: pointer;
+`;
+
+const ErrorMessage = styled.div`
+  color: var(--point-warning);
+  font-size: 1.4rem;
+`;

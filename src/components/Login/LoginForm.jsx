@@ -140,8 +140,36 @@ export default function LoginForm() {
   );
 }
 
-const StyledLoginForm = styled.form``;
+const StyledLoginForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+`;
 
-const Button = styled.button``;
+const Button = styled.button`
+  width: 35.1rem;
+  height: 5rem;
+  border: none;
+  border-radius: 0.8rem;
+  background: var(--moss-green);
+  color: #fff;
+  text-align: center;
+  font-size: 1.8rem;
+  font-weight: 500;
+  cursor: pointer;
+`;
 
-const DisableButton = styled.button``;
+const DisableButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  width: 35.1rem;
+  height: 5rem;
+  border-radius: 0.8rem;
+  background: var(--deep-gray);
+  color: #fff;
+  font-size: 1.8rem;
+  font-weight: 500;
+`;

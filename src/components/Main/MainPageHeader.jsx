@@ -1,11 +1,16 @@
 import styled from "styled-components";
+import useToggle from "../../hooks/useToggle";
 
 export default function MainPageHeader() {
+  const [toggleModal, setToggleModal] = useToggle(false);
+
   return (
     <HeaderContainer>
       <LogoButton>핍홀</LogoButton>
       <MypageButton>마이페이지</MypageButton>
-      <FriendListButon>친구 목록</FriendListButon>
+      <FriendListButon onClick={() => setToggleModal(true)}>
+        친구 목록
+      </FriendListButon>
     </HeaderContainer>
   );
 }
