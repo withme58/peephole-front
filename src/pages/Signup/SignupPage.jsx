@@ -66,7 +66,6 @@ export default function SignupPage() {
         />
       </BodyContainer>
 
-      {/* <StyledSignupButton isActive={isButtonActive} /> */}
       <StyledSignupButton isActive={isButtonActive}>
         회원가입
       </StyledSignupButton>
@@ -97,12 +96,6 @@ const Title = styled.div`
   line-height: 34px;
   font-size: 20px;
   font-weight: bold;
-
-  svg {
-    position: absolute;
-    left: 32px;
-    color: var(--Grayscale-40);
-  }
 `;
 
 const BodyContainer = styled.div`
