@@ -1,21 +1,23 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 export default function LoginFind() {
+  const navigate = useNavigate();
   return (
-    <FindDiv>
-      <p>
-        <a>비밀번호 찾기</a>
-      </p>
-      <p>|</p>
-      <p>
-        <a>이메일 찾기</a>
-      </p>
-    </FindDiv>
+    <PassWordFind>
+      <button
+        onClick={() => {
+          navigate(-1);
+        }}
+      >
+        비밀번호 찾기
+      </button>
+    </PassWordFind>
   );
 }
 
-const FindDiv = styled.div`
+const PassWordFind = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;

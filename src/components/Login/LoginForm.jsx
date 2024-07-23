@@ -1,217 +1,175 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import styled, { css } from "styled-components";
-import { FaEnvelope, FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
-import { PiExclamationMarkBold } from "react-icons/pi";
-import { FaCircleExclamation } from "react-icons/fa6";
+
+import Input from "../userMolcules/Input";
+import ModalCheckIt from "../userMolcules/ModalCheckIt";
+
+import useToggle from "../../hooks/useToggle";
+
+import getAccessToken from "../../utils/token/getAccessToken";
+import setAccessToken from "../../utils/token/setAccessToken";
 
 export default function LoginForm() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [focusedField, setFocusedField] = useState("");
-  const [passwordVisible, setPasswordVisible] = useState(false);
+  const [emailError, setEmailError] = useState(false); // 각종 에러 문구
+  const [passwordError, setPasswordError] = useState(false);
+  const [showPasswordError, setShowPasswordError, showPasswordToggle] =
+    useToggle(false);
+  const { register, handleSubmit, watch } = useForm();
 
-  const [isLogined, setIsLogined] = useState(false);
-  const [loginFail, setLoginFail] = useState(false);
+  const email = watch("email");
+  const password = watch("password");
 
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
+  const onSubmit = (data) => {
+    const loginData = {
+      email: data.email,
+      password: data.password,
+    };
+    login(loginData);
   };
 
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
-  };
-
-  const togglePasswordVisibility = () => {
-    setPasswordVisible(!passwordVisible);
-  };
-
-  const isLoginFormValid = email !== "" && password !== "";
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    if (isLogined === true) {
-    } else {
-      setLoginFail(true);
+  const navigate = useNavigate();
+  useEffect(() => {
+    const AccessToken = getAccessToken();
+    if (AccessToken !== null) {
+      navigate.push("/");
     }
+  }, [navigate]);
+
+  // ----api 관련 함수 필요----
+
+  async function login(data) {}
+
+  const validateEmail = (email) => {
+    const isvalidateEmail = /\S+@\S+\.\S+/.test(email);
+    setEmailError(!isvalidateEmail);
   };
+
+  useEffect(() => {
+    if (email !== "") {
+      validateEmail(email);
+    } else if (email === "") {
+      setEmailError(false);
+    }
+  }, [email]);
+
+  const validatePassword = (password) => {
+    const isvalidatePassword = password?.length >= 8; //비밀번호 8자리 이상으로 임의 설정
+    setPasswordError(!isvalidatePassword);
+  };
+
+  useEffect(() => {
+    if (password !== "") {
+      validatePassword(password);
+    } else if (password === "") {
+      setPasswordError(false);
+    }
+  }, [password]);
+
+  const handleBlur = (field) => {
+    return () => {
+      switch (field) {
+        case "email":
+          validateEmail(email);
+          break;
+        case "password":
+          validatePassword(password);
+          break;
+        default:
+          break;
+      }
+    };
+  };
+
+  const handleFocus = (field) => {
+    return () => {
+      switch (field) {
+        case "email":
+          setEmailError(false);
+          break;
+        case "password":
+          setPasswordError(false);
+          break;
+        default:
+          break;
+      }
+    };
+  };
+
+  const lastCheck =
+    !emailError && !passwordError && email !== "" && password !== "";
 
   return (
-    <LoginContainer>
-      <form onSubmit={handleSubmit}>
-        <Label isFocused={focusedField === "email" && email.length >= 0}>
-          이메일
-        </Label>
-        <LabelDiv isFocused={focusedField === "email" && email.length >= 0}>
-          <FaEnvelope size={24} />
-          <Input
-            type="email"
-            placeholder="이메일"
-            value={email}
-            onChange={handleEmailChange}
-            onFocus={() => setFocusedField("email")}
-            onBlur={() => setFocusedField("")}
-          />
-        </LabelDiv>
-        <Label
-          isFocused={focusedField === "password" && password.length >= 0}
-          loginFail={loginFail}
-        >
-          비밀번호
-        </Label>
-        <LabelDiv
-          isFocused={focusedField === "password" && password.length >= 0}
-          loginFail={loginFail}
-        >
-          <FaLock size={24} />
-          <Input
-            type={passwordVisible ? "text" : "password"}
-            placeholder="비밀번호를 입력해주세요"
-            value={password}
-            onChange={handlePasswordChange}
-            onFocus={() => setFocusedField("password")}
-            onBlur={() => setFocusedField("")}
-            loginFail={loginFail}
-          />
-          <ToggleVisibilityIcon
-            onClick={togglePasswordVisibility}
-            passwordVisible={passwordVisible}
-            loginFail={loginFail}
-          >
-            {passwordVisible ? <FaEye size={24} /> : <FaEyeSlash size={24} />}
-          </ToggleVisibilityIcon>
-        </LabelDiv>
-        {loginFail ? (
-          <ErrorDiv>
-            <FaCircleExclamation /> 야 비번 틀렸다
-          </ErrorDiv>
+    <>
+      {showPasswordError && (
+        <ModalCheckIt
+          text="비밀번호가 일치하지 않습니다."
+          submitButtonText="확인"
+          errorMessage={showPasswordToggle}
+        />
+      )}
+      <StyledLoginForm onSubmit={handleSubmit(onSubmit)}>
+        <Input
+          hookform={register("email", { pattern: /\S+@\S+\.\S+/ })}
+          title="이메일"
+          placeholder="이메일을 입력해 주세요"
+          data="이메일"
+          errorMessage={emailError}
+          name="email"
+          handleFocus={handleFocus("email")}
+          handleBlur={handleBlur("email")}
+        />
+        <Input
+          hookform={register("password")}
+          title="비밀번호"
+          placeholder="비밀번호를 입력해 주세요"
+          data="password"
+          errorMessage={passwordError}
+          name="password"
+          handleFocus={handleFocus("password")}
+          handleBlur={handleBlur("password")}
+        />
+        {lastCheck ? (
+          <Button type="submit">로그인</Button>
         ) : (
-          <div></div>
+          <DisableButton>로그인</DisableButton>
         )}
-
-        <Button
-          type="submit"
-          disabled={!isLoginFormValid}
-          isLoginFormValid={isLoginFormValid}
-          loginFail={loginFail}
-        >
-          로그인
-        </Button>
-      </form>
-    </LoginContainer>
+      </StyledLoginForm>
+    </>
   );
 }
 
-const LoginContainer = styled.div`
+const StyledLoginForm = styled.form`
   display: flex;
   flex-direction: column;
-
-  form {
-    display: flex;
-    flex-direction: column;
-    margin: 55px 32px 0px 32px;
-  }
-`;
-
-const Label = styled.label`
-  font-size: 14px;
-  color: ${(props) =>
-    props.loginFail
-      ? "var(--Red-10)"
-      : props.isFocused
-      ? "var(--Orange-10)"
-      : "var(--Grayscale-40)"};
-  margin: 40px 0px 0px 0px;
-`;
-
-const LabelDiv = styled.div`
-  display: flex;
   align-items: center;
-  margin: 10px 0px 0px 0px;
-  position: relative;
-
-  svg {
-    position: absolute;
-    left: 20px;
-    color: ${(props) =>
-      props.loginFail
-        ? "var(--Red-10)"
-        : props.isFocused
-        ? "var(--Orange-10)"
-        : "var(--Grayscale-50)"};
-  }
-`;
-
-const Input = styled.input`
-  width: 326px;
-  height: 60px;
-  padding: 0px 0px 0px 50px;
-  border: ${(props) =>
-    props.isFocused ? "2px solid var(--Orange-10)" : "0px"};
-  border-radius: 16px;
-  background-color: ${(props) =>
-    props.isFocused ? "var(--Grayscale-10)" : "var(--Grayscale-20)"};
-  font-size: 14px;
-
-  &:focus {
-    border: 2px solid var(--Orange-10);
-    background-color: var(--Grayscale-10);
-  }
-
-  ${(props) =>
-    props.loginFail &&
-    css`
-      background-color: var(--Red-20);
-      border: 2px solid var(--Red-10);
-    `}
-`;
-
-const ToggleVisibilityIcon = styled.div`
-  position: absolute;
-  right: 76px;
-  margin-top: -30px;
-  cursor: pointer;
-
-  svg {
-    color: ${(props) =>
-      props.loginFail
-        ? "var(--Red-10)"
-        : props.passwordVisible
-        ? "var(--Orange-10)"
-        : "var(--Grayscale-50)"};
-  }
+  gap: 3rem;
 `;
 
 const Button = styled.button`
-  background-color: var(--Grayscale-30);
-  color: var(--Grayscale-10);
+  width: 35.1rem;
+  height: 5rem;
   border: none;
-  border-radius: 16px;
+  border-radius: 0.8rem;
+  background: var(--moss-green);
+  color: #fff;
+  text-align: center;
+  font-size: 1.8rem;
+  font-weight: 500;
   cursor: pointer;
-  margin: 77px 0px 20px 0px;
-  height: 60px;
-  width: 326px;
-  font-size: 16px;
-
-  ${(props) =>
-    props.isLoginFormValid &&
-    css`
-      background-color: var(--Orange-10);
-    `}
-
-  ${(props) =>
-    props.loginFail &&
-    css`
-      background-color: var(--Orange-20);
-    `}
-
-    &:hover {
-    background-color: var(--Orange-20);
-  }
 `;
 
-const ErrorDiv = styled.div`
-  margin: 5px 0px 0px 0px;
-  font-size: 14px;
-  color: var(--Red-10);
+const DisableButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  width: 35.1rem;
+  height: 5rem;
+  border-radius: 0.8rem;
+  background: var(--deep-gray);
+  color: #fff;
+  font-size: 1.8rem;
+  font-weight: 500;
 `;
