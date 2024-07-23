@@ -1,8 +1,13 @@
 import React from "react";
 import styled from "styled-components";
+import ReplyForm from "../../components/ReplyQuestion/ReplyForm";
 
 export default function ReplyQuestionPage() {
-  return <PageContainer></PageContainer>;
+  return (
+    <PageContainer>
+      <ReplyForm />
+    </PageContainer>
+  );
 }
 
 const PageContainer = styled.div`
