@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { CiLocationArrow1 } from "react-icons/ci";
+import { IoClose } from "react-icons/io5";
 
 export default function SendQuestionModal({ closeModal, userData = [] }) {
   const onClickBackground = (e) => {
@@ -19,13 +20,17 @@ export default function SendQuestionModal({ closeModal, userData = [] }) {
       <ModalContainer onClick={onClickModal}>
         <Header>
           <FriendListHeader>친구 목록</FriendListHeader>
-          <CloseButton onClick={closeModal}>X</CloseButton>
+          <CloseButton>
+            <IoClose onClick={closeModal} size={25} color="#5a786f" />
+          </CloseButton>
         </Header>
         <FriendList>
           {userData.map((user) => (
             <FriendItem key={user.id}>
-              <FriendItemName>{user.name}</FriendItemName>
-              <CiLocationArrow1 width={24} height={24} />
+              <FriendItemName>{user.name}에게 질문하기</FriendItemName>
+              <SendButton>
+                <CiLocationArrow1 size={30} color="#5a786f" />
+              </SendButton>
             </FriendItem>
           ))}
         </FriendList>
@@ -64,13 +69,11 @@ const Header = styled.div`
 `;
 
 const FriendListHeader = styled.h2`
+  font-size: 24px;
   margin: 0;
 `;
 
-const CloseButton = styled.button`
-  background: none;
-  border: none;
-  font-size: 24px;
+const CloseButton = styled.div`
   cursor: pointer;
 `;
 
@@ -88,4 +91,8 @@ const FriendItem = styled.div`
 
 const FriendItemName = styled.span`
   font-size: 18px;
+`;
+
+const SendButton = styled.div`
+  cursor: pointer;
 `;
