@@ -37,7 +37,7 @@ export default function Input(
             placeholder={placeholder}
             value={value}
             onFocus={handleFocus}
-            $ErrorMessage={!!errorMessage}
+            ErrorMessage={errorMessage}
             name={name}
             disabled={disabled}
             defaultValue={defaultValue}
@@ -53,7 +53,7 @@ export default function Input(
         <InputWrap>
           <Label htmlFor={data + title}>{title}</Label>
           <InputInner>
-            <input
+            <TextInput
               {...hookform}
               type={password ? "password" : "text"}
               id={data + title}
@@ -61,7 +61,7 @@ export default function Input(
               onBlur={handleBlur}
               value={value}
               onFocus={handleFocus}
-              $ErrorMessage={!!errorMessage}
+              ErrorMessage={errorMessage}
               name={name}
             />
             <ImageWrap onClick={handlepassword}>
@@ -105,7 +105,7 @@ const TextInput = styled.input`
   padding: 15px 16px;
   border-radius: 8px;
   border: ${(props) =>
-    props.$errorMessage
+    props.errorMessage
       ? "2px solid var(--point-warning)"
       : "2px solid var(--moss-green)"};
   background: #fff;
