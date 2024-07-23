@@ -1,15 +1,20 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import SendQuestionModal from "./SendQuestionModal";
+import { useNavigate } from "react-router-dom";
 
 export default function MainPageHeader() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+  const navigate = useNavigate();
   // Mock 데이터 정의
   const MockUserData = [
-    { name: "김철수", id: 1 },
-    { name: "김영희", id: 2 },
-    { name: "박민수", id: 3 },
+    { friendName: "kj", questionId: 1 },
+    { friendName: "dgf", questionId: 2 },
+    { friendName: "xv", questionId: 3 },
+    { friendName: "wer", questionId: 4 },
+    { friendName: "sdf", questionId: 5 },
+    { friendName: "ghj", questionId: 6 },
+    { friendName: "tyu", questionId: 7 },
   ];
 
   // 모달 열기
@@ -26,9 +31,23 @@ export default function MainPageHeader() {
 
   return (
     <HeaderContainer>
-      <LogoButton>핍홀</LogoButton>
-      <MypageButton>마이페이지</MypageButton>
-      <FriendListButton onClick={openModal}>친구 목록</FriendListButton>
+      <LogoButton
+        onClick={() => {
+          navigate("/");
+        }}
+      >
+        핍홀
+      </LogoButton>
+      <MypageButton
+        onClick={() => {
+          navigate("/mypage");
+        }}
+      >
+        마이페이지
+      </MypageButton>
+      <FriendListButton onClick={openModal}>
+        질문 보낼 친구 목록
+      </FriendListButton>
       {isModalOpen && (
         <SendQuestionModal userData={MockUserData} closeModal={closeModal} />
       )}
