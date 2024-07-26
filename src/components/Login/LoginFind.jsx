@@ -5,14 +5,12 @@ import styled from "styled-components";
 export default function LoginFind() {
   const navigate = useNavigate();
   return (
-    <PassWordFind>
-      <button
-        onClick={() => {
-          navigate(-1);
-        }}
-      >
-        비밀번호 찾기
-      </button>
+    <PassWordFind
+      onClick={() => {
+        navigate(-1);
+      }}
+    >
+      비밀번호 찾기
     </PassWordFind>
   );
 }
