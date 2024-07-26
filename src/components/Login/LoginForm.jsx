@@ -80,20 +80,20 @@ export default function LoginForm() {
   //   };
   // };
 
-  const handleFocus = (field) => {
-    return () => {
-      switch (field) {
-        case "email":
-          setEmailError(false);
-          break;
-        case "password":
-          setPasswordError(false);
-          break;
-        default:
-          break;
-      }
-    };
-  };
+  // const handleFocus = (field) => {
+  //   return () => {
+  //     switch (field) {
+  //       case "email":
+  //         setEmailError(false);
+  //         break;
+  //       case "password":
+  //         setPasswordError(false);
+  //         break;
+  //       default:
+  //         break;
+  //     }
+  //   };
+  // };
 
   const lastCheck =
     !emailError && !passwordError && email !== "" && password !== "";
@@ -142,12 +142,13 @@ const StyledLoginForm = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 3rem;
+  gap: 30px;
 `;
 
 const Button = styled.button`
   width: 35.1rem;
   height: 5rem;
+  margin-top: 70px;
   border: none;
   border-radius: 0.8rem;
   background: var(--moss-green);
@@ -159,15 +160,14 @@ const Button = styled.button`
 `;
 
 const DisableButton = styled.button`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: none;
   width: 35.1rem;
   height: 5rem;
+  margin-top: 70px;
+  border: none;
   border-radius: 0.8rem;
   background: var(--deep-gray);
   color: #fff;
+  text-align: center;
   font-size: 1.8rem;
   font-weight: 500;
 `;
