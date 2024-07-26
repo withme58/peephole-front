@@ -37,8 +37,6 @@ export default function LoginForm() {
     }
   }, [navigate]);
 
-  // ----api 관련 함수 필요----
-
   async function login(data) {}
 
   const validateEmail = (email) => {
