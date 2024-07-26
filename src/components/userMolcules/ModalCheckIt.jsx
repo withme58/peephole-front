@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export default function ModalCheckIt(
-  submitButtonText,
+  submitButton,
   text,
   cancelButton,
   errorMessage
@@ -12,7 +12,7 @@ export default function ModalCheckIt(
         <Description>{text}</Description>
         <ButtonFlex>
           {cancelButton && <CancelButton>{cancelButton}</CancelButton>}
-          <Button onClick={errorMessage}>{submitButtonText}</Button>
+          <Button onClick={errorMessage}>{submitButton}</Button>
         </ButtonFlex>
       </Container>
     </Background>

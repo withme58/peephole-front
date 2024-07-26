@@ -32,4 +32,4 @@ const SignupCheck = styled.div`
   }
 `;
 
-const SignUpButton = styled.button``;
+const SignUpButton = styled.div``;
