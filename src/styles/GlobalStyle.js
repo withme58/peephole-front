@@ -28,6 +28,7 @@ html,
   body {
     font-family: Pretendard;
     font-size: 62.5%;
+    background-image: url('images/background_blue.png');
   }
 
   a {
