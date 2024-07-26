@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-export default function LoginSignUp() {
+export default function LoginToSignUp() {
   const navigate = useNavigate();
   return (
     <SignupCheck>
@@ -21,15 +21,9 @@ export default function LoginSignUp() {
 const SignupCheck = styled.div`
   display: flex;
   position: absolute;
-  bottom: 53px;
-  left: 97px;
   justify-content: center;
   font-size: 14px;
-  color: var(--Grayscale-5);
-
-  a {
-    color: var(--Orange-10);
-  }
+  color: #fff;
 `;
 
 const SignUpButton = styled.div``;

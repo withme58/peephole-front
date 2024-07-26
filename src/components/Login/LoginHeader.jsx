@@ -10,7 +10,8 @@ const LogoBox = styled.div`
   align-items: center;
   justify-content: center;
   position: relative;
-  font-size: 20px;
+  color: #fff;
+  font-size: 40px;
   height: 56px;
   font-weight: bold;
 `;

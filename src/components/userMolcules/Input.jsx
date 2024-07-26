@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { IoMdEyeOff, IoMdEye } from "react-icons/io";
 import styled from "styled-components";
+import { IoMail } from "react-icons/io5";
+import { IoIosLock } from "react-icons/io";
 
 export default function Input({
   data,
@@ -26,30 +28,38 @@ export default function Input({
       {data !== "password" ? (
         <S.inputWrap>
           <S.label htmlFor={data}>{title}</S.label>
-          <S.input
-            {...hookform}
-            onBlur={handleBlur}
-            type={data === "이메일" ? "email" : "text"}
-            id={data}
-            placeholder={placeholder}
-            value={value}
-            onFocus={handleFocus}
-            errorMessage={errorMessage}
-            name={name}
-            disabled={disabled}
-            defaultValue={defaultValue}
-          />
-          {errorMessage && data === "이메일" && (
-            <S.errorMessage>{data} 형식으로 작성해 주세요.</S.errorMessage>
-          )}
-          {errorMessage && data === "닉네임" && (
-            <S.errorMessage>10자 이하로 작성해주세요.</S.errorMessage>
-          )}
+          <S.inputInner>
+            <S.iconWrap>
+              <IoMail size={20} color="#919597" />
+            </S.iconWrap>
+            <S.input
+              {...hookform}
+              onBlur={handleBlur}
+              type={data === "이메일" ? "email" : "text"}
+              id={data}
+              placeholder={placeholder}
+              value={value}
+              onFocus={handleFocus}
+              errorMessage={errorMessage}
+              name={name}
+              disabled={disabled}
+              defaultValue={defaultValue}
+            />
+            {errorMessage && data === "이메일" && (
+              <S.errorMessage>{data} 형식으로 작성해 주세요.</S.errorMessage>
+            )}
+            {errorMessage && data === "닉네임" && (
+              <S.errorMessage>10자 이하로 작성해주세요.</S.errorMessage>
+            )}
+          </S.inputInner>
         </S.inputWrap>
       ) : (
         <S.inputWrap>
           <S.label htmlFor={data + title}>{title}</S.label>
           <S.inputInner>
+            <S.iconWrap>
+              <IoIosLock size={24} color="#919597" />
+            </S.iconWrap>
             <S.input
               {...hookform}
               type={password ? "password" : "text"}
@@ -62,7 +72,11 @@ export default function Input({
               name={name}
             />
             <S.imageWrap onClick={handlePassword}>
-              {password ? <IoMdEyeOff /> : <IoMdEye />}
+              {password ? (
+                <IoMdEyeOff size={24} color="#919597" />
+              ) : (
+                <IoMdEye size={24} color="#919597" />
+              )}
             </S.imageWrap>
           </S.inputInner>
           {errorMessage &&
@@ -84,29 +98,33 @@ const S = {
     height: 7.7rem;
     display: flex;
     flex-direction: column;
-    gap: 0.8rem;
+    gap: 10px;
   `,
   inputInner: styled.div`
     position: relative;
-    background: var(--light-gray);
+    background: transparent;
   `,
   label: styled.label`
-    color: var(--light-gray);
+    color: #919597;
     font-size: 1.6rem;
     font-weight: 400;
   `,
   input: styled.input`
     width: 100%;
-    padding: 15px 16px;
-    border-radius: 8px;
+    padding: 15px 44px;
+    border-radius: 10px;
     border: ${(props) =>
-      props.errorMessage
-        ? "1px solid var(--point-warning)"
-        : "1px solid var(--moss-green)"};
-    background: #fff;
+      props.errorMessage ? "1px solid var(--point-warning)" : "none"};
     font-size: 1.6rem;
     font-weight: 400;
     line-height: normal;
+    background: rgba(243, 243, 243, 0.2);
+  `,
+  iconWrap: styled.div`
+    position: absolute;
+    top: 50%;
+    left: 1.6rem;
+    transform: translateY(-50%);
   `,
   imageWrap: styled.div`
     width: 2rem;
