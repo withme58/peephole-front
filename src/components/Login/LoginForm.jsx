@@ -2,16 +2,16 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import axios from "../../api/axios";
 
 import Input from "../userMolcules/Input";
 import ModalCheckIt from "../userMolcules/ModalCheckIt";
 
 import useToggle from "../../hooks/useToggle";
-
-import getAccessToken from "../../utils/token/getAccessToken";
-// import setAccessToken from "../../utils/token/setAccessToken";
+import useUserStore from "../../store/useUserStore";
 
 export default function LoginForm() {
+  const { setUser } = useUserStore();
   const [emailError, setEmailError] = useState(false); // 각종 에러 문구
   const [passwordError, setPasswordError] = useState(false);
   const [showPasswordError, setShowPasswordError, showPasswordToggle] =
@@ -31,8 +31,8 @@ export default function LoginForm() {
 
   const navigate = useNavigate();
   useEffect(() => {
-    const AccessToken = getAccessToken();
-    if (AccessToken !== null) {
+    const LocalStorage = localStorage.getItem("login");
+    if (LocalStorage !== null) {
       navigate.push("/");
     }
   }, [navigate]);
@@ -44,41 +44,41 @@ export default function LoginForm() {
     setEmailError(!isvalidateEmail);
   };
 
-  useEffect(() => {
-    if (email !== "") {
-      validateEmail(email);
-    } else if (email === "") {
-      setEmailError(false);
-    }
-  }, [email]);
+  // useEffect(() => {
+  //   if (email !== "") {
+  //     validateEmail(email);
+  //   } else if (email === "") {
+  //     setEmailError(false);
+  //   }
+  // }, [email]);
 
-  const validatePassword = (password) => {
-    const isvalidatePassword = password?.length >= 8; //비밀번호 8자리 이상으로 임의 설정
-    setPasswordError(!isvalidatePassword);
-  };
+  // const validatePassword = (password) => {
+  //   const isvalidatePassword = password?.length >= 8; //비밀번호 8자리 이상으로 임의 설정
+  //   setPasswordError(!isvalidatePassword);
+  // };
 
-  useEffect(() => {
-    if (password !== "") {
-      validatePassword(password);
-    } else if (password === "") {
-      setPasswordError(false);
-    }
-  }, [password]);
+  // useEffect(() => {
+  //   if (password !== "") {
+  //     validatePassword(password);
+  //   } else if (password === "") {
+  //     setPasswordError(false);
+  //   }
+  // }, [password]);
 
-  const handleBlur = (field) => {
-    return () => {
-      switch (field) {
-        case "email":
-          validateEmail(email);
-          break;
-        case "password":
-          validatePassword(password);
-          break;
-        default:
-          break;
-      }
-    };
-  };
+  // const handleBlur = (field) => {
+  //   return () => {
+  //     switch (field) {
+  //       case "email":
+  //         validateEmail(email);
+  //         break;
+  //       case "password":
+  //         validatePassword(password);
+  //         break;
+  //       default:
+  //         break;
+  //     }
+  //   };
+  // };
 
   const handleFocus = (field) => {
     return () => {
@@ -103,7 +103,7 @@ export default function LoginForm() {
       {showPasswordError && (
         <ModalCheckIt
           text="비밀번호가 일치하지 않습니다."
-          submitButtonText="확인"
+          submitButton="확인"
           errorMessage={showPasswordToggle}
         />
       )}
@@ -115,8 +115,8 @@ export default function LoginForm() {
           data="이메일"
           errorMessage={emailError}
           name="email"
-          handleFocus={handleFocus("email")}
-          handleBlur={handleBlur("email")}
+          // handleFocus={handleFocus("email")}
+          // handleBlur={handleBlur("email")}
         />
         <Input
           hookform={register("password")}
@@ -125,8 +125,8 @@ export default function LoginForm() {
           data="password"
           errorMessage={passwordError}
           name="password"
-          handleFocus={handleFocus("password")}
-          handleBlur={handleBlur("password")}
+          // handleFocus={handleFocus("password")}
+          // handleBlur={handleBlur("password")}
         />
         {lastCheck ? (
           <Button type="submit">로그인</Button>
