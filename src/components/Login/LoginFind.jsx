@@ -5,14 +5,12 @@ import styled from "styled-components";
 export default function LoginFind() {
   const navigate = useNavigate();
   return (
-    <PassWordFind>
-      <button
-        onClick={() => {
-          navigate(-1);
-        }}
-      >
-        비밀번호 찾기
-      </button>
+    <PassWordFind
+      onClick={() => {
+        navigate(-1);
+      }}
+    >
+      비밀번호 찾기
     </PassWordFind>
   );
 }
@@ -22,8 +20,5 @@ const PassWordFind = styled.div`
   align-items: center;
   justify-content: center;
   font-size: 14px;
-  color: var(--Grayscale-50);
-  p {
-    padding: 0px 3px 0px 3px;
-  }
+  color: #919597;
 `;
