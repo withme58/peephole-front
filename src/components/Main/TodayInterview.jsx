@@ -49,13 +49,18 @@ export default function TodayInterview() {
   );
 }
 
-const Logo = styled.div``;
-const InterviewContainer = styled.div``;
+const Logo = styled.div`
+  color: #fff;
+`;
+const InterviewContainer = styled.div`
+  color: #fff;
+`;
 const QuestionArea = styled.div``;
 
 const FriendListButton = styled.button`
   background: none;
   border: none;
   font-size: 18px;
+  color: #fff;
   cursor: pointer;
 `;
