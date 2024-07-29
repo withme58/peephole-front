@@ -162,7 +162,7 @@ export default function SignupForm() {
 
   // 에러메세지가 없고 모든값이 빈값이 아닐때 버튼 활성화
   const lastCheck =
-    isChecked &&
+    // isChecked &&
     !emailError &&
     !nicknameError &&
     !passwordError &&
@@ -262,7 +262,7 @@ const Button = styled.button`
   margin-top: 70px;
   border: none;
   border-radius: 0.8rem;
-  background: var(--moss-green);
+  background: #2e8daf;
   color: #fff;
   text-align: center;
   font-size: 1.8rem;

@@ -6,7 +6,7 @@ export default function SignupToLogin() {
   const navigate = useNavigate();
   return (
     <SignupCheck>
-      이미 계정이 있으신가요?
+      이미 계정이 있으신가요? &nbsp;
       <SignUpButton
         onClick={() => {
           navigate("/login");
@@ -20,16 +20,11 @@ export default function SignupToLogin() {
 
 const SignupCheck = styled.div`
   display: flex;
-  position: absolute;
-  bottom: 53px;
-  left: 97px;
   justify-content: center;
   font-size: 14px;
-  color: var(--Grayscale-5);
-
-  a {
-    color: var(--Orange-10);
-  }
+  color: #fff;
 `;
 
-const SignUpButton = styled.button``;
+const SignUpButton = styled.div`
+  color: #2e8daf;
+`;
