@@ -1,9 +1,34 @@
 import React from "react";
 import styled from "styled-components";
+import { IoArrowBack } from "react-icons/io5";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginHeader() {
-  return <LogoBox>피폴</LogoBox>;
+  const navigate = useNavigate();
+
+  return (
+    <Header>
+      <BackButton
+        onClick={() => {
+          navigate(-1);
+        }}
+      >
+        <IoArrowBack />
+      </BackButton>
+      <LogoBox>피폴</LogoBox>
+    </Header>
+  );
 }
+
+const Header = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 20px 0;
+  position: relative;
+`;
+
+const BackButton = styled.div``;
 
 const LogoBox = styled.div`
   display: flex;
