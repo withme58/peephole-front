@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import axios from "../../api/axios";
 
-import Input from "../userMolcules/Input";
-import ModalCheckIt from "../userMolcules/ModalCheckIt";
+import Input from "../Molcules/Input";
+import ModalCheckIt from "../Molcules/ModalCheckIt";
 
 import useToggle from "../../hooks/useToggle";
 import useUserStore from "../../store/useUserStore";
