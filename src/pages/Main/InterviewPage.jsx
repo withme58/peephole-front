@@ -1,15 +1,12 @@
-import React from "react";
 import styled from "styled-components";
-import SignupForm from "../../components/Signup/SignupForm";
 import Header from "../../components/Molcules/Header";
-import SignupToLogin from "../../components/Signup/SignupToLogin";
+import TodayInterview from "../../components/Main/TodayInterview";
 
-export default function SignupPage() {
+export default function InterviewPage() {
   return (
     <PageContainer>
-      <Header text={"회원가입"} />
-      <SignupForm />
-      <SignupToLogin />
+      <Header text={"오늘의 인터뷰"} />
+      <TodayInterview />
     </PageContainer>
   );
 }

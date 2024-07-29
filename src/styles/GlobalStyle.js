@@ -2,16 +2,19 @@ import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
 :root{
-  --light-green: #CBD2C6;
-  --matcha-green: #8ba88e;
-  --moss-green: #5A786F;
-  --forest-green: #3B4E51;
-  --deep-green: #323E45;
+  --main-blue: #42aacb;
+  --tapped-blue: #2e8daf;
+  --hover-blue: #78c7e0;
+  --inactive-blue: #a0d5e5;
   
-  --light-gray: #f3f3f3;
-  --deep-gray: #A5A5A5;
+  --disabled-gray: #acacac;
+  --light-gray: #f3f3f3; //배경색
+  --deep-gray: #a5a5a5;
+  --blue-gray: #3d4954;
+
+  --blue-black: #1a1e1d
+
   --light-red: #ffe1e1;
-  --white-green: #eaefe6;
 
   --body-text: #8e8e8e;
   --title-text: #535353;

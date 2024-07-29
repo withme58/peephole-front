@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import LoginHeader from "../../components/Login/LoginHeader";
+import Header from "../../components/Molcules/Header";
 import LoginForm from "../../components/Login/LoginForm";
 import LoginFind from "../../components/Login/LoginFind";
 // import LoginToSignUp from "../../components/Login/LoginToSignUp";
@@ -8,7 +8,7 @@ import LoginFind from "../../components/Login/LoginFind";
 export default function LoginPage() {
   return (
     <PageContainer>
-      <LoginHeader />
+      <Header text={"로그인"} />
       <LoginForm />
       <LoginFind />
       {/* <LoginToSignUp /> */}

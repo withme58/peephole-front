@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { IoArrowBack } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 
-export default function SignupHeader() {
+export default function LoginHeader({ text }) {
   const navigate = useNavigate();
 
   return (
@@ -15,7 +15,7 @@ export default function SignupHeader() {
       >
         <IoArrowBack size={24} color="white" />
       </BackButton>
-      <LogoBox>회원가입</LogoBox>
+      <HeaderBox>{text}</HeaderBox>
     </Header>
   );
 }
@@ -33,7 +33,7 @@ const BackButton = styled.div`
   align-items: center;
 `;
 
-const LogoBox = styled.div`
+const HeaderBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
