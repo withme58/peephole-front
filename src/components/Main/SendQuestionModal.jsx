@@ -18,7 +18,7 @@ export default function SendQuestionModal({ closeModal, userData = [] }) {
     <Background onClick={onClickBackground}>
       <ModalContainer>
         <Header>
-          <FriendListHeader>질문내용~~</FriendListHeader>
+          <QuestionHeader>피폴 목록</QuestionHeader>
           <CloseButton>
             <IoClose onClick={closeModal} size={25} color="#5a786f" />
           </CloseButton>
@@ -26,7 +26,7 @@ export default function SendQuestionModal({ closeModal, userData = [] }) {
         <FriendList>
           {userData.map((user) => (
             <FriendItem key={user.questionId}>
-              <FriendItemName>{user.friendName}에게 질문하기</FriendItemName>
+              <FriendItemName>{user.friendName}</FriendItemName>
               <SendButton onClick={SuccessModal}>보내기</SendButton>
             </FriendItem>
           ))}
@@ -43,7 +43,7 @@ const Background = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -53,11 +53,10 @@ const ModalContainer = styled.div`
   z-index: 10;
   background-color: white;
   border-radius: 10px;
-  width: 280px;
-  height: 334px;
+  width: 400px;
+  height: 360px;
   max-width: 90%;
   padding: 20px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 `;
 
 const Header = styled.div`
@@ -66,8 +65,17 @@ const Header = styled.div`
   align-items: center;
 `;
 
-const FriendListHeader = styled.h2`
-  font-size: 14px;
+const QuestionHeader = styled.div`
+  /* 피폴 목록 */
+  flex-grow: 1;
+  text-align: center;
+
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+  /* identical to box height, or 120% */
+  text-align: center;
+  color: #535353;
   margin: 0;
 `;
 
@@ -81,18 +89,19 @@ const FriendList = styled.div`
   height: 250px;
   overflow-y: scroll;
   &::-webkit-scrollbar {
-    width: 8px;
+    display: none;
+    /* width: 8px;
     height: 8px;
-    background-color: var(--light-green);
+    background-color: var(--light-green); */
   }
 
-  &::-webkit-scrollbar-thumb {
+  /* &::-webkit-scrollbar-thumb {
     background-color: var(--deep-green);
   }
 
   &::-webkit-scrollbar-thumb:hover {
     background-color: var(--forest-green);
-  }
+  } */
 `;
 
 const FriendItem = styled.div`
@@ -102,7 +111,7 @@ const FriendItem = styled.div`
   padding: 10px;
   border-bottom: 1px solid #eee;
   &:hover {
-    background-color: #d9d9d9;
+    background-color: var(--light-gray);
   }
 `;
 
@@ -123,7 +132,7 @@ const SendButton = styled.button`
   border: none;
   cursor: pointer;
   &:hover {
-    background-color: var(--moss-green);
+    background-color: var(--hover-blue);
     color: #fff;
   }
 `;

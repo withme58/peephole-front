@@ -13,13 +13,13 @@ export default function TodayInterview() {
   비롯된 건가요?`;
   // Mock 데이터 정의
   const MockUserData = [
-    { friendName: "kj", questionId: 1 },
-    { friendName: "dgf", questionId: 2 },
-    { friendName: "xv", questionId: 3 },
-    { friendName: "wer", questionId: 4 },
-    { friendName: "sdf", questionId: 5 },
-    { friendName: "ghj", questionId: 6 },
-    { friendName: "tyu", questionId: 7 },
+    { friendName: "멋쟁이 토마토", questionId: 1 },
+    { friendName: "멋쟁이 복숭아", questionId: 2 },
+    { friendName: "멋쟁이 수박", questionId: 3 },
+    { friendName: "멋쟁이 가지", questionId: 4 },
+    { friendName: "멋쟁이 사과", questionId: 5 },
+    { friendName: "멋쟁이 참외", questionId: 6 },
+    { friendName: "멋쟁이 메론", questionId: 7 },
   ];
 
   // 모달 열기
