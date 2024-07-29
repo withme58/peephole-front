@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { IoArrowBack } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 
-export default function LoginHeader() {
+export default function SignupHeader() {
   const navigate = useNavigate();
 
   return (
@@ -15,7 +15,7 @@ export default function LoginHeader() {
       >
         <IoArrowBack size={24} color="white" />
       </BackButton>
-      <LogoBox>로그인</LogoBox>
+      <LogoBox>회원가입</LogoBox>
     </Header>
   );
 }
