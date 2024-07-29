@@ -4,7 +4,7 @@ import SignupForm from "../../components/Signup/SignupForm";
 import SignupHeader from "../../components/Signup/SignupHeader";
 import SignupToLogin from "../../components/Signup/SignupToLogin";
 
-export default function LoginPage() {
+export default function SignupPage() {
   return (
     <PageContainer>
       <SignupHeader />
