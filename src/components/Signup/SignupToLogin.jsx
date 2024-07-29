@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-export default function LoginSignUp() {
+export default function SignupToLogin() {
   const navigate = useNavigate();
   return (
     <SignupCheck>
