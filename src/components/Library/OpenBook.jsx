@@ -55,6 +55,7 @@ const ModalContent = styled.div`
   align-items: center;
   position: relative;
   perspective: 1000px; /* 3D 효과를 위해 */
+  
 `;
 
 const CloseButton = styled.button`

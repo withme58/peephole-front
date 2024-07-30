@@ -6,6 +6,7 @@ import LibraryPage from "./pages/Library/LibraryPage";
 import FriendListPage from "./pages/FriendList/FriendListPage";
 import ReplyQuestionPage from "./pages/ReplyQuestion/ReplyQuestionPage";
 import InterviewPage from "./pages/Main/InterviewPage";
+import MyPage from "./pages/MyPage/MyPage";
 
 export default function Router() {
   return (
@@ -15,8 +16,9 @@ export default function Router() {
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<SignupPage />} />
       <Route path="/library" element={<LibraryPage />} />
-      <Route path="list" element={<FriendListPage />} />
+      <Route path="/list" element={<FriendListPage />} />
       <Route path="/reply" element={<ReplyQuestionPage />} />
+      <Route path="/mypage" element={<MyPage />} />
     </Routes>
   );
 }
