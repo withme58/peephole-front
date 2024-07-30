@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useState } from "react";
 import SendQuestionModal from "./SendQuestionModal";
+import CalculateDate from "../CalculateDate/CalculateDate";
 
 export default function TodayInterview() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -38,6 +39,7 @@ export default function TodayInterview() {
       <Logo>피폴</Logo>
       <QuestionContainer>
         <QuestionArea>{question}</QuestionArea>
+        <CalculateDate />
       </QuestionContainer>
       <FriendListButton onClick={openModal}>오늘의 피폴</FriendListButton>
       {isModalOpen && (
@@ -66,7 +68,7 @@ const QuestionContainer = styled.div`
   justify-content: center;
 `;
 const QuestionArea = styled.div`
-  display: flex;
+  /* display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
@@ -81,7 +83,7 @@ const QuestionArea = styled.div`
   background: rgba(18, 18, 19, 0.3);
   backdrop-filter: blur(8px);
 
-  border-radius: 32px;
+  border-radius: 32px; */
 `;
 
 const FriendListButton = styled.button`
