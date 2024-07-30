@@ -7,19 +7,10 @@ import { IoArrowBack } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 
 export default function ListForm() {
-  const navigate = useNavigate();
   const [friends, setFriends] = useState(["민교", "동호", "다현"]);
-  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [friendToDelete, setFriendToDelete] = useState(null);
-
-  const openAddModal = () => {
-    setIsAddModalOpen(true);
-  };
-
-  const closeAddModal = () => {
-    setIsAddModalOpen(false);
-  };
 
   const openDeleteModal = (index) => {
     setFriendToDelete(index);
@@ -38,23 +29,8 @@ export default function ListForm() {
     closeDeleteModal();
   };
 
-  const addFriend = (nickname) => {
-    setFriends((prevFriends) => [...prevFriends, nickname]);
-  };
-
   return (
     <>
-      <Header>
-        <BackButton
-          onClick={() => {
-            navigate(-1);
-          }}
-        >
-          <IoArrowBack size={24} color="white" />
-        </BackButton>
-        <LogoBox>친구 목록</LogoBox>
-        <AddButton onClick={openAddModal}>친구 추가</AddButton>
-      </Header>
       <FriendBox>
         {friends.map((name, index) => (
           <FriendList key={index}>
@@ -63,9 +39,7 @@ export default function ListForm() {
           </FriendList>
         ))}
       </FriendBox>
-      {isAddModalOpen && (
-        <AddFriendModal onClose={closeAddModal} onAddFriend={addFriend} />
-      )}
+
       {isDeleteModalOpen && (
         <DeleteConfirmationModal
           onConfirm={confirmDelete}
@@ -91,45 +65,6 @@ const Form = styled.div`
 //   background-color: #f9f9f9;
 //   padding: 0 10px;
 // `;
-const Header = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 20px 0;
-  position: relative;
-  color: #fff;
-`;
-const LogoBox = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  color: #fff;
-  font-size: 40px;
-  height: 56px;
-  font-weight: bold;
-`;
-
-const AddButton = styled.button`
-  display: flex;
-  align-items: center;
-
-  background-color: #4caf50;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  cursor: pointer;
-  border-radius: 5px;
-
-  &:hover {
-    background-color: #45a049;
-  }
-`;
-
-const BackButton = styled.div`
-  display: flex;
-  align-items: center;
-`;
 
 const FriendBox = styled.div`
   display: flex;
