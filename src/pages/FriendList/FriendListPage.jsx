@@ -11,7 +11,9 @@ export default function FriendListPage() {
 }
 
 const PageContainer = styled.div`
-  width: 390px;
-  height: 844px;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 `;

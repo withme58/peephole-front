@@ -3,8 +3,11 @@ import styled from "styled-components";
 import { FaRegTrashAlt } from "react-icons/fa";
 import AddFriendModal from "./AddFriendModal";
 import DeleteConfirmationModal from "./DeleteConfirmationModal";
+import { IoArrowBack } from "react-icons/io5";
+import { useNavigate } from "react-router-dom";
 
 export default function ListForm() {
+  const navigate = useNavigate();
   const [friends, setFriends] = useState(["민교", "동호", "다현"]);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -42,7 +45,14 @@ export default function ListForm() {
   return (
     <>
       <Header>
-        친구 목록
+        <BackButton
+          onClick={() => {
+            navigate(-1);
+          }}
+        >
+          <IoArrowBack size={24} color="white" />
+        </BackButton>
+        <LogoBox>친구 목록</LogoBox>
         <AddButton onClick={openAddModal}>친구 추가</AddButton>
       </Header>
       <FriendBox>
@@ -65,22 +75,45 @@ export default function ListForm() {
     </>
   );
 }
-
+const Form = styled.div`
+  display: flex;
+  align-items: center;
+  position: relative;
+`;
+// const Header = styled.div`
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   position: relative;
+//   font-size: 20px;
+//   height: 56px;
+//   font-weight: bold;
+//   background-color: #f9f9f9;
+//   padding: 0 10px;
+// `;
 const Header = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 20px 0;
+  position: relative;
+  color: #fff;
+`;
+const LogoBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
-  font-size: 20px;
+  color: #fff;
+  font-size: 40px;
   height: 56px;
   font-weight: bold;
-  background-color: #f9f9f9;
-  padding: 0 10px;
 `;
 
 const AddButton = styled.button`
-  position: absolute;
-  right: 10px;
+  display: flex;
+  align-items: center;
+
   background-color: #4caf50;
   color: white;
   border: none;
@@ -91,6 +124,11 @@ const AddButton = styled.button`
   &:hover {
     background-color: #45a049;
   }
+`;
+
+const BackButton = styled.div`
+  display: flex;
+  align-items: center;
 `;
 
 const FriendBox = styled.div`
