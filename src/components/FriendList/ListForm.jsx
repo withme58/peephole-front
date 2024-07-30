@@ -7,6 +7,7 @@ import InvitationConfirmationModal from "./InvitationConfirmationModal";
 
 export default function ListForm() {
   const [friends, setFriends] = useState(["민교", "동호", "다현"]);
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
 
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isInvitationModalOpen, setIsInvitationModalOpen] = useState(false);
@@ -64,13 +65,6 @@ export default function ListForm() {
 
   return (
     <>
-      <Header>
-        친구 목록
-        <AddButton onClick={openAddModal}>친구 추가</AddButton>
-        <InvitationButton onClick={openInvitationModal}>
-          초대 확인
-        </InvitationButton>
-      </Header>
       <FriendBox>
         {friends.map((name, index) => (
           <FriendList key={index}>
@@ -84,14 +78,6 @@ export default function ListForm() {
         <DeleteConfirmationModal
           onConfirm={confirmDelete}
           onCancel={closeDeleteModal}
-        />
-      )}
-      {isInvitationModalOpen && (
-        <InvitationConfirmationModal
-          invitations={invitations}
-          onAccept={acceptInvitation}
-          onDecline={declineInvitation}
-          onClose={closeInvitationModal}
         />
       )}
     </>
@@ -120,22 +106,6 @@ const AddButton = styled.button`
 
   &:hover {
     background-color: #45a049;
-  }
-`;
-
-const InvitationButton = styled.button`
-  // 초대확인 버튼 스타일링
-  position: absolute;
-  right: 120px; /* 적절한 위치 설정 */
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  cursor: pointer;
-  border-radius: 5px;
-
-  &:hover {
-    background-color: #0056b3;
   }
 `;
 
