@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import Input from "../userMolcules/Input";
+// import Input from "../userMolcules/Input";
+import Input from "../Molcules/Input";
 
 export default function MyPageForm() {
   const [name, setName] = useState("으깬 감자");
