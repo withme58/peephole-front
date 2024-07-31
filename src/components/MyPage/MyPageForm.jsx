@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import Input from "../userMolcules/Input";
+import Input from "../Molcules/Input";
+
+import axios from "../../api/axios";
 
 export default function MyPageForm() {
   const [name, setName] = useState("으깬 감자");
@@ -9,6 +11,16 @@ export default function MyPageForm() {
   const [receivedTotalCount, setReceivedTotalCount] = useState(11);
   const [givenTotalCount, setGivenTotalCount] = useState(4);
   const [email, setEmail] = useState("abc@naver.com");
+
+  const fetchData = async () => {
+    try {
+      const response = axios.get(`/member/me`);
+      if (response.result.resultCode === 200) {
+        // 성공
+      }
+    } catch (error) {}
+  };
+
   return (
     <Form>
       <Title>
