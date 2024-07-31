@@ -37,8 +37,30 @@ export default function LoginForm() {
     }
   }, [navigate]);
 
-  async function login(data) {}
+  async function login(data) {
+    try {
+      const res = await axios.post("auth/login", data);
+      localStorage.setItem("login", res.data.accessToken);
 
+      await setUserData();
+      navigate.push("/");
+    } catch (error) {
+      setPasswordError(true);
+      if (data.email !== "" && data.password !== "") {
+        showPasswordToggle();
+      }
+      console.error("로그인 실패:", error);
+    }
+  }
+
+  const setUserData = async () => {
+    try {
+      const respons = await axios.get("users/me");
+      setUser(respons.data);
+    } catch (error) {
+      console.error("사용자 정보 가져오기 실패:", error);
+    }
+  };
   const validateEmail = (email) => {
     const isvalidateEmail = /\S+@\S+\.\S+/.test(email);
     setEmailError(!isvalidateEmail);
