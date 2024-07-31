@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { FaRegTrashAlt } from "react-icons/fa";
 import AddFriendModal from "./AddFriendModal";
-import DeleteConfirmationModal from "./DeleteConfirmationModal";
+import { IoArrowBack } from "react-icons/io5";
+import { useNavigate } from "react-router-dom";
 import InvitationConfirmationModal from "./InvitationConfirmationModal";
 
-export default function ListForm() {
+export default function ListHeader() {
   const [friends, setFriends] = useState(["민교", "동호", "다현"]);
+  const navigate = useNavigate();
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
 
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isInvitationModalOpen, setIsInvitationModalOpen] = useState(false);
   const [friendToDelete, setFriendToDelete] = useState(null);
   const [invitations, setInvitations] = useState(["영창", "단비", "민교"]); // 이부분 백엔드에서 받아와야함
@@ -21,24 +21,6 @@ export default function ListForm() {
   const closeAddModal = () => {
     setIsAddModalOpen(false);
   };
-
-  const openDeleteModal = (index) => {
-    setFriendToDelete(index);
-    setIsDeleteModalOpen(true);
-  };
-
-  const closeDeleteModal = () => {
-    setIsDeleteModalOpen(false);
-    setFriendToDelete(null);
-  };
-
-  const confirmDelete = () => {
-    setFriends((prevFriends) =>
-      prevFriends.filter((_, index) => index !== friendToDelete)
-    );
-    closeDeleteModal();
-  };
-
   const addFriend = (nickname) => {
     setFriends((prevFriends) => [...prevFriends, nickname]);
   };
@@ -65,38 +47,58 @@ export default function ListForm() {
 
   return (
     <>
-      <FriendBox>
-        {friends.map((name, index) => (
-          <FriendList key={index}>
-            <span>{name}</span>
-            <FaRegTrashAlt size={15} onClick={() => openDeleteModal(index)} />
-          </FriendList>
-        ))}
-      </FriendBox>
-
-      {isDeleteModalOpen && (
-        <DeleteConfirmationModal
-          onConfirm={confirmDelete}
-          onCancel={closeDeleteModal}
+      <Header>
+        <BackButton
+          onClick={() => {
+            navigate(-1);
+          }}
+        >
+          <IoArrowBack size={24} color="white" />
+        </BackButton>
+        <LogoBox>친구 목록</LogoBox>
+        <AddButton onClick={openAddModal}>친구 추가</AddButton>
+        <InvitationButton onClick={openInvitationModal}>
+          초대 확인
+        </InvitationButton>
+      </Header>
+      {isAddModalOpen && (
+        <AddFriendModal onClose={closeAddModal} onAddFriend={addFriend} />
+      )}
+      {isInvitationModalOpen && (
+        <InvitationConfirmationModal
+          invitations={invitations}
+          onAccept={acceptInvitation}
+          onDecline={declineInvitation}
+          onClose={closeInvitationModal}
         />
       )}
     </>
   );
 }
-const Form = styled.div`
+
+const Header = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 20px 0;
+  position: relative;
+  color: #fff;
+`;
+const LogoBox = styled.div`
   display: flex;
   align-items: center;
+  justify-content: center;
   position: relative;
-  font-size: 20px;
+  color: #fff;
+  font-size: 40px;
   height: 56px;
   font-weight: bold;
-  background-color: #f9f9f9;
-  padding: 0 10px;
 `;
 
 const AddButton = styled.button`
-  position: absolute;
-  right: 10px;
+  display: flex;
+  align-items: center;
+
   background-color: #4caf50;
   color: white;
   border: none;
@@ -109,23 +111,23 @@ const AddButton = styled.button`
   }
 `;
 
-const FriendBox = styled.div`
+const BackButton = styled.div`
   display: flex;
-  flex-direction: column;
-  position: relative;
-  height: auto;
+  align-items: center;
 `;
 
-const FriendList = styled.div`
-  display: flex;
-  justify-content: space-between;
-  font-size: 20px;
-  background-color: #ff9;
-  margin: 5px;
-  padding: 5px;
-  align-items: center;
+const InvitationButton = styled.button`
+  // 초대확인 버튼 스타일링
+  position: absolute;
+  right: 120px; /* 적절한 위치 설정 */
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
 
-  svg {
-    cursor: pointer;
+  &:hover {
+    background-color: #0056b3;
   }
 `;
