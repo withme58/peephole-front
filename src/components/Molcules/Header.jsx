@@ -22,7 +22,6 @@ export default function Header({ text }) {
 
 const HeaderContainer = styled.div`
   display: flex;
-  justify-content: space-between;
   align-items: center;
   padding: 20px 20px 0;
   position: relative;
@@ -31,6 +30,7 @@ const HeaderContainer = styled.div`
 const BackButton = styled.div`
   display: flex;
   align-items: center;
+  margin-right: auto; /* 추가된 코드 */
 `;
 
 const HeaderBox = styled.div`
@@ -39,7 +39,10 @@ const HeaderBox = styled.div`
   justify-content: center;
   position: relative;
   color: #fff;
-  font-size: 40px;
+  font-size: 24px;
+  width: 360px; /* 추가된 코드 */
   height: 56px;
   font-weight: bold;
+  flex: 1; /* 추가된 코드 */
+  text-align: center; /* 추가된 코드 */
 `;
