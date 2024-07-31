@@ -5,9 +5,9 @@ import { useForm } from "react-hook-form";
 import axios from "../../api/axios";
 
 import useModalToggle from "../../hooks/useModalToggle";
-import ModalCheckIt from "../Molcules/ModalCheckIt";
+import ModalCheckIt from "../userMolcules/ModalCheckIt";
 
-import Input from "../Molcules/Input";
+import Input from "../userMolcules/Input";
 
 import styled from "styled-components";
 
@@ -54,7 +54,7 @@ export default function SignupForm() {
       if (error.response && error.response.status === 409) {
         openModal();
       } else {
-        console.error("회원가입 요청 오류:", error);
+        console.error("닉네임 중복 또는 회원가입 오류:", error);
       }
     }
   };

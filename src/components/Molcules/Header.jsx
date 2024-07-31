@@ -3,11 +3,11 @@ import styled from "styled-components";
 import { IoArrowBack } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 
-export default function LoginHeader({ text }) {
+export default function Header({ text }) {
   const navigate = useNavigate();
 
   return (
-    <Header>
+    <HeaderContainer>
       <BackButton
         onClick={() => {
           navigate(-1);
@@ -16,11 +16,11 @@ export default function LoginHeader({ text }) {
         <IoArrowBack size={24} color="white" />
       </BackButton>
       <HeaderBox>{text}</HeaderBox>
-    </Header>
+    </HeaderContainer>
   );
 }
 
-const Header = styled.div`
+const HeaderContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;

@@ -7,9 +7,9 @@ export default function TodayInterview() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const question = `
   중요한 결정을 내릴 때,
+  중요한 결정을 내릴 때,
   나의 가치와 원칙은
   어떤 영향을 미치나요? 
-
   그 가치는 무엇에서
   비롯된 건가요?`;
   // Mock 데이터 정의
