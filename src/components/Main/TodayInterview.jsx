@@ -1,10 +1,12 @@
 import styled from "styled-components";
 import { useState } from "react";
 import SendQuestionModal from "./SendQuestionModal";
+import CalculateDate from "../CalculateDate/CalculateDate";
 
 export default function TodayInterview() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const question = `
+  중요한 결정을 내릴 때,
   중요한 결정을 내릴 때,
   나의 가치와 원칙은
   어떤 영향을 미치나요? 
@@ -37,6 +39,7 @@ export default function TodayInterview() {
       <Logo>피폴</Logo>
       <QuestionContainer>
         <QuestionArea>{question}</QuestionArea>
+        <CalculateDate />
       </QuestionContainer>
       <FriendListButton onClick={openModal}>오늘의 피폴</FriendListButton>
       {isModalOpen && (
@@ -65,19 +68,22 @@ const QuestionContainer = styled.div`
   justify-content: center;
 `;
 const QuestionArea = styled.div`
-  display: flex;
+  /* display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   padding: 50px 25px;
+
   font-size: 24px;
   font-weight: 600;
+
   position: absolute;
   width: 400px;
   height: 465px;
   background: rgba(18, 18, 19, 0.3);
   backdrop-filter: blur(8px);
-  border-radius: 32px;
+
+  border-radius: 32px; */
 `;
 
 const FriendListButton = styled.button`
