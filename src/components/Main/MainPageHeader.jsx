@@ -1,6 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { IoPersonSharp } from "react-icons/io5";
+import { BiLibrary } from "react-icons/bi";
+import { IoIosChatbubbles } from "react-icons/io";
 
 export default function MainPageHeader() {
   const navigate = useNavigate();
@@ -12,15 +15,31 @@ export default function MainPageHeader() {
           navigate("/");
         }}
       >
-        핍홀
+        피폴
       </LogoButton>
-      <MypageButton
-        onClick={() => {
-          navigate("/mypage");
-        }}
-      >
-        마이페이지
-      </MypageButton>
+      <ButtonContainer>
+        <MypageButton
+          onClick={() => {
+            navigate("/mypage");
+          }}
+        >
+          <IoPersonSharp size={20} />
+        </MypageButton>
+        <LibraryButton
+          onClick={() => {
+            navigate("/library");
+          }}
+        >
+          <BiLibrary />
+        </LibraryButton>
+        <InterviewButton
+          onClick={() => {
+            navigate("/interview");
+          }}
+        >
+          <IoIosChatbubbles />
+        </InterviewButton>
+      </ButtonContainer>
     </HeaderContainer>
   );
 }
@@ -28,22 +47,46 @@ export default function MainPageHeader() {
 // Styled Components
 const HeaderContainer = styled.div`
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between; /* 추가된 부분 */
   padding: 20px;
-  background-color: #f8f9fa;
 `;
 
 const LogoButton = styled.button`
   background: none;
   border: none;
   font-size: 24px;
+  color: #fff;
   cursor: pointer;
+  flex: 1; /* 추가된 부분 */
+  text-align: center; /* 추가된 부분 */
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  gap: 10px;
 `;
 
 const MypageButton = styled.button`
   background: none;
   border: none;
   font-size: 18px;
+  color: #fff;
+  cursor: pointer;
+`;
+
+const LibraryButton = styled.button`
+  background: none;
+  border: none;
+  font-size: 18px;
+  color: #fff;
+  cursor: pointer;
+`;
+
+const InterviewButton = styled.button`
+  background: none;
+  border: none;
+  font-size: 18px;
+  color: #fff;
   cursor: pointer;
 `;
