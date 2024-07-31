@@ -5,9 +5,9 @@ import { useForm } from "react-hook-form";
 import axios from "../../api/axios";
 
 import useModalToggle from "../../hooks/useModalToggle";
-import ModalCheckIt from "../userMolcules/ModalCheckIt";
+import ModalCheckIt from "../Molcules/ModalCheckIt";
 
-import Input from "../userMolcules/Input";
+import Input from "../Molcules/Input";
 
 import styled from "styled-components";
 
