@@ -1,11 +1,12 @@
 import styled from "styled-components";
 import MyPageHeader from "../../components/MyPage/MyPageHeader";
 import MyPageForm from "../../components/MyPage/MyPageForm";
+import Header from "../../components/Molcules/Header";
 
 export default function MyPage() {
   return (
     <PageContainer>
-      <MyPageHeader />
+      <Header text={"마이페이지"} />
       <MyPageForm />
     </PageContainer>
   );
@@ -17,4 +18,5 @@ const PageContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  height: 100vh;
 `;
