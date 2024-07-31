@@ -1,11 +1,12 @@
 import styled from "styled-components";
 import { useState } from "react";
 import SendQuestionModal from "./SendQuestionModal";
+import CalculateDate from "../CalculateDate/CalculateDate";
 
 export default function TodayInterview() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const question = `
-  중요한 결정을 내릴 때, 
+  중요한 결정을 내릴 때,
   나의 가치와 원칙은
   어떤 영향을 미치나요? 
 
@@ -34,33 +35,66 @@ export default function TodayInterview() {
     setIsModalOpen(false);
   };
   return (
-    <>
+    <InterviewContainer>
       <Logo>피폴</Logo>
-      <InterviewContainer>
+      <QuestionContainer>
         <QuestionArea>{question}</QuestionArea>
-      </InterviewContainer>
-      <FriendListButton onClick={openModal}>
-        질문 보낼 친구 목록
-      </FriendListButton>
+        <CalculateDate />
+      </QuestionContainer>
+      <FriendListButton onClick={openModal}>오늘의 피폴</FriendListButton>
       {isModalOpen && (
         <SendQuestionModal userData={MockUserData} closeModal={closeModal} />
       )}
-    </>
+    </InterviewContainer>
   );
 }
+const InterviewContainer = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+`;
 
 const Logo = styled.div`
+  font-size: 24px;
+  font-weight: 600;
   color: #fff;
 `;
-const InterviewContainer = styled.div`
+const QuestionContainer = styled.div`
   color: #fff;
+  display: flex;
+  justify-content: center;
 `;
-const QuestionArea = styled.div``;
+const QuestionArea = styled.div`
+  /* display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 25px;
+
+  font-size: 24px;
+  font-weight: 600;
+
+  position: absolute;
+  width: 400px;
+  height: 465px;
+  background: rgba(18, 18, 19, 0.3);
+  backdrop-filter: blur(8px);
+
+  border-radius: 32px; */
+`;
 
 const FriendListButton = styled.button`
   background: none;
   border: none;
+  border-radius: 10px;
+  width: 300px;
+  height: 60px;
+  background-color: var(--tapped-blue);
   font-size: 18px;
+  font-weight: 400;
   color: #fff;
   cursor: pointer;
 `;

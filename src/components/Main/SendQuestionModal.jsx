@@ -88,19 +88,19 @@ const FriendList = styled.div`
   padding-right: 10px;
   height: 250px;
   overflow-y: scroll;
-  &::-webkit-scrollbar {
+  /* &::-webkit-scrollbar {
     display: none;
-    /* width: 8px;
+    width: 8px;
     height: 8px;
-    background-color: var(--light-green); */
+    background-color: var(--light-gray);
   }
 
-  /* &::-webkit-scrollbar-thumb {
-    background-color: var(--deep-green);
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--tapped-blue);
   }
 
   &::-webkit-scrollbar-thumb:hover {
-    background-color: var(--forest-green);
+    background-color: var(--blue-black);
   } */
 `;
 
