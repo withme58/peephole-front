@@ -30,14 +30,14 @@ export default function MainPageHeader() {
             navigate("/library");
           }}
         >
-          <BiLibrary />
+          <BiLibrary size={20} />
         </LibraryButton>
         <InterviewButton
           onClick={() => {
             navigate("/interview");
           }}
         >
-          <IoIosChatbubbles />
+          <IoIosChatbubbles size={20} />
         </InterviewButton>
       </ButtonContainer>
     </HeaderContainer>
