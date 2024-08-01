@@ -31,6 +31,7 @@ const BackButton = styled.div`
   display: flex;
   align-items: center;
   margin-right: auto; /* 추가된 코드 */
+  cursor: pointer;
 `;
 
 const HeaderBox = styled.div`
