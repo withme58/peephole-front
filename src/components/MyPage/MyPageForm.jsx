@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Input from "../Molcules/Input";
-
 import axios from "../../api/axios";
 
 export default function MyPageForm() {
@@ -12,14 +11,18 @@ export default function MyPageForm() {
   const [givenTotalCount, setGivenTotalCount] = useState(4);
   const [email, setEmail] = useState("abc@naver.com");
 
-  const fetchData = async () => {
+  const fetchData = async (data) => {
     try {
-      const response = axios.get(`/member/me`);
-      if (response.result.resultCode === 200) {
-        // 성공
-      }
-    } catch (error) {}
+      const respnse = await axios.get("/member/me");
+      console.log("Mypage response:", respnse); // 응답 데이터
+    } catch (error) {
+      console.error("마이페이지 데이터 로드 실패:", error);
+    }
   };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   return (
     <Form>

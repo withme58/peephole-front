@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { FaRegTrashAlt } from "react-icons/fa";
 import AddFriendModal from "./AddFriendModal";
 import DeleteConfirmationModal from "./DeleteConfirmationModal";
 import InvitationConfirmationModal from "./InvitationConfirmationModal";
+import axios from "../../api/axios";
 
 export default function ListForm() {
   const [friends, setFriends] = useState(["민교", "동호", "다현"]);
@@ -13,6 +14,19 @@ export default function ListForm() {
   const [isInvitationModalOpen, setIsInvitationModalOpen] = useState(false);
   const [friendToDelete, setFriendToDelete] = useState(null);
   const [invitations, setInvitations] = useState(["영창", "단비", "민교"]); // 이부분 백엔드에서 받아와야함
+
+  const fetchData = async (data) => {
+    try {
+      const respnse = await axios.get("/member/friends");
+      console.log("friendList response:", respnse); // 응답 데이터
+    } catch (error) {
+      console.error("친구목록 데이터 로드 실패:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   const openAddModal = () => {
     setIsAddModalOpen(true);
