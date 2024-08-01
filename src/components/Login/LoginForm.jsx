@@ -5,7 +5,7 @@ import styled from "styled-components";
 import axios from "../../api/axios";
 
 import Input from "../Molcules/Input";
-import ModalCheckIt from "../Molcules/ModalCheckIt";
+// import ModalCheckIt from "../Molcules/ModalCheckIt";
 
 import useToggle from "../../hooks/useToggle";
 import useUserStore from "../../store/useUserStore";
@@ -33,17 +33,18 @@ export default function LoginForm() {
   useEffect(() => {
     const LocalStorage = localStorage.getItem("login");
     if (LocalStorage !== null) {
-      navigate.push("/");
+      navigate("/");
     }
   }, [navigate]);
 
   async function login(data) {
     try {
-      const res = await axios.post("auth/login", data);
+      const res = await axios.post("open-api/signin", data);
+      console.log("Login response:", res); // 응답 데이터
       localStorage.setItem("login", res.data.accessToken);
 
-      await setUserData();
-      navigate.push("/");
+      // await setUserData();
+      navigate("/");
     } catch (error) {
       setPasswordError(true);
       if (data.email !== "" && data.password !== "") {
@@ -53,14 +54,15 @@ export default function LoginForm() {
     }
   }
 
-  const setUserData = async () => {
-    try {
-      const respons = await axios.get("users/me");
-      setUser(respons.data);
-    } catch (error) {
-      console.error("사용자 정보 가져오기 실패:", error);
-    }
-  };
+  // const setUserData = async () => {
+  //   try {
+  //     const respons = await axios.get("/api/member/me");
+  //     setUser(respons.data);
+  //   } catch (error) {
+  //     console.error("사용자 정보 가져오기 실패:", error);
+  //   }
+  // };
+
   const validateEmail = (email) => {
     const isvalidateEmail = /\S+@\S+\.\S+/.test(email);
     setEmailError(!isvalidateEmail);
@@ -122,13 +124,13 @@ export default function LoginForm() {
 
   return (
     <>
-      {showPasswordError && (
+      {/* {showPasswordError && (
         <ModalCheckIt
           text="비밀번호가 일치하지 않습니다."
           submitButton="확인"
           errorMessage={showPasswordToggle}
         />
-      )}
+      )} */}
       <StyledLoginForm onSubmit={handleSubmit(onSubmit)}>
         <Input
           hookform={register("email", { pattern: /\S+@\S+\.\S+/ })}
