@@ -10,4 +10,11 @@ export default function MainPage() {
   );
 }
 
-const MainPageContainer = styled.div``;
+const MainPageContainer = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+`;

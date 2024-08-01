@@ -32,7 +32,7 @@ html,
     font-family: Pretendard;
     font-size: 62.5%;
     background-image: url('images/background_blue.png');
-   background-size: 500px 100vh; /* 너비를 500px로 설정하고 높이를 화면 전체 높이로 설정 */
+   background-size: 500px auto; /* 너비를 500px로 설정하고 높이를 화면 전체 높이로 설정 */
     background-repeat: no-repeat; /* 배경 이미지 반복 없음 */
      background-position: center; /* 배경 이미지를 가운데에 위치 */
   }

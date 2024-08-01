@@ -25,13 +25,11 @@ export default function TodayInterview() {
 
   // 모달 열기
   const openModal = () => {
-    console.log("모달 열기");
     setIsModalOpen(true);
   };
 
   // 모달 닫기
   const closeModal = () => {
-    console.log("모달 닫기");
     setIsModalOpen(false);
   };
   return (
@@ -48,6 +46,7 @@ export default function TodayInterview() {
     </InterviewContainer>
   );
 }
+
 const InterviewContainer = styled.div`
   position: relative;
   display: flex;
@@ -59,31 +58,29 @@ const InterviewContainer = styled.div`
 
 const Logo = styled.div`
   font-size: 24px;
-  font-weight: 600;
+  font-weight: 500;
   color: #fff;
 `;
+
 const QuestionContainer = styled.div`
   color: #fff;
   display: flex;
-  justify-content: center;
-`;
-const QuestionArea = styled.div`
-  /* display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 50px 25px;
-
-  font-size: 24px;
-  font-weight: 600;
-
-  position: absolute;
+  background: rgba(61, 73, 84, 0.3);
+  backdrop-filter: blur(8px);
+  gap: 80px;
+  border-radius: 32px;
   width: 400px;
   height: 465px;
-  background: rgba(18, 18, 19, 0.3);
-  backdrop-filter: blur(8px);
+`;
 
-  border-radius: 32px; */
+const QuestionArea = styled.div`
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center; /* 추가된 부분 */
 `;
 
 const FriendListButton = styled.button`
