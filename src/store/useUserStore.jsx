@@ -6,9 +6,10 @@ const useUserStore = create(
     (set) => ({
       user: {
         id: "",
+        name: "",
         email: "",
-        nickname: "",
         createdAt: "", //~~일째 디자인을 위해..?
+        status: "",
       },
       setUser: (userInfo) => set({ user: userInfo }),
     }),

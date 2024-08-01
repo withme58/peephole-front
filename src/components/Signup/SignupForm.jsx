@@ -39,8 +39,8 @@ export default function SignupForm() {
     try {
       if (!emailError && !passwordCheckError && !nameError) {
         const response = await axios.post("open-api/signup", data);
-        if (response.status === 201) {
-          setShowSuccessModal(true);
+        if (response.status === 200) {
+          // setShowSuccessModal(true);
           navigate("/login");
         }
       }
