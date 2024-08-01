@@ -192,7 +192,7 @@ export default function SignupForm() {
           name="name"
           handleFocus={handleFocus("name")}
           handleBlur={handleBlur("name")}
-          watchValue={name}
+          watchValue={name} // 글자수 체크
         />
         <Input
           hookform={register("email", { pattern: /\S+@\S+\.\S+/ })}
