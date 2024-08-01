@@ -5,7 +5,7 @@ import styled from "styled-components";
 export default function LoginToSignUp() {
   const navigate = useNavigate();
   return (
-    <SignupCheck>
+    <AccountCheck>
       아직 회원이 아니신가요?
       <SignUpButton
         onClick={() => {
@@ -14,16 +14,20 @@ export default function LoginToSignUp() {
       >
         회원가입
       </SignUpButton>
-    </SignupCheck>
+    </AccountCheck>
   );
 }
 
-const SignupCheck = styled.div`
+const AccountCheck = styled.div`
   display: flex;
-  position: absolute;
   justify-content: center;
   font-size: 14px;
   color: #fff;
+  gap: 10px;
 `;
 
-const SignUpButton = styled.div``;
+const SignUpButton = styled.div`
+  color: #2e8daf;
+  font-weight: 700;
+  cursor: pointer;
+`;

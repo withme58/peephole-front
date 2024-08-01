@@ -16,45 +16,39 @@ export default function SignupForm() {
   const [showSuccessModal, setShowSuccessModal] = useState(false); // 회원가입 성공 모달
   const [isModalOpen, openModal, closeModal, toggleModal] =
     useModalToggle(false); // 회원가입 실패 모달
-  const [isChecked, setIsChecked] = useState(false); // 이용약관 체크
   const [emailError, setemailError] = useState(false); // 각종 에러 문구
   const [passwordError, setPasswordError] = useState(false);
   const [passwordCheckError, setPasswordCheckError] = useState(false);
-  const [nicknameError, setNicknameError] = useState(false);
+  const [nameError, setNameError] = useState(false);
   const { register, handleSubmit, watch } = useForm();
   const onSubmit = (data) => {
     const signupData = {
       email: data.email,
-      nickname: data.nickname,
+      name: data.name,
       password: data.password,
     };
     handleSubmits(signupData);
   };
   const email = watch("email");
-  const nickname = watch("nickname");
+  const name = watch("name");
   const password = watch("password");
   const passwordCheck = watch("passwordCheck");
-
-  // 이용약관 체크 확인
-  const handleCheckBoxChange = (e) => {
-    setIsChecked(e.target.checked);
-  };
 
   // 회원가입 실행
   const handleSubmits = async (data) => {
     try {
-      if (isChecked && !emailError && !passwordCheckError && !nicknameError) {
-        const response = await axios.post("users", data);
+      if (!emailError && !passwordCheckError && !nameError) {
+        const response = await axios.post("open-api/signup", data);
         if (response.status === 201) {
           setShowSuccessModal(true);
-          navigate.push("/signin");
+          navigate("/login");
         }
       }
     } catch (error) {
-      if (error.response && error.response.status === 409) {
+      if (error.response && error.response.status === 400) {
         openModal();
       } else {
-        console.error("닉네임 중복 또는 회원가입 오류:", error);
+        console.error("닉네임 중복:", error);
       }
     }
   };
@@ -79,9 +73,9 @@ export default function SignupForm() {
     setPasswordCheckError(!isvalidatePasswordCheck);
   };
 
-  const validateNickname = (nickname) => {
-    const isvalidateNuckname = nickname?.length <= 10 && nickname?.length !== 0;
-    setNicknameError(!isvalidateNuckname);
+  const validateName = (name) => {
+    const isvalidateNuckname = name?.length <= 10 && name?.length !== 0;
+    setNameError(!isvalidateNuckname);
   };
 
   useEffect(() => {
@@ -93,12 +87,12 @@ export default function SignupForm() {
   }, [email]);
 
   useEffect(() => {
-    if (nickname !== "") {
-      validateNickname(nickname);
-    } else if (nickname === "") {
-      setNicknameError(false);
+    if (name !== "") {
+      validateName(name);
+    } else if (name === "") {
+      setNameError(false);
     }
-  }, [nickname]);
+  }, [name]);
 
   useEffect(() => {
     if (password !== "") {
@@ -123,8 +117,8 @@ export default function SignupForm() {
         case "email":
           validateEmail(email);
           break;
-        case "nickname":
-          validateNickname(nickname);
+        case "name":
+          validateName(name);
           break;
         case "password":
           validatePassword(password);
@@ -145,8 +139,8 @@ export default function SignupForm() {
         case "email":
           setemailError(false);
           break;
-        case "nickname":
-          setNicknameError(false);
+        case "name":
+          setNameError(false);
           break;
         case "password":
           setPasswordError(false);
@@ -162,14 +156,13 @@ export default function SignupForm() {
 
   // 에러메세지가 없고 모든값이 빈값이 아닐때 버튼 활성화
   const lastCheck =
-    // isChecked &&
     !emailError &&
-    !nicknameError &&
+    !nameError &&
     !passwordError &&
     !passwordCheckError &&
     email !== "" &&
     password !== "" &&
-    nickname !== "" &&
+    name !== "" &&
     passwordCheck === password;
 
   return (
@@ -183,13 +176,24 @@ export default function SignupForm() {
       )}
       {isModalOpen && (
         <ModalCheckIt
-          text="이미 사용 중인 이메일입니다."
+          text="이미 사용 중인 이름입니다."
           submitButton="확인"
           errorMessage={handleModalToggle}
         />
       )}
 
       <StyledSignupForm onSubmit={handleSubmit(onSubmit)}>
+        <Input
+          hookform={register("name")}
+          data="이름"
+          title="이름"
+          placeholder="이름을 입력해 주세요"
+          errorMessage={nameError}
+          name="name"
+          handleFocus={handleFocus("name")}
+          handleBlur={handleBlur("name")}
+          watchValue={name} // 글자수 체크
+        />
         <Input
           hookform={register("email", { pattern: /\S+@\S+\.\S+/ })}
           data="이메일"
@@ -200,16 +204,7 @@ export default function SignupForm() {
           handleFocus={handleFocus("email")}
           handleBlur={handleBlur("email")}
         />
-        <Input
-          hookform={register("nickname")}
-          data="닉네임"
-          title="닉네임"
-          placeholder="닉네임을 입력해 주세요"
-          errorMessage={nicknameError}
-          name="nickname"
-          handleFocus={handleFocus("nickname")}
-          handleBlur={handleBlur("nickname")}
-        />
+
         <Input
           hookform={register("password")}
           title="비밀번호"
@@ -230,15 +225,6 @@ export default function SignupForm() {
           handleFocus={handleFocus("passwordCheck")}
           handleBlur={handleBlur("passwordCheck")}
         />
-        {/* <S.CheckBox>
-          <S.CheckInput
-            type="checkbox"
-            id="agree"
-            name="agree"
-            onChange={handleCheckBoxChange}
-          />
-          <S.Label htmlFor="agree">이용약관에 동의합니다</S.Label>
-        </S.CheckBox> */}
         {lastCheck ? (
           <Button type="submit">가입하기</Button>
         ) : (
