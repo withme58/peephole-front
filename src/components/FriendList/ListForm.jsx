@@ -15,7 +15,7 @@ export default function ListForm() {
   const [friendToDelete, setFriendToDelete] = useState(null);
   const [invitations, setInvitations] = useState(["영창", "단비", "민교"]); // 이부분 백엔드에서 받아와야함
 
-  const fetchData = async (data) => {
+  const fetchData = async () => {
     try {
       const respnse = await axios.get("/member/friends");
       console.log("friendList response:", respnse); // 응답 데이터

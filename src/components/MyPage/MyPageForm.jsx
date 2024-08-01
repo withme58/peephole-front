@@ -11,7 +11,7 @@ export default function MyPageForm() {
   const [givenTotalCount, setGivenTotalCount] = useState(4);
   const [email, setEmail] = useState("abc@naver.com");
 
-  const fetchData = async (data) => {
+  const fetchData = async () => {
     try {
       const respnse = await axios.get("/member/me");
       console.log("Mypage response:", respnse); // 응답 데이터
