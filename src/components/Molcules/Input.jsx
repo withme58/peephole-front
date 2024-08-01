@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { IoMdEyeOff, IoMdEye } from "react-icons/io";
 import styled from "styled-components";
 import { IoMail } from "react-icons/io5";
@@ -16,12 +16,20 @@ export default function Input({
   disabled,
   defaultValue,
   handleFocus,
+  watchValue,
 }) {
   const [password, setPassword] = useState(true);
+  const [charCount, setCharCount] = useState(0);
 
   const handlePassword = () => {
     setPassword((prev) => !prev);
   };
+
+  useEffect(() => {
+    if (name === "name" && watchValue !== undefined) {
+      setCharCount(watchValue.length);
+    }
+  }, [watchValue, name]);
 
   return (
     <>
@@ -48,9 +56,10 @@ export default function Input({
             {errorMessage && data === "이메일" && (
               <S.errorMessage>{data} 형식으로 작성해 주세요.</S.errorMessage>
             )}
-            {errorMessage && data === "닉네임" && (
+            {errorMessage && data === "이름" && (
               <S.errorMessage>10자 이하로 작성해주세요.</S.errorMessage>
             )}
+            {name === "name" && <S.charCount>{charCount}/10</S.charCount>}
           </S.inputInner>
         </S.inputWrap>
       ) : (
@@ -137,5 +146,15 @@ const S = {
   errorMessage: styled.div`
     color: var(--point-warning);
     font-size: 1.4rem;
+  `,
+  charCount: styled.div`
+    width: 2rem;
+    height: 2rem;
+    position: absolute;
+    color: #919597;
+    font-size: 1.4rem;
+    top: 1.2rem;
+    right: 2rem;
+    cursor: pointer;
   `,
 };
