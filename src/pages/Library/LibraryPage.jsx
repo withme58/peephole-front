@@ -3,6 +3,7 @@ import styled from "styled-components";
 import LibraryBook from "../../components/Library/LibraryBook";
 import axios from "../../api/axios";
 import { FaArrowLeft } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 // const books = Array.from({ length: 18 }, (_, index) => ({
 // 	id: index,
@@ -11,26 +12,9 @@ import { FaArrowLeft } from "react-icons/fa";
 // }));
 
 export default function LibraryPage() {
+		const navigate = useNavigate();
 		const [books, setBooks] = useState([]);
 
-	// 	useEffect(() => {
-	// 		const fetchBooks = async () => {
-	// 				try {
-	// 						const response = await axios.get('http://52.78.139.165:8080/api/answer/list');
-	// 						//console.log(response.data);
-
-	// 						const booksData = response.data?.body?.map((item) => ({
-	// 							id: item.questionId,
-	// 							title: item.questionContent,
-	// 					})) || [];
-	// 						setBooks(booksData);
-	// 				} catch (error) {
-	// 						console.log(error);
-	// 				}
-	// 		};
-
-	// 		fetchBooks();
-	// }, []);
 
 	useEffect(() => {
     const fetchBooks = async () => {
@@ -55,6 +39,10 @@ export default function LibraryPage() {
 
     fetchBooks();
 }, []);
+	const handleBackButtonClick = () => {
+  navigate('/'); // MainPage로 이동
+};
+
 
 	return (
 		
@@ -63,7 +51,7 @@ export default function LibraryPage() {
 
 			<PageContainer>
 				<HeadContainer>
-					<BackButton onClick={() => window.history.back()}>
+					<BackButton onClick={handleBackButtonClick}>
 						<FaArrowLeft />
 					</BackButton>
 					<Heading>피폴 응답</Heading>
