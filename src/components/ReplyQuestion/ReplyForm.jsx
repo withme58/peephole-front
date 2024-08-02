@@ -55,13 +55,13 @@ const QuestionBox = styled.div`
   font-size: 15px;
   height: 100px;
   font-weight: bold;
-  background-color: lightgreen;
   padding: 0 10px;
   width: 100%;
+  color: #fff;
 `;
 
 const TextArea = styled.textarea`
-  width: 100%;
+  width: 90%;
   height: 200px;
   padding: 10px;
   font-size: 14px;

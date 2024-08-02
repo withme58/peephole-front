@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Input from "../Molcules/Input";
-
 import axios from "../../api/axios";
 
 export default function MyPageForm() {
@@ -14,12 +13,16 @@ export default function MyPageForm() {
 
   const fetchData = async () => {
     try {
-      const response = axios.get(`/member/me`);
-      if (response.result.resultCode === 200) {
-        // 성공
-      }
-    } catch (error) {}
+      const respnse = await axios.get("/member/me");
+      console.log("Mypage response:", respnse); // 응답 데이터
+    } catch (error) {
+      console.error("마이페이지 데이터 로드 실패:", error);
+    }
   };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   return (
     <Form>
@@ -31,11 +34,6 @@ export default function MyPageForm() {
         alt="logo"
       />
       <InfoBox>
-        <CountDiv>
-          <CountTitle>도움 받은 횟수</CountTitle>
-          <CountNum>{receivedCount}</CountNum>
-          <CountNumTotal>{receivedTotalCount}회</CountNumTotal>
-        </CountDiv>
         <CountDiv>
           <CountTitle>도움을 준 횟수</CountTitle>
           <CountNum>{givenCount}</CountNum>
@@ -67,6 +65,9 @@ export default function MyPageForm() {
 const Form = styled.div`
   padding: 20px 20px 0;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const Title = styled.div`
@@ -86,8 +87,7 @@ const Profile = styled.img`
 `;
 
 const InfoBox = styled.div`
-  width: 400px;
-  height: 157px;
+  width: 200px;
   border: 2px solid #42aacb;
   border-radius: 16px;
   display: flex;
@@ -128,6 +128,7 @@ const StyledLoginForm = styled.form`
 `;
 
 const UserInfoBox = styled.div`
+  width: 400px;
   margin: 10px;
   text-align: left;
 `;

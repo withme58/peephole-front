@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { FaRegTrashAlt } from "react-icons/fa";
 import AddFriendModal from "./AddFriendModal";
 import DeleteConfirmationModal from "./DeleteConfirmationModal";
 import InvitationConfirmationModal from "./InvitationConfirmationModal";
+import axios from "../../api/axios";
 
 export default function ListForm() {
   const [friends, setFriends] = useState(["민교", "동호", "다현"]);
@@ -13,6 +14,19 @@ export default function ListForm() {
   const [isInvitationModalOpen, setIsInvitationModalOpen] = useState(false);
   const [friendToDelete, setFriendToDelete] = useState(null);
   const [invitations, setInvitations] = useState(["영창", "단비", "민교"]); // 이부분 백엔드에서 받아와야함
+
+  const fetchData = async () => {
+    try {
+      const respnse = await axios.get("/member/friends");
+      console.log("friendList response:", respnse); // 응답 데이터
+    } catch (error) {
+      console.error("친구목록 데이터 로드 실패:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   const openAddModal = () => {
     setIsAddModalOpen(true);
@@ -68,6 +82,10 @@ export default function ListForm() {
       <FriendBox>
         {friends.map((name, index) => (
           <FriendList key={index}>
+            <Profile
+              src={`${process.env.PUBLIC_URL}/images/profile.png`}
+              alt="logo"
+            />
             <span>{name}</span>
             <FaRegTrashAlt size={15} onClick={() => openDeleteModal(index)} />
           </FriendList>
@@ -83,49 +101,29 @@ export default function ListForm() {
     </>
   );
 }
-const Form = styled.div`
-  display: flex;
-  align-items: center;
-  position: relative;
-  font-size: 20px;
-  height: 56px;
-  font-weight: bold;
-  background-color: #f9f9f9;
-  padding: 0 10px;
-`;
 
-const AddButton = styled.button`
-  position: absolute;
-  right: 10px;
-  background-color: #4caf50;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  cursor: pointer;
-  border-radius: 5px;
-
-  &:hover {
-    background-color: #45a049;
-  }
+const Profile = styled.img`
+  width: 45px;
+  height: 45px;
+  margin-right: 15px;
 `;
 
 const FriendBox = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
-  height: auto;
+  width: 498px;
 `;
 
 const FriendList = styled.div`
   display: flex;
-  justify-content: space-between;
-  font-size: 20px;
-  background-color: #ff9;
-  margin: 5px;
-  padding: 5px;
-  align-items: center;
+  font-size: 25px;
+  padding: 20px 0px 20px 10%;
+  color: #fff;
 
   svg {
     cursor: pointer;
+    position: absolute;
+    right: 10%;
   }
 `;

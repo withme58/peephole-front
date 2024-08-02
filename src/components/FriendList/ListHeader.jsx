@@ -47,20 +47,10 @@ export default function ListHeader() {
 
   return (
     <>
-      <Header>
-        <BackButton
-          onClick={() => {
-            navigate(-1);
-          }}
-        >
-          <IoArrowBack size={24} color="white" />
-        </BackButton>
-        <LogoBox>친구 목록</LogoBox>
-        <AddButton onClick={openAddModal}>친구 추가</AddButton>
-        <InvitationButton onClick={openInvitationModal}>
-          초대 확인
-        </InvitationButton>
-      </Header>
+      <AddButton onClick={openAddModal}>친구 추가</AddButton>
+      <InvitationButton onClick={openInvitationModal}>
+        초대 확인
+      </InvitationButton>
       {isAddModalOpen && (
         <AddFriendModal onClose={closeAddModal} onAddFriend={addFriend} />
       )}
@@ -76,33 +66,14 @@ export default function ListHeader() {
   );
 }
 
-const Header = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 20px 0;
-  position: relative;
-  color: #fff;
-`;
-const LogoBox = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  color: #fff;
-  font-size: 40px;
-  height: 56px;
-  font-weight: bold;
-`;
-
 const AddButton = styled.button`
-  display: flex;
-  align-items: center;
-
+  top: 30px;
+  left: 55%;
+  position: absolute;
   background-color: #4caf50;
   color: white;
   border: none;
-  padding: 10px 20px;
+  padding: 10px;
   cursor: pointer;
   border-radius: 5px;
 
@@ -111,19 +82,15 @@ const AddButton = styled.button`
   }
 `;
 
-const BackButton = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
 const InvitationButton = styled.button`
   // 초대확인 버튼 스타일링
+  top: 30px;
+  left: 60%;
   position: absolute;
-  right: 120px; /* 적절한 위치 설정 */
   background-color: #007bff;
   color: white;
   border: none;
-  padding: 10px 20px;
+  padding: 10px;
   cursor: pointer;
   border-radius: 5px;
 
