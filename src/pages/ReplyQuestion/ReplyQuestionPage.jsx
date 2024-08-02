@@ -1,10 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 import ReplyForm from "../../components/ReplyQuestion/ReplyForm";
+import Header from "../../components/Molcules/Header";
 
 export default function ReplyQuestionPage() {
   return (
     <PageContainer>
+      <Header text={"질문 응답하기"} />
       <ReplyForm />
     </PageContainer>
   );

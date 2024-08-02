@@ -35,11 +35,6 @@ export default function MyPageForm() {
       />
       <InfoBox>
         <CountDiv>
-          <CountTitle>도움 받은 횟수</CountTitle>
-          <CountNum>{receivedCount}</CountNum>
-          <CountNumTotal>{receivedTotalCount}회</CountNumTotal>
-        </CountDiv>
-        <CountDiv>
           <CountTitle>도움을 준 횟수</CountTitle>
           <CountNum>{givenCount}</CountNum>
           <CountNumTotal>{givenTotalCount}회</CountNumTotal>
@@ -70,6 +65,9 @@ export default function MyPageForm() {
 const Form = styled.div`
   padding: 20px 20px 0;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const Title = styled.div`
@@ -89,8 +87,7 @@ const Profile = styled.img`
 `;
 
 const InfoBox = styled.div`
-  width: 400px;
-  height: 157px;
+  width: 200px;
   border: 2px solid #42aacb;
   border-radius: 16px;
   display: flex;
@@ -131,6 +128,7 @@ const StyledLoginForm = styled.form`
 `;
 
 const UserInfoBox = styled.div`
+  width: 400px;
   margin: 10px;
   text-align: left;
 `;
