@@ -13,8 +13,17 @@ export default function MyPageForm() {
 
   const fetchData = async () => {
     try {
-      const respnse = await axios.get("/member/me");
-      console.log("Mypage response:", respnse); // 응답 데이터
+      const token = localStorage.getItem("login");
+      console.log("mypage : token", token);
+      if (!token) {
+        throw new Error("No token found in localStorage");
+      }
+      const response = await axios.get("/member/me", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      console.log("Mypage response:", response.data); // 응답 데이터
     } catch (error) {
       console.error("마이페이지 데이터 로드 실패:", error);
     }

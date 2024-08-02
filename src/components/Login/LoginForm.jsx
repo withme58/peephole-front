@@ -32,17 +32,18 @@ export default function LoginForm() {
   const navigate = useNavigate();
   useEffect(() => {
     const LocalStorage = localStorage.getItem("login");
-    if (LocalStorage !== null) {
-      navigate("/");
-    }
+    console.log("token", LocalStorage);
+    // if (LocalStorage !== null) {
+    //   navigate("/");
+    // }
   }, [navigate]);
 
   async function login(data) {
     try {
       const res = await axios.post("open-api/signin", data);
       console.log("Login response:", res); // 응답 데이터
-      localStorage.setItem("login", res.data.accessToken);
-
+      localStorage.setItem("login", res.data.body.accessToken);
+      console.log(localStorage.getItem("login"));
       // await setUserData();
       navigate("/");
     } catch (error) {
