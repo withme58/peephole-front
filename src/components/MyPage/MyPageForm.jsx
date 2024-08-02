@@ -5,25 +5,16 @@ import axios from "../../api/axios";
 
 export default function MyPageForm() {
   const [name, setName] = useState("으깬 감자");
-  const [receivedCount, setReceivedCount] = useState(3);
   const [givenCount, setGivenCount] = useState(1);
-  const [receivedTotalCount, setReceivedTotalCount] = useState(11);
   const [givenTotalCount, setGivenTotalCount] = useState(4);
   const [email, setEmail] = useState("abc@naver.com");
 
   const fetchData = async () => {
     try {
-      const token = localStorage.getItem("login");
-      console.log("mypage : token", token);
-      if (!token) {
-        throw new Error("No token found in localStorage");
-      }
-      const response = await axios.get("/member/me", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      console.log("Mypage response:", response.data); // 응답 데이터
+      const response = await axios.get("/api/member/me");
+      console.log("Mypage response:", response.data.body); // 응답 데이터
+      setName(response.data.body.name);
+      setEmail(response.data.body.email);
     } catch (error) {
       console.error("마이페이지 데이터 로드 실패:", error);
     }
