@@ -77,7 +77,7 @@ export default function TodayInterview() {
       </QuestionContainer>
       <FriendListButton onClick={openModal}>오늘의 피폴</FriendListButton>
       {isModalOpen && (
-        <SendQuestionModal userData={MockUserData} closeModal={closeModal} /> //여기에 friendList 넣음
+        <SendQuestionModal userData={friendList} closeModal={closeModal} /> //여기에 friendList 넣음
       )}
     </InterviewContainer>
   );

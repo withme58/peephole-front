@@ -8,7 +8,7 @@ export default function CalculateDate() {
 
   async function getDday() {
     try {
-      const response = await axios.get("/api");
+      const response = await axios.get("/api/member/me");
       const createdAt = response.data.body.createdAt;
       const calculateDay = DdayCalculator(createdAt);
       console.log(createdAt);
