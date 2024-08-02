@@ -1,29 +1,34 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import LibraryBook from "../../components/Library/LibraryBook";
-import axios from "axios";
+import axios from "../../api/axios";
 import { FaArrowLeft } from "react-icons/fa";
 
-const books = Array.from({ length: 18 }, (_, index) => ({
-	id: index,
-	// title: `Book ${index + 1}`,
-	title: '책 이름'
-}));
+// const books = Array.from({ length: 18 }, (_, index) => ({
+// 	id: index,
+// 	// title: `Book ${index + 1}`,
+// 	title: '책 이름'
+// }));
 
 export default function LibraryPage() {
-	// const [books, setBooks] = useState([]);
+		const [books, setBooks] = useState([]);
 
-	// useEffect(() => {
-	//   axios.get('http://localhost:8080/answer/list')
-	//   .then(response => {
-	//     // if(response.status === 200)
-	//     console.log(response.data);
-	//     setBooks(response.data?.body.answers);
-	//   })
-	//   .catch(error => {
-	//     console.log(error)
-	//   })
-	// }, [])
+		useEffect(() => {
+			const fetchBooks = async () => {
+					try {
+							const response = await axios.get('/api/answer/list');
+							console.log(response.data);
+
+							// response.data?.body?.answers가 유효한지 확인
+							const booksData = response.data?.body?.answers || [];
+							setBooks(booksData);
+					} catch (error) {
+							console.log(error);
+					}
+			};
+
+			fetchBooks();
+	}, []);
 
 	return (
 		
