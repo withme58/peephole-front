@@ -5,14 +5,12 @@ import styled from "styled-components";
 import axios from "../../api/axios";
 
 import Input from "../Molcules/Input";
-// import ModalCheckIt from "../Molcules/ModalCheckIt";
-
 import useToggle from "../../hooks/useToggle";
 import useUserStore from "../../store/useUserStore";
 
 export default function LoginForm() {
   const { setUser } = useUserStore();
-  const [emailError, setEmailError] = useState(false); // 각종 에러 문구
+  const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
   const [showPasswordError, setShowPasswordError, showPasswordToggle] =
     useToggle(false);
@@ -20,6 +18,16 @@ export default function LoginForm() {
 
   const email = watch("email");
   const password = watch("password");
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    //잘 작동함
+    const LocalStorage = localStorage.getItem("accessToken");
+    if (LocalStorage !== null) {
+      navigate("/");
+    }
+  }, [navigate]);
 
   const onSubmit = (data) => {
     const loginData = {
@@ -29,22 +37,14 @@ export default function LoginForm() {
     login(loginData);
   };
 
-  const navigate = useNavigate();
-  useEffect(() => {
-    const LocalStorage = localStorage.getItem("login");
-    console.log("token", LocalStorage);
-    // if (LocalStorage !== null) {
-    //   navigate("/");
-    // }
-  }, [navigate]);
-
   async function login(data) {
     try {
       const res = await axios.post("open-api/signin", data);
       console.log("Login response:", res); // 응답 데이터
-      localStorage.setItem("login", res.data.body.accessToken);
-      console.log(localStorage.getItem("login"));
-      // await setUserData();
+      localStorage.setItem("accessToken", res.data.body.accessToken);
+      localStorage.setItem("refreshToken", res.data.body.refreshToken);
+      //로컬스토리지에 잘 담겨짐
+      await setUserData();
       navigate("/");
     } catch (error) {
       setPasswordError(true);
@@ -55,14 +55,21 @@ export default function LoginForm() {
     }
   }
 
-  // const setUserData = async () => {
-  //   try {
-  //     const respons = await axios.get("/api/member/me");
-  //     setUser(respons.data);
-  //   } catch (error) {
-  //     console.error("사용자 정보 가져오기 실패:", error);
-  //   }
-  // };
+  const setUserData = async () => {
+    try {
+      const res = await axios.get("api/member/me");
+      const userData = res.data.body;
+      setUser({
+        id: userData.id,
+        name: userData.name,
+        email: userData.email,
+        createdAt: userData.createdAt,
+        status: userData.status,
+      });
+    } catch (error) {
+      console.error("사용자 정보 가져오기 실패:", error);
+    }
+  };
 
   const validateEmail = (email) => {
     const isvalidateEmail = /\S+@\S+\.\S+/.test(email);
@@ -78,7 +85,7 @@ export default function LoginForm() {
   }, [email]);
 
   const validatePassword = (password) => {
-    const isvalidatePassword = password?.length >= 8; //비밀번호 8자리 이상으로 임의 설정
+    const isvalidatePassword = password?.length >= 8;
     setPasswordError(!isvalidatePassword);
   };
 
@@ -125,13 +132,6 @@ export default function LoginForm() {
 
   return (
     <>
-      {/* {showPasswordError && (
-        <ModalCheckIt
-          text="비밀번호가 일치하지 않습니다."
-          submitButton="확인"
-          errorMessage={showPasswordToggle}
-        />
-      )} */}
       <StyledLoginForm onSubmit={handleSubmit(onSubmit)}>
         <Input
           hookform={register("email", { pattern: /\S+@\S+\.\S+/ })}
@@ -176,7 +176,7 @@ const Button = styled.button`
   margin-top: 70px;
   border: none;
   border-radius: 0.8rem;
-  background: var(--moss-green);
+  background: var(--main-blue);
   color: #fff;
   text-align: center;
   font-size: 1.8rem;

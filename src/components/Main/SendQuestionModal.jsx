@@ -2,18 +2,45 @@ import React from "react";
 import styled from "styled-components";
 import { IoClose } from "react-icons/io5";
 import SuccessModal from "./SuccessModal";
+import axios from "../../api/axios";
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 export default function SendQuestionModal({ closeModal, userData = [] }) {
+  const navigate = useNavigate();
+  const { register, handleSubmit } = useForm();
+
   const onClickBackground = (e) => {
     if (e.target === e.currentTarget) {
       closeModal();
     }
   };
 
-  // const onClickModal = (e) => {
-  //   e.stopPropagation();
-  // };
+  const onSubmit = async (data) => {
+    const questionData = {
+      questionId: data.questionId,
+      friendName: data.friendName,
+    };
+    try {
+      const response = await axios.post("/api/myfridnes", data);
+      console.log("SendQuestion response:", response); // 응답 데이터
+      if (response.status === 200) {
+        // openModal();
+        // navigate("/");
+      }
+    } catch {
+      console.error("SendQuestion 데이터 전송 실패:");
+    }
+  };
 
+  async function SendQuestion() {
+    try {
+      const response = await axios.post("/api/myfriends");
+      console.log("SendQuestion response:", response); // 응답 데이터
+    } catch (error) {
+      console.error("SendQuestion 데이터 로드 실패:");
+    }
+  }
   return (
     <Background onClick={onClickBackground}>
       <ModalContainer>
@@ -23,14 +50,32 @@ export default function SendQuestionModal({ closeModal, userData = [] }) {
             <IoClose onClick={closeModal} size={25} color="#5a786f" />
           </CloseButton>
         </Header>
-        <FriendList>
-          {userData.map((user) => (
+        <QuestionForm onSubmit={handleSubmit(onSubmit)}>
+          {/* {userData.map((user) => (
             <FriendItem key={user.questionId}>
               <FriendItemName>{user.friendName}</FriendItemName>
+              <input
+                type="hidden"
+                {...register("questionId")}
+                value={user.questionId}
+              />
+              <input
+                type="hidden"
+                {...register("friendName")}
+                value={user.friendName}
+              />
+              <SendButton type="submit">보내기</SendButton>
+            </FriendItem>
+          ))} */}
+          {userData.map((user) => (
+            <FriendItem hookform={register("questionId")} key={user.questionId}>
+              <FriendItemName hookform={register("friendName")}>
+                {user.friendName}
+              </FriendItemName>
               <SendButton onClick={SuccessModal}>보내기</SendButton>
             </FriendItem>
           ))}
-        </FriendList>
+        </QuestionForm>
       </ModalContainer>
     </Background>
   );
@@ -83,7 +128,7 @@ const CloseButton = styled.div`
   cursor: pointer;
 `;
 
-const FriendList = styled.div`
+const QuestionForm = styled.div`
   margin-top: 20px;
   padding-right: 10px;
   height: 250px;
