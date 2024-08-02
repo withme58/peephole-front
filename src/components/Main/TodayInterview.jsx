@@ -3,11 +3,14 @@ import { useState, useEffect } from "react";
 import SendQuestionModal from "./SendQuestionModal";
 import CalculateDate from "../CalculateDate/CalculateDate";
 import axios from "../../api/axios";
+import { set } from "react-hook-form";
 
 export default function TodayInterview() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [question, setQuestion] = useState(null);
+  const [friendList, setFriendList] = useState([]);
 
+  // 질문 데이터 불러오기
   async function getQuestion() {
     try {
       const response = await axios.get("/api");
@@ -20,6 +23,21 @@ export default function TodayInterview() {
 
   useEffect(() => {
     getQuestion();
+  }, []);
+
+  //친구 목록 불러오기
+  async function getFriendList() {
+    try {
+      const response = await axios.get("/api/myfriends");
+      setFriendList(response.data.body.myfriends);
+      console.log("FriendList response:", response); // 응답 데이터
+    } catch (error) {
+      console.error("FriendList 데이터 로드 실패:", error);
+    }
+  }
+
+  useEffect(() => {
+    getFriendList();
   }, []);
 
   const mockquestion = `
@@ -59,7 +77,7 @@ export default function TodayInterview() {
       </QuestionContainer>
       <FriendListButton onClick={openModal}>오늘의 피폴</FriendListButton>
       {isModalOpen && (
-        <SendQuestionModal userData={MockUserData} closeModal={closeModal} />
+        <SendQuestionModal userData={MockUserData} closeModal={closeModal} /> //여기에 friendList 넣음
       )}
     </InterviewContainer>
   );
