@@ -10,9 +10,8 @@ const Modal = ({ isOpen, onClose }) => {
   useEffect(() => {
     const fetchQuestionId = async () => {
       try {
-        // questionId를 가져오는 API 요청
         const response = await axios.get('http://52.78.139.165:8080/api/answer/list');
-        console.log(response.data); // 응답 데이터 콘솔 출력
+        console.log(response.data); 
         const firstQuestionId = response.data?.body?.[0]?.questionId;
         setQuestionId(firstQuestionId); // 첫 번째 questionId를 상태에 저장
       } catch (error) {
@@ -30,8 +29,8 @@ const Modal = ({ isOpen, onClose }) => {
       const fetchData = async () => {
         try {
           const response = await axios.get(`http://52.78.139.165:8080/api/answer/one?questionId=${questionId}`);
-          console.log(response.data); // 응답 데이터 콘솔 출력
-          setData(response.data.body); // 상태에 데이터 저장
+          console.log(response.data); 
+          setData(response.data.body); 
         } catch (error) {
           console.error("데이터 가져오기 실패:", error);
         }
