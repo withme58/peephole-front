@@ -1,29 +1,48 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import LibraryBook from "../../components/Library/LibraryBook";
-import axios from "axios";
+import axios from "../../api/axios";
 import { FaArrowLeft } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
-const books = Array.from({ length: 18 }, (_, index) => ({
-	id: index,
-	// title: `Book ${index + 1}`,
-	title: '책 이름'
-}));
+// const books = Array.from({ length: 18 }, (_, index) => ({
+// 	id: index,
+// 	// title: `Book ${index + 1}`,
+// 	title: '책 이름'
+// }));
 
 export default function LibraryPage() {
-	// const [books, setBooks] = useState([]);
+		const navigate = useNavigate();
+		const [books, setBooks] = useState([]);
 
-	// useEffect(() => {
-	//   axios.get('http://localhost:8080/answer/list')
-	//   .then(response => {
-	//     // if(response.status === 200)
-	//     console.log(response.data);
-	//     setBooks(response.data?.body.answers);
-	//   })
-	//   .catch(error => {
-	//     console.log(error)
-	//   })
-	// }, [])
+
+	useEffect(() => {
+    const fetchBooks = async () => {
+        try {
+            const response = await axios.get('http://52.78.139.165:8080/api/answer/list');
+            console.log(response.data); // 전체 응답 확인
+
+            // 응답에서 body가 배열인지 확인 후 처리
+            if (Array.isArray(response.data.body)) {
+                const booksData = response.data.body.map((item) => ({
+                    id: item.questionId,
+                    title: item.questionContent,
+                }));
+                setBooks(booksData);
+            } else {
+                console.error('Expected an array in the body');
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    fetchBooks();
+}, []);
+	const handleBackButtonClick = () => {
+  navigate('/'); // MainPage로 이동
+};
+
 
 	return (
 		
@@ -32,7 +51,7 @@ export default function LibraryPage() {
 
 			<PageContainer>
 				<HeadContainer>
-					<BackButton onClick={() => window.history.back()}>
+					<BackButton onClick={handleBackButtonClick}>
 						<FaArrowLeft />
 					</BackButton>
 					<Heading>피폴 응답</Heading>
