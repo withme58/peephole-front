@@ -71,8 +71,8 @@ export default function TodayInterview() {
     <InterviewContainer>
       <Logo>피폴</Logo>
       <QuestionContainer>
-        <QuestionArea>{mockquestion}</QuestionArea>
-        {/* <QuestionArea>{question}</QuestionArea> */}
+        {/* <QuestionArea>{mockquestion}</QuestionArea> */}
+        <QuestionArea>{question}</QuestionArea>
         <CalculateDate />
       </QuestionContainer>
       <FriendListButton onClick={openModal}>오늘의 피폴</FriendListButton>
