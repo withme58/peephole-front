@@ -1,14 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { IoClose } from "react-icons/io5";
 import SuccessModal from "./SuccessModal";
+import FailModal from "./FailModal"; // FailModal 컴포넌트 추가
 import axios from "../../api/axios";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
-export default function SendQuestionModal({ closeModal, userData = [] }) {
+export default function SendQuestionModal({
+  closeModal,
+  userData = [],
+  questionId,
+}) {
   const navigate = useNavigate();
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, setValue } = useForm();
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [showFailModal, setShowFailModal] = useState(false); // 실패 모달 상태 추가
 
   const onClickBackground = (e) => {
     if (e.target === e.currentTarget) {
@@ -18,61 +25,47 @@ export default function SendQuestionModal({ closeModal, userData = [] }) {
 
   const onSubmit = async (data) => {
     const questionData = {
-      questionId: data.questionId,
+      questionId: questionId, // 전달받은 questionId 사용
       friendName: data.friendName,
     };
     try {
-      const response = await axios.post("/api/myfriends", data);
+      const response = await axios.post("/api/myfriends", questionData);
       console.log("SendQuestion response:", response); // 응답 데이터
       if (response.status === 200) {
-        // openModal();
-        // navigate("/");
+        setShowSuccessModal(true);
       }
-    } catch {
-      console.error("SendQuestion 데이터 전송 실패:");
+    } catch (error) {
+      console.error("SendQuestion 데이터 전송 실패:", error);
+      setShowFailModal(true); // 실패 시 FailModal 표시
     }
   };
 
-  async function SendQuestion() {
-    try {
-      const response = await axios.post("/api/myfriends");
-      console.log("SendQuestion response:", response); // 응답 데이터
-    } catch (error) {
-      console.error("SendQuestion 데이터 로드 실패:");
-    }
-  }
+  const handleSendClick = (user) => {
+    setValue("friendName", user.name);
+    handleSubmit(onSubmit)();
+  };
+
   return (
     <Background onClick={onClickBackground}>
       <ModalContainer>
+        {showSuccessModal && <SuccessModal closeModal={closeModal} />}
+        {showFailModal && (
+          <FailModal closeModal={() => setShowFailModal(false)} />
+        )}{" "}
+        {/* 실패 모달 조건부 렌더링 */}
         <Header>
           <QuestionHeader>피폴 목록</QuestionHeader>
           <CloseButton>
             <IoClose onClick={closeModal} size={25} color="#5a786f" />
           </CloseButton>
         </Header>
-        <QuestionForm onSubmit={handleSubmit(onSubmit)}>
-          {/* {userData.map((user) => (
-            <FriendItem key={user.questionId}>
-              <FriendItemName>{user.friendName}</FriendItemName>
-              <input
-                type="hidden"
-                {...register("questionId")}
-                value={user.questionId}
-              />
-              <input
-                type="hidden"
-                {...register("friendName")}
-                value={user.friendName}
-              />
-              <SendButton type="submit">보내기</SendButton>
-            </FriendItem>
-          ))} */}
+        <QuestionForm>
           {userData.map((user) => (
-            <FriendItem hookform={register("questionId")} key={user.questionId}>
-              <FriendItemName hookform={register("friendName")}>
-                {user.friendName}
-              </FriendItemName>
-              <SendButton onClick={SuccessModal}>보내기</SendButton>
+            <FriendItem key={user.id}>
+              <FriendItemName>{user.name}</FriendItemName>
+              <SendButton type="button" onClick={() => handleSendClick(user)}>
+                보내기
+              </SendButton>
             </FriendItem>
           ))}
         </QuestionForm>
@@ -111,14 +104,11 @@ const Header = styled.div`
 `;
 
 const QuestionHeader = styled.div`
-  /* 피폴 목록 */
   flex-grow: 1;
   text-align: center;
-
   font-weight: 600;
   font-size: 20px;
   line-height: 24px;
-  /* identical to box height, or 120% */
   text-align: center;
   color: #535353;
   margin: 0;
@@ -133,20 +123,6 @@ const QuestionForm = styled.div`
   padding-right: 10px;
   height: 250px;
   overflow-y: scroll;
-  /* &::-webkit-scrollbar {
-    display: none;
-    width: 8px;
-    height: 8px;
-    background-color: var(--light-gray);
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background-color: var(--tapped-blue);
-  }
-
-  &::-webkit-scrollbar-thumb:hover {
-    background-color: var(--blue-black);
-  } */
 `;
 
 const FriendItem = styled.div`
