@@ -128,6 +128,11 @@ const S = {
     font-weight: 400;
     line-height: normal;
     background: rgba(243, 243, 243, 0.2);
+    &:focus {
+      border: 1px solid var(--main-blue);
+      background: white;
+      color: var(--main-blue);
+    }
   `,
   iconWrap: styled.div`
     position: absolute;
@@ -142,6 +147,9 @@ const S = {
     top: 1.2rem;
     right: 1.6rem;
     cursor: pointer;
+    /* &:focus {
+      color: var(--main-blue);
+    } 어디로 들어가야하지.. */
   `,
   errorMessage: styled.div`
     color: var(--point-warning);
