@@ -1,9 +1,22 @@
 // AddFriendModal.jsx
 import React, { useState } from "react";
 import styled from "styled-components";
+import axios from "../../api/axios";
 
 export default function AddFriendModal({ onClose, onAddFriend }) {
   const [nickname, setNickname] = useState("");
+
+  const onSubmit = async () => {
+    try {
+      const response = await axios.post("/api//member/friends/request", {
+        friendName: nickname,
+      });
+      console.log("addFriend response:", response.data.body); // 응답 데이터
+      onClose();
+    } catch (error) {
+      console.error("친구추가 데이터 로드 실패:", error);
+    }
+  };
 
   const handleAdd = () => {
     if (nickname.trim()) {
@@ -21,7 +34,7 @@ export default function AddFriendModal({ onClose, onAddFriend }) {
           value={nickname}
           onChange={(e) => setNickname(e.target.value)}
         />
-        <button onClick={handleAdd}>요청 보내기</button>
+        <button onClick={onSubmit}>요청 보내기</button>
       </ModalContent>
     </ModalOverlay>
   );

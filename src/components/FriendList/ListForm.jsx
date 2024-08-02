@@ -17,10 +17,11 @@ export default function ListForm() {
 
   const fetchData = async () => {
     try {
-      const respnse = await axios.get("/member/friends");
-      console.log("friendList response:", respnse); // 응답 데이터
+      const response = await axios.get("/api/member/friends");
+      console.log("Friend List response:", response.data.body); // 응답 데이터
+      setFriends(response.data.body.friendResponseList);
     } catch (error) {
-      console.error("친구목록 데이터 로드 실패:", error);
+      console.error("친구 리스트 데이터 로드 실패:", error);
     }
   };
 
