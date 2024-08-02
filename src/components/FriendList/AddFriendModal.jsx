@@ -1,9 +1,34 @@
 // AddFriendModal.jsx
 import React, { useState } from "react";
 import styled from "styled-components";
+import axios from "../../api/axios";
 
 export default function AddFriendModal({ onClose, onAddFriend }) {
   const [nickname, setNickname] = useState("");
+
+  const onSubmit = async () => {
+    try {
+      const response = await axios.post("/api/member/friend/request", {
+        name: nickname,
+      });
+      console.log("addFriend response:", response.data.body); // 응답 데이터
+      onClose();
+    } catch (error) {
+      console.error("친구추가 데이터 로드 실패:", error);
+      if (error.response) {
+        // 서버에서 응답이 반환된 경우
+        console.error("서버 에러:", error.response.status);
+        console.error("응답 데이터:", error.response.data);
+      } else if (error.request) {
+        // 요청이 만들어졌으나 서버에서 응답이 없었음
+        console.error("서버 응답 없음:", error.request);
+      } else {
+        // 요청을 만들기 전에 발생한 문제
+        console.error("요청 에러:", error.message);
+      }
+      onClose();
+    }
+  };
 
   const handleAdd = () => {
     if (nickname.trim()) {
@@ -21,7 +46,7 @@ export default function AddFriendModal({ onClose, onAddFriend }) {
           value={nickname}
           onChange={(e) => setNickname(e.target.value)}
         />
-        <button onClick={handleAdd}>요청 보내기</button>
+        <button onClick={onSubmit}>요청 보내기</button>
       </ModalContent>
     </ModalOverlay>
   );
@@ -37,6 +62,7 @@ const ModalOverlay = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 100000;
 `;
 
 const ModalContent = styled.div`

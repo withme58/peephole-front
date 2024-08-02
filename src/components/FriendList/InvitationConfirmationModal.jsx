@@ -1,7 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import axios from "../../api/axios";
 
-export default function InvitationConfirmationModal({ invitations, onAccept, onDecline, onClose }) {
+export default function InvitationConfirmationModal({
+  onAccept,
+  onDecline,
+  onClose,
+}) {
+  const [invitations, setInvitations] = useState([]);
+  const fetchData = async () => {
+    try {
+      const response = await axios.get("/api/member/friend/waiting");
+      console.log("Friend List response:", response.data.body); // 응답 데이터
+      setInvitations(response.data.body.friendResponseList);
+    } catch (error) {
+      console.error("대기 친구 데이터 로드 실패:", error);
+    }
+  };
+  useEffect(() => {
+    fetchData();
+  }, []);
   return (
     <ModalOverlay>
       <ModalContent>
@@ -33,6 +51,7 @@ const ModalOverlay = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 100000;
 `;
 
 const ModalContent = styled.div`
@@ -41,10 +60,11 @@ const ModalContent = styled.div`
   border-radius: 8px;
   text-align: center;
   width: 400px;
-  height: 500px; 
+  height: 500px;
   display: flex;
   flex-direction: column;
-  overflow: hidden; 
+  overflow: hidden;
+  z-index: 100000;
 `;
 
 const Title = styled.h2`
@@ -53,7 +73,7 @@ const Title = styled.h2`
 `;
 
 const InvitationList = styled.div`
-  flex: 1; 
+  flex: 1;
   overflow-y: auto;
   margin-bottom: 20px;
 `;
@@ -79,4 +99,3 @@ const CloseButton = styled.button`
   padding: 5px 10px;
   cursor: pointer;
 `;
-
