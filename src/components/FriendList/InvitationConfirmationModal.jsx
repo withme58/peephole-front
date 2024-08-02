@@ -1,7 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 
-export default function InvitationConfirmationModal({ invitations, onAccept, onDecline, onClose }) {
+export default function InvitationConfirmationModal({
+  invitations,
+  onAccept,
+  onDecline,
+  onClose,
+}) {
   return (
     <ModalOverlay>
       <ModalContent>
@@ -33,6 +38,7 @@ const ModalOverlay = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 100000;
 `;
 
 const ModalContent = styled.div`
@@ -41,10 +47,11 @@ const ModalContent = styled.div`
   border-radius: 8px;
   text-align: center;
   width: 400px;
-  height: 500px; 
+  height: 500px;
   display: flex;
   flex-direction: column;
-  overflow: hidden; 
+  overflow: hidden;
+  z-index: 100000;
 `;
 
 const Title = styled.h2`
@@ -53,7 +60,7 @@ const Title = styled.h2`
 `;
 
 const InvitationList = styled.div`
-  flex: 1; 
+  flex: 1;
   overflow-y: auto;
   margin-bottom: 20px;
 `;
@@ -79,4 +86,3 @@ const CloseButton = styled.button`
   padding: 5px 10px;
   cursor: pointer;
 `;
-

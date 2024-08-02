@@ -106,6 +106,7 @@ const Profile = styled.img`
   width: 45px;
   height: 45px;
   margin-right: 15px;
+  z-index: 1000;
 `;
 
 const FriendBox = styled.div`
