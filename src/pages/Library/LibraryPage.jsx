@@ -13,22 +13,48 @@ import { FaArrowLeft } from "react-icons/fa";
 export default function LibraryPage() {
 		const [books, setBooks] = useState([]);
 
-		useEffect(() => {
-			const fetchBooks = async () => {
-					try {
-							const response = await axios.get('/api/answer/list');
-							console.log(response.data);
+	// 	useEffect(() => {
+	// 		const fetchBooks = async () => {
+	// 				try {
+	// 						const response = await axios.get('http://52.78.139.165:8080/api/answer/list');
+	// 						//console.log(response.data);
 
-							// response.data?.body?.answers가 유효한지 확인
-							const booksData = response.data?.body?.answers || [];
-							setBooks(booksData);
-					} catch (error) {
-							console.log(error);
-					}
-			};
+	// 						const booksData = response.data?.body?.map((item) => ({
+	// 							id: item.questionId,
+	// 							title: item.questionContent,
+	// 					})) || [];
+	// 						setBooks(booksData);
+	// 				} catch (error) {
+	// 						console.log(error);
+	// 				}
+	// 		};
 
-			fetchBooks();
-	}, []);
+	// 		fetchBooks();
+	// }, []);
+
+	useEffect(() => {
+    const fetchBooks = async () => {
+        try {
+            const response = await axios.get('http://52.78.139.165:8080/api/answer/list');
+            console.log(response.data); // 전체 응답 확인
+
+            // 응답에서 body가 배열인지 확인 후 처리
+            if (Array.isArray(response.data.body)) {
+                const booksData = response.data.body.map((item) => ({
+                    id: item.questionId,
+                    title: item.questionContent,
+                }));
+                setBooks(booksData);
+            } else {
+                console.error('Expected an array in the body');
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    fetchBooks();
+}, []);
 
 	return (
 		

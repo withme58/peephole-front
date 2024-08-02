@@ -1,8 +1,45 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useSpring, animated } from "@react-spring/web";
+import axios from "../../api/axios";
 
-const Modal = ({ isOpen, onClose, title }) => {
+const Modal = ({ isOpen, onClose }) => {
+  const [data, setData] = useState(null);
+  const [questionId, setQuestionId] = useState(null);
+
+  useEffect(() => {
+    const fetchQuestionId = async () => {
+      try {
+        // questionId를 가져오는 API 요청
+        const response = await axios.get('http://52.78.139.165:8080/api/answer/list');
+        console.log(response.data); // 응답 데이터 콘솔 출력
+        const firstQuestionId = response.data?.body?.[0]?.questionId;
+        setQuestionId(firstQuestionId); // 첫 번째 questionId를 상태에 저장
+      } catch (error) {
+        console.error("questionId 가져오기 실패:", error);
+      }
+    };
+
+    if (isOpen) {
+      fetchQuestionId();
+    }
+  }, [isOpen]);
+
+  useEffect(() => {
+    if (isOpen && questionId) {
+      const fetchData = async () => {
+        try {
+          const response = await axios.get(`http://52.78.139.165:8080/api/answer/one?questionId=${questionId}`);
+          console.log(response.data); // 응답 데이터 콘솔 출력
+          setData(response.data.body); // 상태에 데이터 저장
+        } catch (error) {
+          console.error("데이터 가져오기 실패:", error);
+        }
+      };
+      fetchData();
+    }
+  }, [isOpen, questionId]); // isOpen과 questionId 상태가 변경될 때마다 데이터를 가져옴
+
   // Modal 전체의 애니메이션 설정
   const springProps = useSpring({
     opacity: isOpen ? 1 : 0,
@@ -19,10 +56,10 @@ const Modal = ({ isOpen, onClose, title }) => {
           {/* <CloseButton onClick={onClose}>X</CloseButton> */}
           {/* <BookTitle>{title}</BookTitle> */}
           <Page height={100}>
-		        	제목
+            {data ? data.questionTitle : "제목 로딩 중..."}
           </Page>
           <Page height={350}>
-            페이지 내용
+            {data ? data.content : "페이지 내용 로딩 중..."}
           </Page>
         </ModalContent>
       </animated.div>
@@ -55,7 +92,6 @@ const ModalContent = styled.div`
   align-items: center;
   position: relative;
   perspective: 1000px; /* 3D 효과를 위해 */
-  
 `;
 
 const CloseButton = styled.button`
