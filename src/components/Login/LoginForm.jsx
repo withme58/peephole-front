@@ -22,7 +22,8 @@ export default function LoginForm() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const LocalStorage = localStorage.getItem("login");
+    //잘 작동함
+    const LocalStorage = localStorage.getItem("accessToken");
     if (LocalStorage !== null) {
       navigate("/");
     }
@@ -42,7 +43,7 @@ export default function LoginForm() {
       console.log("Login response:", res); // 응답 데이터
       localStorage.setItem("accessToken", res.data.body.accessToken);
       localStorage.setItem("refreshToken", res.data.body.refreshToken);
-
+      //로컬스토리지에 잘 담겨짐
       await setUserData();
       navigate("/");
     } catch (error) {
@@ -175,7 +176,7 @@ const Button = styled.button`
   margin-top: 70px;
   border: none;
   border-radius: 0.8rem;
-  background: var(--moss-green);
+  background: var(--main-blue);
   color: #fff;
   text-align: center;
   font-size: 1.8rem;

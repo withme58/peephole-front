@@ -1,11 +1,46 @@
 import styled from "styled-components";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import SendQuestionModal from "./SendQuestionModal";
 import CalculateDate from "../CalculateDate/CalculateDate";
+import axios from "../../api/axios";
+import { set } from "react-hook-form";
 
 export default function TodayInterview() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const question = `
+  const [question, setQuestion] = useState(null);
+  const [friendList, setFriendList] = useState([]);
+
+  // 질문 데이터 불러오기
+  async function getQuestion() {
+    try {
+      const response = await axios.get("/api");
+      setQuestion(response.data.body.question);
+      console.log("Question response:", response); // 응답 데이터
+    } catch (error) {
+      console.error("Question 데이터 로드 실패:", error);
+    }
+  }
+
+  useEffect(() => {
+    getQuestion();
+  }, []);
+
+  //친구 목록 불러오기
+  async function getFriendList() {
+    try {
+      const response = await axios.get("/api/myfriends");
+      setFriendList(response.data.body.myfriends);
+      console.log("FriendList response:", response); // 응답 데이터
+    } catch (error) {
+      console.error("FriendList 데이터 로드 실패:", error);
+    }
+  }
+
+  useEffect(() => {
+    getFriendList();
+  }, []);
+
+  const mockquestion = `
   중요한 결정을 내릴 때,
   중요한 결정을 내릴 때,
   나의 가치와 원칙은
@@ -36,12 +71,13 @@ export default function TodayInterview() {
     <InterviewContainer>
       <Logo>피폴</Logo>
       <QuestionContainer>
-        <QuestionArea>{question}</QuestionArea>
+        <QuestionArea>{mockquestion}</QuestionArea>
+        {/* <QuestionArea>{question}</QuestionArea> */}
         <CalculateDate />
       </QuestionContainer>
       <FriendListButton onClick={openModal}>오늘의 피폴</FriendListButton>
       {isModalOpen && (
-        <SendQuestionModal userData={MockUserData} closeModal={closeModal} />
+        <SendQuestionModal userData={MockUserData} closeModal={closeModal} /> //여기에 friendList 넣음
       )}
     </InterviewContainer>
   );
