@@ -22,7 +22,7 @@ export default function SendQuestionModal({ closeModal, userData = [] }) {
       friendName: data.friendName,
     };
     try {
-      const response = await axios.post("/api/myfridnes", data);
+      const response = await axios.post("/api/myfriends", data);
       console.log("SendQuestion response:", response); // 응답 데이터
       if (response.status === 200) {
         // openModal();

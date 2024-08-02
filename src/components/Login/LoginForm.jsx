@@ -9,7 +9,7 @@ import useToggle from "../../hooks/useToggle";
 import useUserStore from "../../store/useUserStore";
 
 export default function LoginForm() {
-  const { setUser } = useUserStore();
+  // const { setUser } = useUserStore();
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
   const [showPasswordError, setShowPasswordError, showPasswordToggle] =
@@ -44,7 +44,7 @@ export default function LoginForm() {
       localStorage.setItem("accessToken", res.data.body.accessToken);
       localStorage.setItem("refreshToken", res.data.body.refreshToken);
       //로컬스토리지에 잘 담겨짐
-      await setUserData();
+      // await setUserData();
       navigate("/");
     } catch (error) {
       setPasswordError(true);
@@ -55,21 +55,21 @@ export default function LoginForm() {
     }
   }
 
-  const setUserData = async () => {
-    try {
-      const res = await axios.get("api/member/me");
-      const userData = res.data.body;
-      setUser({
-        id: userData.id,
-        name: userData.name,
-        email: userData.email,
-        createdAt: userData.createdAt,
-        status: userData.status,
-      });
-    } catch (error) {
-      console.error("사용자 정보 가져오기 실패:", error);
-    }
-  };
+  // const setUserData = async () => {
+  //   try {
+  //     const res = await axios.get("api/member/me");
+  //     const userData = res.data.body;
+  //     setUser({
+  //       id: userData.id,
+  //       name: userData.name,
+  //       email: userData.email,
+  //       createdAt: userData.createdAt,
+  //       status: userData.status,
+  //     });
+  //   } catch (error) {
+  //     console.error("사용자 정보 가져오기 실패:", error);
+  //   }
+  // };
 
   const validateEmail = (email) => {
     const isvalidateEmail = /\S+@\S+\.\S+/.test(email);

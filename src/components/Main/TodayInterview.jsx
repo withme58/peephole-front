@@ -29,7 +29,7 @@ export default function TodayInterview() {
   async function getFriendList() {
     try {
       const response = await axios.get("/api/myfriends");
-      setFriendList(response.data.body.myfriends);
+      setFriendList(response.data.body.friends);
       console.log("FriendList response:", response); // 응답 데이터
     } catch (error) {
       console.error("FriendList 데이터 로드 실패:", error);
@@ -71,13 +71,13 @@ export default function TodayInterview() {
     <InterviewContainer>
       <Logo>피폴</Logo>
       <QuestionContainer>
-        <QuestionArea>{mockquestion}</QuestionArea>
-        {/* <QuestionArea>{question}</QuestionArea> */}
+        {/* <QuestionArea>{mockquestion}</QuestionArea> */}
+        <QuestionArea>{question}</QuestionArea>
         <CalculateDate />
       </QuestionContainer>
       <FriendListButton onClick={openModal}>오늘의 피폴</FriendListButton>
       {isModalOpen && (
-        <SendQuestionModal userData={MockUserData} closeModal={closeModal} /> //여기에 friendList 넣음
+        <SendQuestionModal userData={friendList} closeModal={closeModal} /> //여기에 friendList 넣음
       )}
     </InterviewContainer>
   );

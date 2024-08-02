@@ -27,7 +27,7 @@ instance.interceptors.response.use(
     const originalRequest = error.config;
     const refreshToken = localStorage.getItem("refreshToken");
 
-    if (error.response.status === 401 && refreshToken) {
+    if (error.response.status === 400 && refreshToken) {
       // 토큰 갱신 요청 되는진
       try {
         const response = await axios.post(
