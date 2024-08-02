@@ -8,13 +8,25 @@ export default function AddFriendModal({ onClose, onAddFriend }) {
 
   const onSubmit = async () => {
     try {
-      const response = await axios.post("/api//member/friends/request", {
-        friendName: nickname,
+      const response = await axios.post("/api/member/friend/request", {
+        name: nickname,
       });
       console.log("addFriend response:", response.data.body); // 응답 데이터
       onClose();
     } catch (error) {
       console.error("친구추가 데이터 로드 실패:", error);
+      if (error.response) {
+        // 서버에서 응답이 반환된 경우
+        console.error("서버 에러:", error.response.status);
+        console.error("응답 데이터:", error.response.data);
+      } else if (error.request) {
+        // 요청이 만들어졌으나 서버에서 응답이 없었음
+        console.error("서버 응답 없음:", error.request);
+      } else {
+        // 요청을 만들기 전에 발생한 문제
+        console.error("요청 에러:", error.message);
+      }
+      onClose();
     }
   };
 

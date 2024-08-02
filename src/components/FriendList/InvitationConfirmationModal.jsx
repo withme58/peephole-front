@@ -1,12 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import axios from "../../api/axios";
 
 export default function InvitationConfirmationModal({
-  invitations,
   onAccept,
   onDecline,
   onClose,
 }) {
+  const [invitations, setInvitations] = useState([]);
+  const fetchData = async () => {
+    try {
+      const response = await axios.get("/api/member/friend/waiting");
+      console.log("Friend List response:", response.data.body); // 응답 데이터
+      setInvitations(response.data.body.friendResponseList);
+    } catch (error) {
+      console.error("대기 친구 데이터 로드 실패:", error);
+    }
+  };
+  useEffect(() => {
+    fetchData();
+  }, []);
   return (
     <ModalOverlay>
       <ModalContent>
