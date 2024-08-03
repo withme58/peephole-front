@@ -25,12 +25,12 @@ export default function InvitationConfirmationModal({
       <ModalContent>
         <Title>초대 목록</Title>
         <InvitationList>
-          {invitations.map((name) => (
-            <InvitationItem key={name}>
-              <span>{name}</span>
+          {invitations.map((invite) => (
+            <InvitationItem key={invite.id}>
+              <span>{invite.name}</span> {/* 여기서 invite.name을 렌더링 */}
               <ButtonGroup>
-                <button onClick={() => onAccept(name)}>수락</button>
-                <button onClick={() => onDecline(name)}>거절</button>
+                <button onClick={() => onAccept(invite.name)}>수락</button>
+                <button onClick={() => onDecline(invite.name)}>거절</button>
               </ButtonGroup>
             </InvitationItem>
           ))}
