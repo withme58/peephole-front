@@ -48,7 +48,7 @@ export default function SendQuestionModal({
   return (
     <Background onClick={onClickBackground}>
       <ModalContainer>
-        {showSuccessModal && <SuccessModal closeModal={closeModal} />}
+        {showSuccessModal && <SuccessModal closeModal={() => navigate("/")} />}
         {showFailModal && (
           <FailModal closeModal={() => setShowFailModal(false)} />
         )}{" "}
