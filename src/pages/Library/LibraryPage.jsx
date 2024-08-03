@@ -13,9 +13,7 @@ export default function LibraryPage() {
     const fetchBooks = async () => {
       try {
         const response = await axios.get('http://52.78.139.165:8080/api/answer/list');
-        console.log(response.data); // 전체 응답 확인
-
-        // 응답에서 body가 배열인지 확인 후 처리
+        console.log(response.data); 
         if (Array.isArray(response.data.body)) {
           const booksData = response.data.body.map((item) => ({
             id: item.questionId,
@@ -73,7 +71,7 @@ const PageContainer = styled.div`
   padding: 0 10px;
   border: 2px solid black;
   overflow-y: auto;
-  overflow-x: hidden; /* 수평 스크롤바 제거 */
+  overflow-x: hidden; 
   &::-webkit-scrollbar {
     display: none;
   }
@@ -97,10 +95,10 @@ const HeadContainer = styled.div`
 const BookList = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-auto-rows: 272px; /* 각 행의 높이를 272px로 설정 */
+  grid-auto-rows: 272px; 
   gap: 10px;
-  width: calc(100% - 55px); /* 오른쪽 이동 */
-  margin-left: 35px; /* 왼쪽으로 이동 효과 */
+  width: calc(100% - 55px); 
+  margin-left: 35px; 
 `;
 
 const BackButton = styled.button`
@@ -115,5 +113,5 @@ const BackButton = styled.button`
 `;
 
 const Heading = styled.h1`
-  margin-left: 150px; /* 왼쪽으로 10px 이동 */
+  margin-left: 150px; 
 `;

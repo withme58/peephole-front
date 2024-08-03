@@ -76,7 +76,7 @@ const ModalContent = styled.div`
   justify-content: center;
   align-items: center;
   position: relative;
-  perspective: 1000px; /* 3D 효과를 위해 */
+  perspective: 1000px; 
 `;
 
 const Page = styled.div`
@@ -87,8 +87,8 @@ const Page = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  backface-visibility: hidden; /* 페이지의 뒷면을 숨김 */
-  margin-bottom: 10px; /* 페이지 사이의 간격 */
+  backface-visibility: hidden;
+  margin-bottom: 10px; 
 `;
 
 export default Modal;
