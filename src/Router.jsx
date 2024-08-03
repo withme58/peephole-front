@@ -7,6 +7,7 @@ import FriendListPage from "./pages/FriendList/FriendListPage";
 import ReplyQuestionPage from "./pages/ReplyQuestion/ReplyQuestionPage";
 import InterviewPage from "./pages/Main/InterviewPage";
 import MyPage from "./pages/MyPage/MyPage";
+import QuestionAll from "./pages/ReplyQuestion/QuestionAll";
 
 export default function Router() {
   return (
@@ -19,6 +20,7 @@ export default function Router() {
       <Route path="/list" element={<FriendListPage />} />
       <Route path="/reply" element={<ReplyQuestionPage />} />
       <Route path="/mypage" element={<MyPage />} />
+      <Route path="/questionAll" element={<QuestionAll />} />
     </Routes>
   );
 }

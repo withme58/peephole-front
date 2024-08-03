@@ -81,13 +81,13 @@ export default function ListForm() {
   return (
     <>
       <FriendBox>
-        {friends.map((name, index) => (
+        {friends.map((friend, index) => (
           <FriendList key={index}>
             <Profile
               src={`${process.env.PUBLIC_URL}/images/profile.png`}
               alt="logo"
             />
-            <span>{name}</span>
+            <span>{friend.name}</span>
             <FaRegTrashAlt size={15} onClick={() => openDeleteModal(index)} />
           </FriendList>
         ))}
