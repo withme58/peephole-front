@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import AddFriendModal from "./AddFriendModal";
 import { IoArrowBack } from "react-icons/io5";
@@ -11,8 +11,6 @@ export default function ListHeader() {
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
 
   const [isInvitationModalOpen, setIsInvitationModalOpen] = useState(false);
-  const [friendToDelete, setFriendToDelete] = useState(null);
-  const [invitations, setInvitations] = useState(["영창", "단비", "민교"]); // 이부분 백엔드에서 받아와야함
 
   const openAddModal = () => {
     setIsAddModalOpen(true);
@@ -33,18 +31,6 @@ export default function ListHeader() {
     setIsInvitationModalOpen(false);
   };
 
-  const acceptInvitation = (name) => {
-    addFriend(name);
-    setInvitations((prevInvitations) =>
-      prevInvitations.filter((invite) => invite !== name)
-    );
-  };
-  const declineInvitation = (name) => {
-    setInvitations((prevInvitations) =>
-      prevInvitations.filter((invite) => invite !== name)
-    );
-  };
-
   return (
     <>
       <AddButton onClick={openAddModal}>친구 추가</AddButton>
@@ -55,12 +41,7 @@ export default function ListHeader() {
         <AddFriendModal onClose={closeAddModal} onAddFriend={addFriend} />
       )}
       {isInvitationModalOpen && (
-        <InvitationConfirmationModal
-          invitations={invitations}
-          onAccept={acceptInvitation}
-          onDecline={declineInvitation}
-          onClose={closeInvitationModal}
-        />
+        <InvitationConfirmationModal onClose={closeInvitationModal} />
       )}
     </>
   );

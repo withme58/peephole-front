@@ -2,12 +2,10 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import axios from "../../api/axios";
 
-export default function InvitationConfirmationModal({
-  onAccept,
-  onDecline,
-  onClose,
-}) {
+export default function InvitationConfirmationModal({ onClose }) {
   const [invitations, setInvitations] = useState([]);
+
+  // Fetch data from the API
   const fetchData = async () => {
     try {
       const response = await axios.get("/api/member/friend/waiting");
@@ -17,9 +15,34 @@ export default function InvitationConfirmationModal({
       console.error("대기 친구 데이터 로드 실패:", error);
     }
   };
+
+  // Fetch data when the component mounts
   useEffect(() => {
     fetchData();
   }, []);
+
+  // Accept invitation and refetch data
+  const onAccept = async (id) => {
+    try {
+      await axios.get(`/api/member/friend/accept?friendId=${id}`);
+      console.log("Friend accept response: Invitation accepted."); // Response data not used here
+      await fetchData(); // Reload invitations
+    } catch (error) {
+      console.error("friend accept 에러 :", error);
+    }
+  };
+
+  // Decline invitation and refetch data
+  const onDecline = async (id) => {
+    try {
+      await axios.get(`/api/member/friend/reject?friendId=${id}`);
+      console.log("Friend reject response: Invitation rejected."); // Response data not used here
+      await fetchData(); // Reload invitations
+    } catch (error) {
+      console.error("friend reject 에러 :", error);
+    }
+  };
+
   return (
     <ModalOverlay>
       <ModalContent>
@@ -29,8 +52,8 @@ export default function InvitationConfirmationModal({
             <InvitationItem key={invite.id}>
               <span>{invite.name}</span> {/* 여기서 invite.name을 렌더링 */}
               <ButtonGroup>
-                <button onClick={() => onAccept(invite.name)}>수락</button>
-                <button onClick={() => onDecline(invite.name)}>거절</button>
+                <button onClick={() => onAccept(invite.id)}>수락</button>
+                <button onClick={() => onDecline(invite.id)}>거절</button>
               </ButtonGroup>
             </InvitationItem>
           ))}
