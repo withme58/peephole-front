@@ -6,7 +6,7 @@ import Header from "../../components/Molcules/Header";
 export default function ReplyQuestionPage() {
   return (
     <PageContainer>
-      <Header text={"질문 응답하기"} />
+      <Header text={"오늘의 인터뷰"} />
       <ReplyForm />
     </PageContainer>
   );

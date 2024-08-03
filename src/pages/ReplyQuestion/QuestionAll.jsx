@@ -1,13 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import ReplyForm from "../../components/ReplyQuestion/ReplyForm";
 import Header from "../../components/Molcules/Header";
 
 export default function QuestionAll() {
   return (
     <PageContainer>
-      <Header text={"질문 응답하기"} />
-      <ReplyForm />
+      <Header text={"오늘의 인터뷰"} />
     </PageContainer>
   );
 }
