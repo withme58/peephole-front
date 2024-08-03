@@ -1,11 +1,30 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom"; // Updated import
+import { useNavigate, useLocation } from "react-router-dom"; // Updated import
+import axios from "../../api/axios";
 
 export default function ReplyForm() {
-  const question = "질문 뭐하지 오늘 뭐했니? ㅎㅎ 아 배고프당";
+  const location = useLocation();
+  const { answerId } = location.state || {}; // 전달된 상태를 받아옴
+  const [question, setQuestion] = useState(null); // 초기 상태 null로 변경
   const [replyText, setReplyText] = useState("");
   const navigate = useNavigate(); // Updated hook
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(`/api/question/${answerId}`);
+      console.log("question single response:", response.data.body); // 응답 데이터
+      setQuestion(response.data.body); // Ensure entire body is assigned correctly
+    } catch (error) {
+      console.error("단일 질문 데이터 로드 실패:", error);
+    }
+  };
+
+  useEffect(() => {
+    if (answerId) {
+      fetchData();
+    }
+  }, [answerId]);
 
   const handleChange = (e) => {
     const text = e.target.value;
@@ -19,14 +38,23 @@ export default function ReplyForm() {
     if (replyText.trim()) {
       // Handle the submission logic here (e.g., send the reply to a server)
       console.log("Submitted reply:", replyText);
+      console.log("Answer ID:", answerId); // Answer ID 출력
       setReplyText(""); // Clear the textarea after submission
       navigate("/"); // Navigate back to the root route
     }
   };
 
+  if (!question) {
+    return <div>Loading...</div>; // 로딩 상태 표시
+  }
+
   return (
     <FormContainer onSubmit={handleSubmit}>
-      <QuestionBox>{question}</QuestionBox>
+      <QuestionBox>
+        <div>{new Date(question.createdAt).toLocaleDateString()}</div>
+        <div>{question.friendName}님이 보냈습니다.</div>
+        <div>{question.questionName}</div>
+      </QuestionBox>
       <TextArea
         value={replyText}
         onChange={handleChange}
@@ -50,7 +78,8 @@ const FormContainer = styled.form`
 
 const QuestionBox = styled.div`
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start; /* 왼쪽 정렬 */
   justify-content: center;
   font-size: 15px;
   height: 100px;
