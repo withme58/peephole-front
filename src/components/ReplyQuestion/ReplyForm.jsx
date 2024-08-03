@@ -8,6 +8,7 @@ export default function ReplyForm() {
   const { answerId } = location.state || {}; // 전달된 상태를 받아옴
   const [question, setQuestion] = useState(null); // 초기 상태 null로 변경
   const [replyText, setReplyText] = useState("");
+  const [friendId, setFriend] = useState();
   const navigate = useNavigate(); // Updated hook
 
   const fetchData = async () => {
@@ -15,6 +16,7 @@ export default function ReplyForm() {
       const response = await axios.get(`/api/question/${answerId}`);
       console.log("question single response:", response.data.body); // 응답 데이터
       setQuestion(response.data.body); // Ensure entire body is assigned correctly
+      setFriend(response.body.friendId);
     } catch (error) {
       console.error("단일 질문 데이터 로드 실패:", error);
     }
@@ -33,13 +35,25 @@ export default function ReplyForm() {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (replyText.trim()) {
       // Handle the submission logic here (e.g., send the reply to a server)
       console.log("Submitted reply:", replyText);
       console.log("Answer ID:", answerId); // Answer ID 출력
       setReplyText(""); // Clear the textarea after submission
+      console.log(friendId);
+      try {
+        const response = await axios.post(`/api/question`, {
+          friendId: friendId,
+          answer: replyText,
+          answerId: answerId,
+        });
+        console.log("질문 응답 response:", response.data.body); // 응답 데이터
+      } catch (error) {
+        console.error("질문 응답 로드 실패:", error);
+      }
+
       navigate("/"); // Navigate back to the root route
     }
   };
