@@ -29,16 +29,8 @@ export default function ListForm() {
     fetchData();
   }, []);
 
-  const openAddModal = () => {
-    setIsAddModalOpen(true);
-  };
-
-  const closeAddModal = () => {
-    setIsAddModalOpen(false);
-  };
-
-  const openDeleteModal = (index) => {
-    setFriendToDelete(index);
+  const openDeleteModal = (id) => {
+    setFriendToDelete(id);
     setIsDeleteModalOpen(true);
   };
 
@@ -47,35 +39,17 @@ export default function ListForm() {
     setFriendToDelete(null);
   };
 
-  const confirmDelete = () => {
-    setFriends((prevFriends) =>
-      prevFriends.filter((_, index) => index !== friendToDelete)
-    );
+  const confirmDelete = async () => {
+    try {
+      const response = await axios.delete(
+        `/api/member/friend/delete?friendId=${friendToDelete}`
+      );
+      console.log("Friend 삭제 response:", response.data.body); // 응답 데이터
+      fetchData();
+    } catch (error) {
+      console.error("친구 리스트 삭제 로드 실패:", error);
+    }
     closeDeleteModal();
-  };
-
-  const addFriend = (nickname) => {
-    setFriends((prevFriends) => [...prevFriends, nickname]);
-  };
-
-  const openInvitationModal = () => {
-    setIsInvitationModalOpen(true);
-  };
-
-  const closeInvitationModal = () => {
-    setIsInvitationModalOpen(false);
-  };
-
-  const acceptInvitation = (name) => {
-    addFriend(name);
-    setInvitations((prevInvitations) =>
-      prevInvitations.filter((invite) => invite !== name)
-    );
-  };
-  const declineInvitation = (name) => {
-    setInvitations((prevInvitations) =>
-      prevInvitations.filter((invite) => invite !== name)
-    );
   };
 
   return (
@@ -88,7 +62,10 @@ export default function ListForm() {
               alt="logo"
             />
             <span>{friend.name}</span>
-            <FaRegTrashAlt size={15} onClick={() => openDeleteModal(index)} />
+            <FaRegTrashAlt
+              size={15}
+              onClick={() => openDeleteModal(friend.id)}
+            />
           </FriendList>
         ))}
       </FriendBox>
