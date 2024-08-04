@@ -4,7 +4,7 @@ import axios from "../../api/axios";
 import { useEffect, useState } from "react";
 
 export default function CalculateDate() {
-  const [day, setDay] = useState(null); //Date는 user에서 createdAt으로 받아온다
+  const [day, setDay] = useState(null);
 
   async function getDday() {
     try {
@@ -13,7 +13,7 @@ export default function CalculateDate() {
       const calculateDay = DdayCalculator(createdAt);
       console.log(createdAt);
       setDay(calculateDay);
-      console.log("Dday response:", response); // 응답 데이터
+      console.log("Dday response:", response);
     } catch (error) {
       console.error("Dday 데이터 로드 실패:", error);
     }

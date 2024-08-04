@@ -34,13 +34,11 @@ export default function SignupForm() {
   const password = watch("password");
   const passwordCheck = watch("passwordCheck");
 
-  // 회원가입 실행
   const handleSubmits = async (data) => {
     try {
       if (!emailError && !passwordCheckError && !nameError) {
         const response = await axios.post("open-api/signup", data);
         if (response.status === 200) {
-          // setShowSuccessModal(true);
           navigate("/login");
         }
       }
@@ -57,7 +55,6 @@ export default function SignupForm() {
     toggleModal();
   };
 
-  // 유효성검사 true 나오게끔
   const validateEmail = (email) => {
     const isvalidateEmail = /\S+@\S+\.\S+/.test(email);
     setemailError(!isvalidateEmail);
@@ -110,7 +107,6 @@ export default function SignupForm() {
     }
   }, [passwordCheck, password]);
 
-  // foucs out
   const handleBlur = (field) => {
     return () => {
       switch (field) {
@@ -132,7 +128,6 @@ export default function SignupForm() {
     };
   };
 
-  // foucs in
   const handleFocus = (field) => {
     return () => {
       switch (field) {
@@ -154,7 +149,6 @@ export default function SignupForm() {
     };
   };
 
-  // 에러메세지가 없고 모든값이 빈값이 아닐때 버튼 활성화
   const lastCheck =
     !emailError &&
     !nameError &&
