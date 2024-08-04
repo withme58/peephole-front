@@ -12,7 +12,7 @@ export default function LibraryPage() {
   useEffect(() => {
     const fetchBooks = async () => {
       try {
-        const response = await axios.get('http://52.78.139.165:8080/api/answer/list');
+        const response = await axios.get('/api/answer/list');
         console.log(response.data); 
         if (Array.isArray(response.data.body)) {
           const booksData = response.data.body.map((item) => ({
