@@ -36,6 +36,7 @@ const AskBoxContainer = styled.div`
   padding: 10px;
   background-color: rgba(61, 73, 84, 0.3);
   border-radius: 10px;
+  margin-top: 40px;
 `;
 const AskBoxTitle = styled.div`
   font-size: 24px;
