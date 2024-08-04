@@ -28,7 +28,7 @@ instance.interceptors.response.use(
     const refreshToken = localStorage.getItem("refreshToken");
 
     if (error.response.status === 400 && refreshToken) {
-      // 토큰 갱신 요청 되는진
+      // 토큰 갱신 요청
       try {
         const response = await axios.post(
           `${process.env.REACT_APP_API_URL}/refresh-token`,
@@ -46,8 +46,18 @@ instance.interceptors.response.use(
         return axios(originalRequest);
       } catch (refreshError) {
         console.error("토큰 갱신 실패:", refreshError);
-        // 갱신 실패 시 로그아웃 처리 등 추가 작업 수행 가능
+        // 갱신 실패 시 토큰 삭제 및 추가 작업 수행
+        localStorage.removeItem("accessToken");
+        localStorage.removeItem("refreshToken");
+        // 로그아웃 처리 등 추가 작업 수행 가능
       }
+    }
+
+    // 토큰이 만료된 경우 토큰 삭제
+    if (error.response.status === 401) {
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("refreshToken");
+      // 로그아웃 처리 등 추가 작업 수행 가능
     }
 
     return Promise.reject(error);
