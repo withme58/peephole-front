@@ -48,7 +48,7 @@ export default function MainPageHeader() {
 const HeaderContainer = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between; /* 추가된 부분 */
+  justify-content: space-between;
   padding: 20px;
 `;
 
@@ -58,8 +58,8 @@ const LogoButton = styled.button`
   font-size: 24px;
   color: #fff;
   cursor: pointer;
-  flex: 1; /* 추가된 부분 */
-  text-align: center; /* 추가된 부분 */
+  flex: 1;
+  text-align: center;
 `;
 
 const ButtonContainer = styled.div`

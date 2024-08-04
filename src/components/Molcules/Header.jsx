@@ -30,7 +30,7 @@ const HeaderContainer = styled.div`
 const BackButton = styled.div`
   display: flex;
   align-items: center;
-  margin-right: auto; /* 추가된 코드 */
+  margin-right: auto;
   cursor: pointer;
 `;
 
@@ -41,9 +41,9 @@ const HeaderBox = styled.div`
   position: relative;
   color: #fff;
   font-size: 24px;
-  width: 360px; /* 추가된 코드 */
+  width: 360px;
   height: 56px;
   font-weight: bold;
-  flex: 1; /* 추가된 코드 */
-  text-align: center; /* 추가된 코드 */
+  flex: 1;
+  text-align: center;
 `;
