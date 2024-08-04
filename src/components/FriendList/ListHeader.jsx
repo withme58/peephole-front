@@ -7,7 +7,6 @@ import InvitationConfirmationModal from "./InvitationConfirmationModal";
 
 export default function ListHeader() {
   const [friends, setFriends] = useState(["민교", "동호", "다현"]);
-  const navigate = useNavigate();
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
 
   const [isInvitationModalOpen, setIsInvitationModalOpen] = useState(false);
