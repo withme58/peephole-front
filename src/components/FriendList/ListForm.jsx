@@ -88,15 +88,21 @@ const FriendBox = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
-  width: 498px;
+  width: 400px;
+  height: 800px;
+  border-radius: 20px;
+  background-color: #f3f3f330;
+  align-items: center;
 `;
 
 const FriendList = styled.div`
   display: flex;
   font-size: 25px;
-  padding: 20px 0px 20px 10%;
+  width: 380px;
+  padding: 20px;
   color: #fff;
-
+  border-bottom: 1px solid #fff;
+  align-items: center;
   svg {
     cursor: pointer;
     position: absolute;
