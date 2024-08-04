@@ -101,10 +101,13 @@ const HeadContainer = styled.div`
 const BookList = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-auto-rows: 272px; 
+  grid-auto-rows: 190px; 
   gap: 10px;
   width: calc(100% - 115px); 
   margin-left: 55px; 
+  margin-bottom:100px;
+   margin-top: -70px; // 위쪽 여백 설정
+  margin-bottom: 20px; // 아래쪽 여백 설정
 `;
 
 const BackButton = styled.button`
@@ -113,9 +116,7 @@ const BackButton = styled.button`
   color: #ffffff;
   cursor: pointer;
   font-size: 24px;
-  &:hover {
-    color: #ffffff;
-  }
+  
 `;
 
 const Heading = styled.h1`
