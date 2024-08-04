@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { IoClose } from "react-icons/io5";
 import SuccessModal from "./SuccessModal";
-import FailModal from "./FailModal"; // FailModal 컴포넌트 추가
+import FailModal from "./FailModal";
 import axios from "../../api/axios";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
@@ -13,9 +13,9 @@ export default function SendQuestionModal({
   questionId,
 }) {
   const navigate = useNavigate();
-  const { register, handleSubmit, setValue } = useForm();
+  const { handleSubmit, setValue } = useForm();
   const [showSuccessModal, setShowSuccessModal] = useState(false);
-  const [showFailModal, setShowFailModal] = useState(false); // 실패 모달 상태 추가
+  const [showFailModal, setShowFailModal] = useState(false);
 
   const onClickBackground = (e) => {
     if (e.target === e.currentTarget) {
@@ -25,18 +25,18 @@ export default function SendQuestionModal({
 
   const onSubmit = async (data) => {
     const questionData = {
-      questionId: questionId, // 전달받은 questionId 사용
+      questionId: questionId,
       friendName: data.friendName,
     };
     try {
       const response = await axios.post("/api/myfriends", questionData);
-      console.log("SendQuestion response:", response); // 응답 데이터
+      console.log("SendQuestion response:", response);
       if (response.status === 200) {
         setShowSuccessModal(true);
       }
     } catch (error) {
       console.error("SendQuestion 데이터 전송 실패:", error);
-      setShowFailModal(true); // 실패 시 FailModal 표시
+      setShowFailModal(true);
     }
   };
 
@@ -52,7 +52,6 @@ export default function SendQuestionModal({
         {showFailModal && (
           <FailModal closeModal={() => setShowFailModal(false)} />
         )}{" "}
-        {/* 실패 모달 조건부 렌더링 */}
         <Header>
           <QuestionHeader>피폴 목록</QuestionHeader>
           <CloseButton>
@@ -74,7 +73,6 @@ export default function SendQuestionModal({
   );
 }
 
-// Styled Components
 const Background = styled.div`
   position: fixed;
   top: 0;
