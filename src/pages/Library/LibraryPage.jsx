@@ -18,6 +18,7 @@ export default function LibraryPage() {
           const booksData = response.data.body.map((item) => ({
             id: item.questionId,
             title: item.questionContent,
+            colorCode: item.colorCode, 
           }));
           setBooks(booksData);
         } else {
@@ -46,7 +47,12 @@ export default function LibraryPage() {
         </HeadContainer>
         <BookList>
           {books.map((book) => (
-            <LibraryBook key={book.id} title={book.title} questionId={book.id} />
+            <LibraryBook 
+              key={book.id} 
+              title={book.title} 
+              questionId={book.id} 
+              colorCode={book.colorCode} // 추가된 부분
+            />
           ))}
         </BookList>
       </PageContainer>
