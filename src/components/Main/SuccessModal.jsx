@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { IoClose } from "react-icons/io5";
 
-export default function SuccessModal({ closeModal, userData = [] }) {
+export default function SuccessModal({ closeModal, userName }) {
   const onClickBackground = (e) => {
     if (e.target === e.currentTarget) {
       closeModal();
@@ -11,10 +11,12 @@ export default function SuccessModal({ closeModal, userData = [] }) {
   return (
     <Background onClick={onClickBackground}>
       <ModalContainer>
+        <img src="icons/success.svg" alt="success" />
         <CloseButton>
           <IoClose onClick={closeModal} size={25} color="#5a786f" />
         </CloseButton>
-        <SendMessage>{userData.friendId}에게 보냈습니다.</SendMessage>
+        <SendMessage>{userName}에게 보냈습니다.</SendMessage>{" "}
+        {/* 수정된 부분 */}
       </ModalContainer>
     </Background>
   );
@@ -48,4 +50,9 @@ const CloseButton = styled.div`
   cursor: pointer;
 `;
 
-const SendMessage = styled.div``;
+const SendMessage = styled.div`
+  text-align: center;
+  font-size: 18px;
+  color: #535353;
+  margin-top: 20px;
+`;

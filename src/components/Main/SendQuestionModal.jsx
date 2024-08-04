@@ -16,6 +16,7 @@ export default function SendQuestionModal({
   const { handleSubmit, setValue } = useForm();
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [showFailModal, setShowFailModal] = useState(false);
+  const [selectedUserName, setSelectedUserName] = useState(""); // 추가된 부분
 
   const onClickBackground = (e) => {
     if (e.target === e.currentTarget) {
@@ -42,16 +43,22 @@ export default function SendQuestionModal({
 
   const handleSendClick = (user) => {
     setValue("friendName", user.name);
+    setSelectedUserName(user.name); // 추가된 부분
     handleSubmit(onSubmit)();
   };
 
   return (
     <Background onClick={onClickBackground}>
       <ModalContainer>
-        {showSuccessModal && <SuccessModal closeModal={() => navigate("/")} />}
+        {showSuccessModal && (
+          <SuccessModal
+            closeModal={() => navigate("/")}
+            userName={selectedUserName} // 추가된 부분
+          />
+        )}
         {showFailModal && (
           <FailModal closeModal={() => setShowFailModal(false)} />
-        )}{" "}
+        )}
         <Header>
           <QuestionHeader>피폴 목록</QuestionHeader>
           <CloseButton>

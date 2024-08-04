@@ -40,7 +40,7 @@ export default function LoginForm() {
       const res = await axios.post("open-api/signin", data);
       console.log("Login response:", res); // 응답 데이터
       localStorage.setItem("accessToken", res.data.body.accessToken);
-      localStorage.setItem("refreshToken", res.data.body.refreshToken);
+      // localStorage.setItem("refreshToken", res.data.body.refreshToken);
       navigate("/");
     } catch (error) {
       setPasswordError(true);
