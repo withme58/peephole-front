@@ -9,7 +9,7 @@ const Modal = ({ isOpen, onClose, questionId }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://52.78.139.165:8080/api/answer/one?questionId=${questionId}`);
+        const response = await axios.get(`/api/answer/one?questionId=${questionId}`);
         console.log(response.data);
         setData(response.data.body);
       } catch (error) {
