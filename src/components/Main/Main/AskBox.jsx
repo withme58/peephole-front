@@ -1,11 +1,14 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import CalculateDate from "../../CalculateDate/CalculateDate";
 
-export default function LandingtoLogin() {
+export default function AskBox() {
   const navigate = useNavigate();
   return (
     <AskBoxContainer>
-      <AskBoxTitle>로그인/회원가입을 해주세요.</AskBoxTitle>
+      <AskBoxTitle>
+        하루에 한 명, <span>인터뷰</span>를 해볼까요?
+      </AskBoxTitle>
       <AskBoxContent>
         <AskBoxQuote>
           <p>매일매일 색다른 질문을 받아</p>
@@ -14,11 +17,13 @@ export default function LandingtoLogin() {
         </AskBoxQuote>
         <AskBoxButton
           onClick={() => {
-            navigate("/login");
+            navigate("/interview");
           }}
         >
-          로그인
+          질문하기
         </AskBoxButton>
+        <CalculateDate />
+        {/* 메인에서도 api가 불러와져야 토큰이 없을때 랜딩 띄워줄 수 있음 */}
       </AskBoxContent>
     </AskBoxContainer>
   );
@@ -42,10 +47,14 @@ const AskBoxTitle = styled.div`
   font-family: "Noto Sans KR";
   color: #fff;
   text-align: center;
+  span {
+    color: var(--main-blue);
+  }
 `;
 
 const AskBoxContent = styled.div`
   text-align: center;
+  /* gap: 10px; */
 `;
 const AskBoxQuote = styled.div`
   font-size: 20px;

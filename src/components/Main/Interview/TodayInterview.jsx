@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import { useState, useEffect } from "react";
 import SendQuestionModal from "./SendQuestionModal";
-import CalculateDate from "../CalculateDate/CalculateDate";
-import axios from "../../api/axios";
+import CalculateDate from "../../CalculateDate/CalculateDate";
+import axios from "../../../api/axios";
 
 export default function TodayInterview() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -55,7 +55,9 @@ export default function TodayInterview() {
         <QuestionArea>{question}</QuestionArea>
         <CalculateDate />
       </QuestionContainer>
-      <FriendListButton onClick={openModal}>오늘의 피폴</FriendListButton>
+      <ButtonContainer>
+        <FriendListButton onClick={openModal}>오늘의 피폴</FriendListButton>
+      </ButtonContainer>
       {isModalOpen && (
         <SendQuestionModal
           questionId={questionId}
@@ -110,8 +112,13 @@ const FriendListButton = styled.button`
   width: 300px;
   height: 60px;
   background-color: var(--tapped-blue);
+
   font-size: 18px;
   font-weight: 400;
   color: #fff;
   cursor: pointer;
+`;
+
+const ButtonContainer = styled.div`
+  padding: 10px 0 40px 0;
 `;

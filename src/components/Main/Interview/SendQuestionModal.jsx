@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { IoClose } from "react-icons/io5";
 import SuccessModal from "./SuccessModal";
 import FailModal from "./FailModal";
-import axios from "../../api/axios";
+import axios from "../../../api/axios";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 

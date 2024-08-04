@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { IoMdPerson } from "react-icons/io";
 
-export default function LandingHeader({ text }) {
+export default function MainHeader({ text }) {
   const navigate = useNavigate();
 
   return (
@@ -19,6 +19,7 @@ const HeaderContainer = styled.div`
   align-items: center;
   padding: 20px 20px 0;
   position: relative;
+  gap: 240px;
 `;
 
 const HeaderBox = styled.div`
