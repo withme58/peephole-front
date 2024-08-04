@@ -58,21 +58,22 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100%;
-  width: 100%;
+  /* height: 100%;
+  width: 100%; */
   background-color: #3d4954;
   overflow: hidden;
 `;
 
 const SwipeContainer = styled.div`
   display: flex;
-  transform: ${({ currentIndex }) => `translateX(-${currentIndex * 100}%)`};
-  transition: transform 0.5s ease-in-out;
   width: 300%;
+  transform: ${({ currentIndex }) =>
+    `translateX(-${(currentIndex * 100) / 3}%)`};
+  transition: transform 0.5s ease-in-out;
 `;
 
 const Slide = styled.div`
-  min-width: 100vw;
+  width: 100vw;
   height: 100%;
   display: flex;
   align-items: center;

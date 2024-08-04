@@ -25,7 +25,7 @@ instance.interceptors.response.use(
   },
   (error) => {
     if (error.response && error.response.status === 400) {
-      // 401 에러일 경우 액세스 토큰 삭제
+      // 400 에러일 경우 액세스 토큰 삭제
       localStorage.removeItem("accessToken");
       window.location.href = "/";
     }
