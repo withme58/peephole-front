@@ -12,18 +12,18 @@ export default function LibraryPage() {
   useEffect(() => {
     const fetchBooks = async () => {
       try {
-        const response = await axios.get('/api/answer/list');
-        console.log(response.data); 
+        const response = await axios.get("/api/answer/list");
+        console.log(response.data);
         if (Array.isArray(response.data.body)) {
           const booksData = response.data.body.map((item) => ({
             id: item.questionId,
             title: item.questionContent,
-            colorCode: item.colorCode, 
-            receiverName: item.receiverName, 
+            colorCode: item.colorCode,
+            receiverName: item.receiverName,
           }));
           setBooks(booksData);
         } else {
-          console.error('에러났다잉');
+          console.error("에러났다잉");
         }
       } catch (error) {
         console.log(error);
@@ -34,7 +34,7 @@ export default function LibraryPage() {
   }, []);
 
   const handleBackButtonClick = () => {
-    navigate('/'); // MainPage로 이동
+    navigate("/peephole"); // MainPage로 이동
   };
 
   return (
@@ -49,12 +49,12 @@ export default function LibraryPage() {
         <ScrollableContainer>
           <BookList>
             {books.map((book) => (
-              <LibraryBook 
-                key={book.id} 
-                title={book.title} 
-                questionId={book.id} 
-                colorCode={book.colorCode} 
-                receiverName={book.receiverName} 
+              <LibraryBook
+                key={book.id}
+                title={book.title}
+                questionId={book.id}
+                colorCode={book.colorCode}
+                receiverName={book.receiverName}
               />
             ))}
           </BookList>
@@ -78,7 +78,7 @@ const PageContainer = styled.div`
   gap: 10px;
   padding: 0 10px;
   border: 2px solid black;
-  overflow: hidden; 
+  overflow: hidden;
 `;
 
 const HeadContainer = styled.div`
@@ -91,29 +91,29 @@ const HeadContainer = styled.div`
   padding-top: 77px;
   padding-left: 0px;
   flex-shrink: 0;
-  font-family: 'SF Pro Text', sans-serif;
+  font-family: "SF Pro Text", sans-serif;
   font-size: 10px;
   line-height: 30px;
 `;
 
 const ScrollableContainer = styled.div`
-  height: calc(100% - 256px); 
-  overflow-y: auto; 
+  height: calc(100% - 256px);
+  overflow-y: auto;
   overflow-x: hidden;
   &::-webkit-scrollbar {
     display: none;
   }
-  margin-bottom:100px;
+  margin-bottom: 100px;
 `;
 
 const BookList = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-auto-rows: 190px; 
+  grid-auto-rows: 190px;
   // gap-bottom: 10px;
-  width: calc(100% - 115px); 
-  margin-left: 62px; 
-  margin-bottom: 20px; 
+  width: calc(100% - 115px);
+  margin-left: 62px;
+  margin-bottom: 20px;
   margin-top: 0px;
 `;
 
@@ -126,7 +126,7 @@ const BackButton = styled.button`
 `;
 
 const Heading = styled.h1`
-  margin-left: 150px; 
+  margin-left: 150px;
   font-weight: bold;
   font-size: 24px;
 `;
