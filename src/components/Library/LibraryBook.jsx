@@ -11,7 +11,7 @@ export default function LibraryBook({ title, questionId, colorCode, receiverName
     <>
       <BookContainer colorCode={colorCode} onClick={() => setIsModalOpen(true)}>
         <ContentContainer>
-          <Title>{title.length > 10 ? `${title.slice(0, 10)}...` : title}</Title>
+          <Title>{title.length > 10 ? `${title.slice(0, 10)}...?` : title}</Title>
         <ReceiverName>{newReceiverName}</ReceiverName>
         </ContentContainer>
       </BookContainer>
@@ -31,7 +31,7 @@ const BookContainer = styled.div`
   background: ${(props) => props.colorCode || 'rgba(255, 255, 255, 1)'};
   display: flex;
   justify-content: center;
-  align-items: flex-end; /* 하단 정렬 */
+  align-items: flex-end; 
   border-radius: 30px 30px 10px 10px; 
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   cursor: pointer;
@@ -54,7 +54,7 @@ const Title = styled.h1`
   text-align: left;
   padding-left:4px;
   padding-bottom:5px;
-  font-family: 'Noto Sans KR', sans-serif; /* 폰트 적용 */
+  font-family: 'Noto Sans KR', sans-serif;
 
 
 `;

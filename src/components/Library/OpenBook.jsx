@@ -1,3 +1,4 @@
+// Modal.js
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useSpring, animated } from "@react-spring/web";
@@ -25,8 +26,8 @@ const Modal = ({ isOpen, onClose, questionId }) => {
   // Modal 전체의 애니메이션 설정
   const springProps = useSpring({
     opacity: isOpen ? 1 : 0,
-    transform: isOpen ? "rotateY(0deg)" : "rotateY(-90deg)",
-    config: { tension: 300, friction: 20 },
+    transform: isOpen ? "translateY(0)" : "translateY(100%)",
+    config: { tension: 0, friction: 10 },
   });
 
   if (!isOpen) return null;
@@ -35,6 +36,7 @@ const Modal = ({ isOpen, onClose, questionId }) => {
     <ModalOverlay onClick={onClose}>
       <animated.div style={springProps}>
         <ModalContent onClick={(e) => e.stopPropagation()}>
+          <CloseButton onClick={onClose}>×</CloseButton> 
           {data ? (
             <>
               <Page height={100}>{data.questionTitle}</Page>
@@ -53,23 +55,25 @@ const Modal = ({ isOpen, onClose, questionId }) => {
 };
 
 const ModalOverlay = styled.div`
-  position: fixed;
-  top: 0;
+  position: fixed; 
+  top: 80px;
   left: 0;
   width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  // height: calc(100% - 500px); 
+  // background: rgba(0, 0, 0, 0.5);
+  background:none;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start; 
   z-index: 999;
 `;
 
 const ModalContent = styled.div`
-  width: 450px;
-  height: auto;
-  background: white;
-  border-radius: 8px;
+  width: 501px; //498 
+  height: 1001px;
+  background: #D9D9D9;
+  border-top-left-radius: 8px; 
+  border-top-right-radius: 8px; 
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -77,6 +81,17 @@ const ModalContent = styled.div`
   align-items: center;
   position: relative;
   perspective: 1000px; 
+`;
+
+const CloseButton = styled.button`
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  
 `;
 
 const Page = styled.div`
