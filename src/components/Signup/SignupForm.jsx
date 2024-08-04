@@ -37,7 +37,7 @@ export default function SignupForm() {
   const handleSubmits = async (data) => {
     try {
       if (!emailError && !passwordCheckError && !nameError) {
-        const response = await axios.post("open-api/signup", data);
+        const response = await axios.post("/open-api/signup", data);
         if (response.status === 200) {
           navigate("/login");
         }
