@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import axios from "../../api/axios";
 
-export default function AddFriendModal({ onClose, onAddFriend }) {
+export default function AddFriendModal({ onClose }) {
   const [nickname, setNickname] = useState("");
 
   const onSubmit = async () => {
@@ -26,13 +26,6 @@ export default function AddFriendModal({ onClose, onAddFriend }) {
         // 요청을 만들기 전에 발생한 문제
         console.error("요청 에러:", error.message);
       }
-      onClose();
-    }
-  };
-
-  const handleAdd = () => {
-    if (nickname.trim()) {
-      onAddFriend(nickname);
       onClose();
     }
   };

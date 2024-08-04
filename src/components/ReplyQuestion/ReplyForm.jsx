@@ -8,7 +8,7 @@ export default function ReplyForm() {
   const { answerId } = location.state || {}; // 전달된 상태를 받아옴
   const [question, setQuestion] = useState(null); // 초기 상태 null로 변경
   const [replyText, setReplyText] = useState("");
-  const [friendId, setFriend] = useState();
+  const [friendId, setFriendId] = useState();
   const navigate = useNavigate(); // Updated hook
 
   const fetchData = async () => {
@@ -16,7 +16,7 @@ export default function ReplyForm() {
       const response = await axios.get(`/api/question/${answerId}`);
       console.log("question single response:", response.data.body); // 응답 데이터
       setQuestion(response.data.body); // Ensure entire body is assigned correctly
-      setFriend(response.body.friendId);
+      setFriendId(response.data.body.friendId); // `response.data.body` 사용
     } catch (error) {
       console.error("단일 질문 데이터 로드 실패:", error);
     }
@@ -26,7 +26,7 @@ export default function ReplyForm() {
     if (answerId) {
       fetchData();
     }
-  }, [answerId]);
+  }, [answerId]); // `fetchData`가 아닌 `answerId`를 종속성 배열에 추가
 
   const handleChange = (e) => {
     const text = e.target.value;
@@ -41,8 +41,9 @@ export default function ReplyForm() {
       // Handle the submission logic here (e.g., send the reply to a server)
       console.log("Submitted reply:", replyText);
       console.log("Answer ID:", answerId); // Answer ID 출력
+      console.log("Friend ID:", friendId); // Friend ID 출력
       setReplyText(""); // Clear the textarea after submission
-      console.log(friendId);
+
       try {
         const response = await axios.post(`/api/question`, {
           friendId: friendId,

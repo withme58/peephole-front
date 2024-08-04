@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import MyPageHeader from "../../components/MyPage/MyPageHeader";
 import MyPageForm from "../../components/MyPage/MyPageForm";
 import Header from "../../components/Molcules/Header";
 
