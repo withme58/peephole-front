@@ -64,9 +64,9 @@ const CenteredContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  width: 100%;
+  
 `;
+
 
 const PageContainer = styled.div`
   width: 498px;
