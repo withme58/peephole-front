@@ -52,7 +52,7 @@ export default function SendQuestionModal({
       <ModalContainer>
         {showSuccessModal && (
           <SuccessModal
-            closeModal={() => navigate("/")}
+            closeModal={() => navigate("/peephole")}
             userName={selectedUserName} // 추가된 부분
           />
         )}
