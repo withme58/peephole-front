@@ -1,12 +1,12 @@
-import LandingtoLogin from "../../components/Landing/LandingtoLogin";
+// import LandingtoLogin from "../../components/Landing/LandingtoLogin";
 import React from "react";
-import LandingHeader from "../../components/Landing/LandingHeader";
+import MainHeader from "../../components/Molcules/MainHeader";
 import styled from "styled-components";
 
 export default function LandingPage() {
   return (
     <PageContainer>
-      <LandingHeader text={"Peephole."} />
+      <MainHeader text={"Peephole."} />
     </PageContainer>
   );
 }
