@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import CalculateDate from "../../CalculateDate/CalculateDate";
 
 export default function AskBox() {
   const navigate = useNavigate();
@@ -21,6 +22,8 @@ export default function AskBox() {
         >
           질문하기
         </AskBoxButton>
+        <CalculateDate />
+        {/* 메인에서도 api가 불러와져야 토큰이 없을때 랜딩 띄워줄 수 있음 */}
       </AskBoxContent>
     </AskBoxContainer>
   );
