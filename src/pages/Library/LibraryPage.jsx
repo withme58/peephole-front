@@ -103,8 +103,8 @@ const BookList = styled.div`
   grid-template-columns: repeat(3, 1fr);
   grid-auto-rows: 272px; 
   gap: 10px;
-  width: calc(100% - 55px); 
-  margin-left: 35px; 
+  width: calc(100% - 115px); 
+  margin-left: 55px; 
 `;
 
 const BackButton = styled.button`

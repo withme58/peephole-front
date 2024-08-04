@@ -21,13 +21,13 @@ export default function LibraryBook({ title, questionId, colorCode }) {
 }
 
 const BookContainer = styled.div`
-  width: 118px;
-  height: 180px;
+  width: 106px;
+  height: 140px;
   background: ${(props) => props.colorCode || 'rgba(255, 255, 255, 1)'};
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 8px;
+  border-radius: 30px 30px 10px 10px; 
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   overflow: hidden;
