@@ -46,24 +46,45 @@ export default function InvitationConfirmationModal({ onClose }) {
   return (
     <ModalOverlay>
       <ModalContent>
-        <Title>초대 목록</Title>
+        <Header>
+          <QuestionHeader>초대 목록</QuestionHeader>
+        </Header>
         <InvitationList>
           {invitations.map((invite) => (
             <InvitationItem key={invite.id}>
               <span>{invite.name}</span> {/* 여기서 invite.name을 렌더링 */}
               <ButtonGroup>
-                <button onClick={() => onAccept(invite.id)}>수락</button>
-                <button onClick={() => onDecline(invite.id)}>거절</button>
+                <AcceptButton onClick={() => onAccept(invite.id)}>
+                  수락
+                </AcceptButton>
+                <RejectButton onClick={() => onDecline(invite.id)}>
+                  거절
+                </RejectButton>
               </ButtonGroup>
             </InvitationItem>
           ))}
         </InvitationList>
-        <CloseButton onClick={onClose}>닫기</CloseButton>
+        <SendButton onClick={onClose}>닫기</SendButton>
       </ModalContent>
     </ModalOverlay>
   );
 }
+const Header = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
 
+const QuestionHeader = styled.div`
+  flex-grow: 1;
+  text-align: center;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+  text-align: center;
+  color: #535353;
+  margin: 0;
+`;
 const ModalOverlay = styled.div`
   position: fixed;
   top: 0;
@@ -90,26 +111,21 @@ const ModalContent = styled.div`
   z-index: 100000;
 `;
 
-const Title = styled.h2`
-  margin: 0;
-  font-size: 18px;
-`;
-
 const InvitationList = styled.div`
   flex: 1;
-  overflow-y: auto;
-  margin-bottom: 20px;
+  margin: 20px 0px 20px 0px;
 `;
 
 const InvitationItem = styled.div`
   display: flex;
   justify-content: space-between;
   margin-bottom: 10px;
+  padding-left: 15px;
+  font-size: 20px;
 `;
 
 const ButtonGroup = styled.div`
   display: flex;
-  gap: 10px;
 
   button {
     padding: 5px 10px;
@@ -117,8 +133,46 @@ const ButtonGroup = styled.div`
   }
 `;
 
-const CloseButton = styled.button`
-  margin-top: auto;
-  padding: 5px 10px;
+const AcceptButton = styled.button`
+  padding: 10px 10px;
+  font-size: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--hover-blue);
+  color: #fff;
+  border-radius: 5px;
+  border: none;
   cursor: pointer;
+  margin-right: 5px;
+`;
+
+const RejectButton = styled.button`
+  padding: 10px 10px;
+  font-size: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--light-gray);
+  color: var(--deep-gray);
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+`;
+
+const SendButton = styled.button`
+  padding: 10px 10px;
+  font-size: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--light-gray);
+  color: var(--deep-gray);
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  &:hover {
+    background-color: var(--hover-blue);
+    color: #fff;
+  }
 `;
