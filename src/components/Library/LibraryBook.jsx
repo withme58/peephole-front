@@ -5,13 +5,13 @@ import Modal from "./OpenBook";
 export default function LibraryBook({ title, questionId, colorCode, receiverName }) { 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const newReceiverName = receiverName.length > 7 ? `#${receiverName.slice(0, 7)}...` : `# ${receiverName}`;
+  const newReceiverName = receiverName.length > 8 ? `#${receiverName.slice(0, 8)}...` : `# ${receiverName}`;
 
   return (
     <>
       <BookContainer colorCode={colorCode} onClick={() => setIsModalOpen(true)}>
         <ContentContainer>
-          <Title>{title.length > 10 ? `${title.slice(0, 10)}...` : title}</Title>
+          <Title>{title.length > 10 ? `${title.slice(0, 10)}...?` : title}</Title>
         <ReceiverName>{newReceiverName}</ReceiverName>
         </ContentContainer>
       </BookContainer>
@@ -31,7 +31,7 @@ const BookContainer = styled.div`
   background: ${(props) => props.colorCode || 'rgba(255, 255, 255, 1)'};
   display: flex;
   justify-content: center;
-  align-items: flex-end; /* 하단 정렬 */
+  align-items: flex-end; 
   border-radius: 30px 30px 10px 10px; 
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   cursor: pointer;
@@ -54,14 +54,14 @@ const Title = styled.h1`
   text-align: left;
   padding-left:4px;
   padding-bottom:5px;
-  font-family: 'Noto Sans KR', sans-serif; /* 폰트 적용 */
+  font-family: 'Noto Sans KR', sans-serif;
 
 
 `;
 
 const ReceiverName = styled.p`
   margin: 0;
-  font-size: 13px;
+  font-size: 12px;
   text-align: left; 
   padding-left:4px;
   padding-bottom:7px;

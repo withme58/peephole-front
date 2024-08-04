@@ -19,11 +19,11 @@ export default function LibraryPage() {
             id: item.questionId,
             title: item.questionContent,
             colorCode: item.colorCode, 
-            receiverName: item.receiverName, // 추가된 부분
+            receiverName: item.receiverName, 
           }));
           setBooks(booksData);
         } else {
-          console.error('Expected an array in the body');
+          console.error('에러났다잉');
         }
       } catch (error) {
         console.log(error);
@@ -46,17 +46,19 @@ export default function LibraryPage() {
           </BackButton>
           <Heading>받은 응답</Heading>
         </HeadContainer>
-        <BookList>
-          {books.map((book) => (
-            <LibraryBook 
-              key={book.id} 
-              title={book.title} 
-              questionId={book.id} 
-              colorCode={book.colorCode} 
-              receiverName={book.receiverName} // 추가된 부분
-            />
-          ))}
-        </BookList>
+        <ScrollableContainer>
+          <BookList>
+            {books.map((book) => (
+              <LibraryBook 
+                key={book.id} 
+                title={book.title} 
+                questionId={book.id} 
+                colorCode={book.colorCode} 
+                receiverName={book.receiverName} 
+              />
+            ))}
+          </BookList>
+        </ScrollableContainer>
       </PageContainer>
     </CenteredContainer>
   );
@@ -76,16 +78,12 @@ const PageContainer = styled.div`
   gap: 10px;
   padding: 0 10px;
   border: 2px solid black;
-  overflow-y: auto;
-  overflow-x: hidden; 
-  &::-webkit-scrollbar {
-    display: none;
-  }
+  overflow: hidden; 
 `;
 
 const HeadContainer = styled.div`
   width: 100%;
-  height: 256px;
+  height: 180px;
   color: #f0f0f0;
   display: flex;
   justify-content: flex-start;
@@ -98,15 +96,25 @@ const HeadContainer = styled.div`
   line-height: 30px;
 `;
 
+const ScrollableContainer = styled.div`
+  height: calc(100% - 256px); 
+  overflow-y: auto; 
+  overflow-x: hidden;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  margin-bottom:100px;
+`;
+
 const BookList = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-auto-rows: 190px; 
-  gap: 10px;
+  // gap-bottom: 10px;
   width: calc(100% - 115px); 
-  margin-left: 55px; 
+  margin-left: 62px; 
   margin-bottom: 20px; 
-  margin-top:-70px;
+  margin-top: 0px;
 `;
 
 const BackButton = styled.button`
