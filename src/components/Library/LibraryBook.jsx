@@ -5,7 +5,7 @@ import Modal from "./OpenBook";
 export default function LibraryBook({ title, questionId, colorCode, receiverName }) { 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const newReceiverName = receiverName.length > 7 ? `#${receiverName.slice(0, 7)}...` : `# ${receiverName}`;
+  const newReceiverName = receiverName.length > 8 ? `#${receiverName.slice(0, 8)}...` : `# ${receiverName}`;
 
   return (
     <>
@@ -61,7 +61,7 @@ const Title = styled.h1`
 
 const ReceiverName = styled.p`
   margin: 0;
-  font-size: 13px;
+  font-size: 12px;
   text-align: left; 
   padding-left:4px;
   padding-bottom:7px;

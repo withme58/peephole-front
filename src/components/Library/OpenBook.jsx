@@ -1,4 +1,3 @@
-// Modal.js
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useSpring, animated } from "@react-spring/web";
@@ -23,7 +22,6 @@ const Modal = ({ isOpen, onClose, questionId }) => {
     }
   }, [isOpen, questionId]); 
 
-  // Modal 전체의 애니메이션 설정
   const springProps = useSpring({
     opacity: isOpen ? 1 : 0,
     transform: isOpen ? "translateY(0)" : "translateY(100%)",
@@ -32,6 +30,10 @@ const Modal = ({ isOpen, onClose, questionId }) => {
 
   if (!isOpen) return null;
 
+  const formatReceiverName = (name) => {
+    return name.length > 10 ? `${name.slice(0, 10)}...` : name;
+  };
+
   return (
     <ModalOverlay onClick={onClose}>
       <animated.div style={springProps}>
@@ -39,13 +41,19 @@ const Modal = ({ isOpen, onClose, questionId }) => {
           <CloseButton onClick={onClose}>×</CloseButton> 
           {data ? (
             <>
-              <Page height={100}>{data.questionTitle}</Page>
-              <Page height={350}>{data.content}</Page>
+              <Header>
+                <ReceiverName>{formatReceiverName(data.receiverName)}</ReceiverName> 님의 인터뷰
+              </Header> 
+              <QuestionTitle>{data.questionTitle}</QuestionTitle>
+              <Content>{data.content}</Content>
             </>
           ) : (
             <>
-              <Page height={100}>제목 로딩 중...</Page>
-              <Page height={350}>페이지 내용 로딩 중...</Page>
+              <Header>
+                <ReceiverName>닉네임</ReceiverName> 로딩 중...
+              </Header> 
+              <QuestionTitle>제목 로딩 중...</QuestionTitle>
+              <Content>페이지 내용 로딩 중...</Content>
             </>
           )}
         </ModalContent>
@@ -59,9 +67,7 @@ const ModalOverlay = styled.div`
   top: 80px;
   left: 0;
   width: 100%;
-  // height: calc(100% - 500px); 
-  // background: rgba(0, 0, 0, 0.5);
-  background:none;
+  background: none;
   display: flex;
   justify-content: center;
   align-items: flex-start; 
@@ -69,11 +75,11 @@ const ModalOverlay = styled.div`
 `;
 
 const ModalContent = styled.div`
-  width: 501px; //498 
+  width: 501px; 
   height: 1001px;
-  background: #D9D9D9;
-  border-top-left-radius: 8px; 
-  border-top-right-radius: 8px; 
+  background: #F8F8F8;
+  border-top-right-radius: 28px; 
+  border-top-left-radius: 28px; 
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -85,25 +91,68 @@ const ModalContent = styled.div`
 
 const CloseButton = styled.button`
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 15px;
+  right: 15px;
   background: transparent;
   border: none;
   font-size: 18px;
   cursor: pointer;
-  
+  font-family: 'Noto Sans KR', sans-serif;
 `;
 
-const Page = styled.div`
-  width: 100%;
-  height: ${(props) => props.height}px;
-  background: #f0f0f0;
-  border-radius: 8px;
+const Header = styled.h2`
+  font-family: 'Noto Sans KR', sans-serif;
+  position: absolute;
+  top: 59px; 
+  left: 55px; 
+  font-size: 21px;
+  font-weight: Normal;
+  color: #8E8E8E;
+`;
+
+
+const ReceiverName = styled.span`
+  font-family: 'Noto Sans KR', sans-serif;
+  color: #2E90AF;
+  font-size: 30px;
+  font-weight: Bold;
+`;
+
+const QuestionTitle = styled.div`
+  width: 388px;
+  height: 180px;
+  // background: #f0f0f0;
+  border-radius: 10px;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: flex-start;
+  font-size: 24px; 
+  font-family: 'Noto Sans KR', sans-serif;
+  font-weight: bold;
   backface-visibility: hidden;
-  margin-bottom: 10px; 
+  position: absolute; 
+  top: 150px; 
+`;
+
+const Content = styled.div`
+  width: 388px;
+  height: 550px;
+  // background: #f0f0f0;
+  border-radius: 10px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  font-size: 20px; 
+  font-weight: regular;
+
+  font-family: 'Noto Sans KR', sans-serif;
+  backface-visibility: hidden;
+  position: absolute; 
+  top: 330px; 
+  overflow-y: auto; /* 추가된 부분 */
+  &::-webkit-scrollbar {
+      display: none;
+    }
 `;
 
 export default Modal;
