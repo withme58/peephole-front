@@ -19,6 +19,7 @@ export default function LibraryPage() {
             id: item.questionId,
             title: item.questionContent,
             colorCode: item.colorCode, 
+            receiverName: item.receiverName, // 추가된 부분
           }));
           setBooks(booksData);
         } else {
@@ -43,7 +44,7 @@ export default function LibraryPage() {
           <BackButton onClick={handleBackButtonClick}>
             <FaArrowLeft />
           </BackButton>
-          <Heading>피폴 응답</Heading>
+          <Heading>받은 응답</Heading>
         </HeadContainer>
         <BookList>
           {books.map((book) => (
@@ -51,7 +52,8 @@ export default function LibraryPage() {
               key={book.id} 
               title={book.title} 
               questionId={book.id} 
-              colorCode={book.colorCode} // 추가된 부분
+              colorCode={book.colorCode} 
+              receiverName={book.receiverName} // 추가된 부분
             />
           ))}
         </BookList>
@@ -64,9 +66,7 @@ const CenteredContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  
 `;
-
 
 const PageContainer = styled.div`
   width: 498px;
@@ -91,7 +91,7 @@ const HeadContainer = styled.div`
   justify-content: flex-start;
   align-items: flex-start;
   padding-top: 77px;
-  padding-left:0px;
+  padding-left: 0px;
   flex-shrink: 0;
   font-family: 'SF Pro Text', sans-serif;
   font-size: 10px;
@@ -105,9 +105,8 @@ const BookList = styled.div`
   gap: 10px;
   width: calc(100% - 115px); 
   margin-left: 55px; 
-  margin-bottom:100px;
-   margin-top: -70px; // 위쪽 여백 설정
-  margin-bottom: 20px; // 아래쪽 여백 설정
+  margin-bottom: 20px; 
+  margin-top:-70px;
 `;
 
 const BackButton = styled.button`
@@ -116,9 +115,10 @@ const BackButton = styled.button`
   color: #ffffff;
   cursor: pointer;
   font-size: 24px;
-  
 `;
 
 const Heading = styled.h1`
   margin-left: 150px; 
+  font-weight: bold;
+  font-size: 24px;
 `;
