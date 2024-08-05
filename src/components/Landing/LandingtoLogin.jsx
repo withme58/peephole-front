@@ -32,6 +32,7 @@ const AskBoxContainer = styled.div`
   width: 400px;
   height: 448px;
   padding: 10px;
+  backdrop-filter: blur(5px);
   background-color: rgba(61, 73, 84, 0.3);
   border-radius: 10px;
   margin-top: 40px;

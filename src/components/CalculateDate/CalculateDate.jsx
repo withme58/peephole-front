@@ -29,7 +29,6 @@ export default function CalculateDate() {
 }
 
 const DateContainer = styled.div`
-  font-family: "Noto Sans KR";
   color: var(--main-blue);
   font-size: 16px;
   font-weight: medium;

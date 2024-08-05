@@ -232,7 +232,6 @@ export default function SignupForm() {
 }
 
 const StyledSignupForm = styled.form`
-  font-family: "Noto Sans KR";
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -241,29 +240,29 @@ const StyledSignupForm = styled.form`
 
 const Button = styled.button`
   font-family: "Noto Sans KR";
-  width: 35.1rem;
-  height: 5rem;
+  width: 400px;
+  height: 60px;
   margin-top: 70px;
   border: none;
-  border-radius: 0.8rem;
-  background: #2e8daf;
+  border-radius: 16px;
+  background: var(--main-blue);
   color: #fff;
   text-align: center;
-  font-size: 1.8rem;
+  font-size: 24px;
   font-weight: 500;
   cursor: pointer;
 `;
 
 const DisableButton = styled.button`
   font-family: "Noto Sans KR";
-  width: 35.1rem;
-  height: 5rem;
+  width: 400px;
+  height: 60px;
   margin-top: 70px;
   border: none;
-  border-radius: 0.8rem;
+  border-radius: 16px;
   background: var(--deep-gray);
   color: #fff;
   text-align: center;
-  font-size: 1.8rem;
-  font-weight: 500;
+  font-size: 24px;
+  font-weight: 800;
 `;

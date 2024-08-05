@@ -35,10 +35,11 @@ export default function Input({
   const getIcon = () => {
     switch (data) {
       case "nickname":
-      case "name":
         return <IoPersonSharp size={20} color="#919597" />;
       case "이메일":
         return <IoMail size={20} color="#919597" />;
+      case "password":
+        return <IoIosLock size={20} color="#919597" />;
       default:
         return null;
     }
@@ -71,7 +72,7 @@ export default function Input({
               {data} 형식으로 작성해 주세요.
             </S.errorMessage>
           )}
-          {errorMessage && (data === "이름" || data === "nickname") && (
+          {errorMessage && data === "nickname" && (
             <S.errorMessage visible={errorMessage}>
               10자 이하로 작성해주세요.
             </S.errorMessage>
@@ -121,9 +122,8 @@ export default function Input({
 
 const S = {
   inputWrap: styled.div`
-    font-family: "Noto Sans KR";
     width: 100%;
-    max-width: 52rem;
+    max-width: 400px;
     display: flex;
     flex-direction: column;
     gap: 5px;
@@ -136,17 +136,16 @@ const S = {
   `,
   label: styled.label`
     color: #919597;
-    font-size: 1.6rem;
+    font-size: 16px;
     font-weight: 400;
   `,
   input: styled.input`
-    font-family: "Noto Sans KR";
     width: 100%;
     padding: 15px 44px;
     border-radius: 10px;
     border: ${(props) =>
       props.errorMessage ? "1px solid var(--point-warning)" : "none"};
-    font-size: 1.6rem;
+    font-size: 18px;
     font-weight: 400;
     line-height: normal;
     background: rgba(243, 243, 243, 0.2);
@@ -158,27 +157,27 @@ const S = {
   `,
   iconWrap: styled.div`
     position: absolute;
-    left: 1.6rem;
+    left: 16px;
     pointer-events: none;
   `,
   imageWrap: styled.div`
-    width: 2rem;
-    height: 2rem;
+    width: 20px;
+    height: 20px;
     position: absolute;
-    right: 1.6rem;
+    right: 16px;
     cursor: pointer;
   `,
   errorMessage: styled.div`
     color: var(--point-warning);
-    font-size: 1.4rem;
+    font-size: 18px;
     margin-top: 5px;
     visibility: ${(props) => (props.visible ? "visible" : "hidden")};
   `,
   charCount: styled.div`
     position: absolute;
     color: #919597;
-    font-size: 1.4rem;
-    right: 2rem;
+    font-size: 16px;
+    right: 20px;
     cursor: pointer;
   `,
 };

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import axios from "../../api/axios";
 
-export default function InvitationConfirmationModal({ onClose }) {
+export default function InvitationConfirmationModal() {
   const [invitations, setInvitations] = useState([]);
 
   // Fetch data from the API
@@ -45,6 +45,7 @@ export default function InvitationConfirmationModal({ onClose }) {
 
   return (
     <InvitationList>
+      {invitations.length === 0 ? <Text>텅~</Text> : null}
       {invitations.map((invite) => (
         <InvitationItem key={invite.id}>
           <Profile
@@ -65,24 +66,20 @@ export default function InvitationConfirmationModal({ onClose }) {
     </InvitationList>
   );
 }
-
+const Text = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  color: #8e8e8e;
+  font-size: 20px;
+`;
 const Profile = styled.img`
   width: 45px;
   height: 45px;
   margin-right: 15px;
   z-index: 1000;
-`;
-
-const ModalContent = styled.div`
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  width: 400px;
-  height: 700px;
-  border-radius: 20px;
-  background-color: #f3f3f330;
-  align-items: center;
-  margin-top: 20px;
 `;
 
 /* 스타일 컴포넌트로 스크롤바 커스터마이징 */

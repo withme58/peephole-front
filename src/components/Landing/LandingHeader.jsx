@@ -1,8 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-// import { IoMdPerson } from "react-icons/io";
-import { FaLock } from "react-icons/fa";
 
 export default function LandingHeader() {
   const navigate = useNavigate();
@@ -10,13 +8,14 @@ export default function LandingHeader() {
   return (
     <HeaderContainer>
       <HeaderBox>Peephole.</HeaderBox>
-      <LockIcon size={24} color="white" onClick={() => navigate("/signup")} />
+      <SignupIcon onClick={() => navigate("/signup")}>
+        <img src="/icons/signup.svg" alt="signup" />
+      </SignupIcon>
     </HeaderContainer>
   );
 }
 
 const HeaderContainer = styled.div`
-  font-family: "Noto Sans KR";
   display: flex;
   align-items: center;
   padding: 20px 20px 0;
@@ -30,7 +29,9 @@ const HeaderBox = styled.div`
   font-weight: bold;
 `;
 
-const LockIcon = styled(FaLock)`
+const SignupIcon = styled.div`
   margin-left: auto;
+  width: 24px;
+  height: 24px;
   cursor: pointer;
 `;

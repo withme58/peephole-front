@@ -27,10 +27,24 @@ const LandingMain = ({ onClose }) => {
           <Logo>Peephole.</Logo>
         </Slide>
         <Slide>
-          <Introduction>Peephole.</Introduction>
+          <IntroductionWrapper>
+            <Introduction>Peephole.</Introduction>
+          </IntroductionWrapper>
         </Slide>
         <Slide>
-          <Introduction>소개 2</Introduction>
+          <IntroductionWrapper>
+            <IntroductionTitle>이것은 메인페이지</IntroductionTitle>
+            <Image src="images/main-mock.png" alt="Main Mockup" />
+          </IntroductionWrapper>
+        </Slide>
+        <Slide>
+          <IntroductionWrapper>
+            <IntroductionTitle>이것은 세부페이지</IntroductionTitle>
+            <Image src="images/detail-mock.png" alt="Detail Mockup" />
+            <StartButtonContainer>
+              <StartButton onClick={onClose}>시작하기</StartButton>
+            </StartButtonContainer>
+          </IntroductionWrapper>
         </Slide>
       </SwipeContainer>
       <ButtonContainer>
@@ -41,16 +55,6 @@ const LandingMain = ({ onClose }) => {
           &#9654;
         </ArrowButton>
       </ButtonContainer>
-      <DotsContainer>
-        <Dots>
-          {[...Array(3)].map((_, index) => (
-            <Dot key={index} active={index === currentIndex} />
-          ))}
-        </Dots>
-        <StartButton onClick={onClose} disabled={currentIndex !== 2}>
-          시작하기
-        </StartButton>
-      </DotsContainer>
     </Container>
   );
 };
@@ -61,28 +65,29 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   background-image: url("images/background_blue.png");
-  background-size: 500px auto; /* 너비를 500px로 설정하고 높이를 화면 전체 높이로 설정 */
-
+  background-size: cover;
   overflow: hidden;
   position: relative;
   width: 498px;
-  height: 100vh;
+  height: 100vh; /* 화면 전체 높이를 차지하도록 설정 */
 `;
 
 const SwipeContainer = styled.div`
   display: flex;
-  width: 300%;
+  width: 1494px; /* 총 4개의 슬라이드를 위한 너비 */
   transform: ${({ currentIndex }) =>
     `translateX(-${(currentIndex * 100) / 3}%)`};
   transition: transform 0.5s ease-in-out;
+  height: 100%; /* 화면 전체 높이를 차지하도록 설정 */
 `;
 
 const Slide = styled.div`
-  width: 100vw;
+  width: 498px;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
 `;
 
 const Logo = styled.div`
@@ -92,11 +97,33 @@ const Logo = styled.div`
   color: #fff;
 `;
 
+const IntroductionWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%; /* 내용이 중앙에 오도록 설정 */
+`;
+
+const IntroductionTitle = styled.div`
+  font-size: 24px;
+  font-weight: bold;
+  font-family: "Noto Sans KR";
+  color: #fff;
+  margin-bottom: 20px;
+`;
+
 const Introduction = styled.div`
   font-size: 60px;
   font-weight: bold;
   font-family: "Noto Sans KR";
   color: #fff;
+  margin-bottom: 20px; /* Peephole 텍스트를 위로 이동시키기 위해 추가된 여백 */
+`;
+
+const Image = styled.img`
+  width: 100%;
+  max-width: 400px;
 `;
 
 const ButtonContainer = styled.div`
@@ -121,25 +148,11 @@ const ArrowButton = styled.button`
   pointer-events: ${({ disabled }) => (disabled ? "none" : "auto")};
 `;
 
-const DotsContainer = styled.div`
+const StartButtonContainer = styled.div`
+  margin-top: 20px;
+  width: 100%;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: absolute;
-  bottom: 20px;
-`;
-
-const Dots = styled.div`
-  display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
-`;
-
-const Dot = styled.div`
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background-color: ${({ active }) => (active ? "#fff" : "#888")};
+  justify-content: center;
 `;
 
 const StartButton = styled.button`
@@ -147,15 +160,19 @@ const StartButton = styled.button`
   height: 60px;
   border: none;
   border-radius: 16px;
-  background-color: ${({ disabled }) =>
-    disabled ? "rgba(175, 175, 175, 0.5)" : "var(--main-blue)"};
+  background-color: var(--main-blue);
   font-size: 24px;
   font-weight: 600;
   font-family: "Noto Sans KR";
   color: #fff;
-  cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
+  cursor: pointer;
   transition: opacity 0.3s ease, background-color 0.3s ease;
-  z-index: 100; /* Ensure button is on top */
+  z-index: 100; /* 버튼이 맨 위에 있도록 설정 */
+
+  &:disabled {
+    background-color: rgba(175, 175, 175, 0.5);
+    cursor: not-allowed;
+  }
 `;
 
 export default LandingMain;

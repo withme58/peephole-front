@@ -1,13 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-import ReplyForm from "../../components/ReplyQuestion/ReplyForm";
 import Header from "../../components/Molcules/Header";
+import InterviewOne from "../../components/ReplyQuestion/InterviewOne";
 
-export default function ReplyQuestionPage() {
+export default function QuestionOne() {
   return (
     <PageContainer>
-      <Header text={"오늘의 인터뷰"} />
-      <ReplyForm />
+      <Header text={"받은 인터뷰"} />
+      <InterviewOne />
     </PageContainer>
   );
 }
@@ -17,5 +17,6 @@ const PageContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100vh;
+  justify-content: center;
+  margin-bottom: 30px;
 `;
