@@ -9,7 +9,6 @@ export default function FriendListHeader({ text }) {
   const navigate = useNavigate();
   const [friends, setFriends] = useState(["민교", "동호", "다현"]);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
-  const [isInvitationModalOpen, setIsInvitationModalOpen] = useState(false);
 
   const openAddModal = () => {
     setIsAddModalOpen(true);
