@@ -24,7 +24,7 @@ export default function LibraryPage() {
 
           // 받은 데이터로 books 상태 업데이트
           setBooks((prevBooks) => {
-            const booksCount = booksData.length >= 15 ? booksData.length : 15;
+            const booksCount = booksData.length >= 12 ? booksData.length : 12;
             const updatedBooks = Array(booksCount).fill({});
             return updatedBooks.map((book, index) => booksData[index] || book);
           });
@@ -120,7 +120,7 @@ const BookList = styled.div`
   width: calc(100% - 115px); 
   margin-left: 62px; 
   margin-bottom: 20px; 
-  margin-top: 0px;
+  margin-top: 5px;
 `;
 
 const BackButton = styled.button`

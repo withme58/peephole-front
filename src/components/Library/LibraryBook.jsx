@@ -43,15 +43,24 @@ const BookContainer = styled.div`
   width: 106px;
   height: 140px;
   background: ${(props) => (props.hasData ? props.colorCode : 'rgba(255, 255, 255, 0.1)')}; 
-  border: ${(props) => (props.hasData ? 'none' : '2px solid rgba(255, 255, 255, 0.2)')}; 
+  border: 2px solid rgba(255, 255, 255, 0.5); 
   display: flex;
   justify-content: center;
   align-items: flex-end; 
   border-radius: 30px 30px 10px 10px; 
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6); 
   cursor: ${(props) => (props.hasData ? 'pointer' : 'default')}; 
   overflow: hidden;
-  transition: transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+
+  ${(props) =>
+    props.hasData &&
+    `
+    &:hover {
+      transform: translateY(-5px);  위로 이동
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.9); 
+    }
+  `}
 `;
 
 
