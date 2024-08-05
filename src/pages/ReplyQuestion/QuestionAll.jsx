@@ -13,10 +13,12 @@ export default function QuestionAll() {
 }
 
 const PageContainer = styled.div`
-  position: relative;
+ position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-bottom: 30px;
+  gap: 30px;
+  padding-top:30px;
+
 `;
