@@ -45,8 +45,10 @@ export default function SignupForm() {
     } catch (error) {
       if (error.response && error.response.status === 400) {
         openModal();
-      } else {
-        alert("닉네임 중복!", error);
+      } else if (error.response.status === 401) {
+        alert("닉네임이 중복됩니다.", error);
+      } else if (error.response.status === 402) {
+        alert("이메일이 중복됩니다.", error);
       }
     }
   };
