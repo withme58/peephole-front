@@ -181,9 +181,9 @@ export default function SignupForm() {
       <StyledSignupForm onSubmit={handleSubmit(onSubmit)}>
         <Input
           hookform={register("name")}
-          data="이름"
-          title="이름"
-          placeholder="이름을 입력해 주세요"
+          data="nickname"
+          title="닉네임"
+          placeholder="닉네임을 입력해 주세요"
           errorMessage={nameError}
           name="name"
           handleFocus={handleFocus("name")}
@@ -245,10 +245,10 @@ const Button = styled.button`
   margin-top: 70px;
   border: none;
   border-radius: 16px;
-  background: #2e8daf;
+  background: var(--main-blue);
   color: #fff;
   text-align: center;
-  font-size: 18px;
+  font-size: 24px;
   font-weight: 500;
   cursor: pointer;
 `;
@@ -263,6 +263,6 @@ const DisableButton = styled.button`
   background: var(--deep-gray);
   color: #fff;
   text-align: center;
-  font-size: 18px;
+  font-size: 24px;
   font-weight: 800;
 `;
