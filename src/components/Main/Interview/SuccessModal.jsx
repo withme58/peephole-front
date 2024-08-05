@@ -47,6 +47,7 @@ const Background = styled.div`
 `;
 
 const ModalContainer = styled.div`
+  font-family: "Noto Sans KR";
   z-index: 10;
   background-color: white;
   border-radius: 10px;
@@ -57,12 +58,14 @@ const ModalContainer = styled.div`
 `;
 
 const CloseButton = styled.div`
+  font-family: "Noto Sans KR";
   display: flex;
   margin-left: 340px;
   cursor: pointer;
 `;
 
 const SendMessage = styled.div`
+  font-family: "Noto Sans KR";
   text-align: center;
   font-size: 18px;
   color: var(--title-text);

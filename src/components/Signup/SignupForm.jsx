@@ -181,9 +181,9 @@ export default function SignupForm() {
       <StyledSignupForm onSubmit={handleSubmit(onSubmit)}>
         <Input
           hookform={register("name")}
-          data="이름"
-          title="이름"
-          placeholder="이름을 입력해 주세요"
+          data="nickname"
+          title="닉네임"
+          placeholder="닉네임을 입력해 주세요"
           errorMessage={nameError}
           name="name"
           handleFocus={handleFocus("name")}
@@ -232,6 +232,7 @@ export default function SignupForm() {
 }
 
 const StyledSignupForm = styled.form`
+  font-family: "Noto Sans KR";
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -239,6 +240,7 @@ const StyledSignupForm = styled.form`
 `;
 
 const Button = styled.button`
+  font-family: "Noto Sans KR";
   width: 35.1rem;
   height: 5rem;
   margin-top: 70px;
@@ -253,6 +255,7 @@ const Button = styled.button`
 `;
 
 const DisableButton = styled.button`
+  font-family: "Noto Sans KR";
   width: 35.1rem;
   height: 5rem;
   margin-top: 70px;
