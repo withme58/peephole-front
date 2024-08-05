@@ -11,9 +11,7 @@ export default function CalculateDate() {
       const response = await axios.get("/api/member/me");
       const createdAt = response.data.body.createdAt;
       const calculateDay = DdayCalculator(createdAt);
-      console.log(createdAt);
       setDay(calculateDay);
-      console.log("Dday response:", response);
     } catch (error) {
       console.error("Dday 데이터 로드 실패:", error);
     }

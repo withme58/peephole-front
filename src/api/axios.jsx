@@ -18,14 +18,13 @@ instance.interceptors.request.use(
   }
 );
 
-// 응답 인터셉터를 추가하여 액세스 토큰 만료 시 로컬스토리지에서 토큰 삭제
 instance.interceptors.response.use(
   (response) => {
     return response;
   },
   (error) => {
     if (error.response && error.response.status === 400) {
-      // 400 에러일 경우 액세스 토큰 삭제
+      // 400 에러일 경우 액세스 토큰 삭제 및 랜딩페이지로 리다이렉트
       localStorage.removeItem("accessToken");
       window.location.href = "/";
     }

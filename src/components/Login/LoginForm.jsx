@@ -37,7 +37,6 @@ export default function LoginForm() {
   async function login(data) {
     try {
       const res = await axios.post("/open-api/signin", data);
-      console.log("Login response:", res); // 응답 데이터
       localStorage.setItem("accessToken", res.data.body.accessToken);
       navigate("/peephole");
     } catch (error) {

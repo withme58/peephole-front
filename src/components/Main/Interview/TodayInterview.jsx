@@ -16,7 +16,7 @@ export default function TodayInterview() {
       const response = await axios.get("/api");
       setQuestion(response.data.body.question);
       setQuestionId(response.data.body.questionId);
-      console.log("Question response:", response);
+      // console.log("Question response:", response);
     } catch (error) {
       console.error("Question 데이터 로드 실패:", error);
     }
@@ -30,7 +30,6 @@ export default function TodayInterview() {
     try {
       const response = await axios.get("/api/myfriends");
       setFriendList(response.data.body.friends);
-      console.log("FriendList response:", response);
     } catch (error) {
       console.error("FriendList 데이터 로드 실패:", error);
     }

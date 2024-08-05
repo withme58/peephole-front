@@ -16,7 +16,6 @@ export default function SuccessModal({ closeModal, userName }) {
           <IoClose onClick={closeModal} size={25} color="#5a786f" />
         </CloseButton>
         <SendMessage>{userName}에게 보냈습니다.</SendMessage>{" "}
-        {/* 수정된 부분 */}
       </ModalContainer>
     </Background>
   );

@@ -31,7 +31,6 @@ export default function SendQuestionModal({
     };
     try {
       const response = await axios.post("/api/myfriends", questionData);
-      console.log("SendQuestion response:", response);
       if (response.status === 200) {
         setShowSuccessModal(true);
       }
