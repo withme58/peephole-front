@@ -32,7 +32,7 @@ html, body {
   background: #1a1e1d;
   height: 100%;
   width: 100%;
-  overflow: hidden;
+  /* overflow: hidden; */
   padding: 0;
   margin: 0;
   font-family: "Noto Sans KR", sans-serif;
