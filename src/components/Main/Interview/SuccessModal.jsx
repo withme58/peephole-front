@@ -16,7 +16,7 @@ export default function SuccessModal({ closeModal, userName }) {
         </CloseButton>
         <ImageContainer>
           <img
-            src="images/gold-lemon-removebg.png"
+            src="images/deliver-message.png"
             alt="success"
             width={200}
             height={200}
