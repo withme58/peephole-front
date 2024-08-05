@@ -15,6 +15,7 @@ export default function SignupPage() {
 }
 
 const PageContainer = styled.div`
+  font-family: "Noto Sans KR";
   position: relative;
   display: flex;
   flex-direction: column;

@@ -19,6 +19,7 @@ export default function MainHeader() {
 }
 
 const HeaderContainer = styled.div`
+  font-family: "Noto Sans KR";
   display: flex;
   align-items: center;
   padding: 20px 20px 0;

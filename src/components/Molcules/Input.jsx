@@ -121,6 +121,7 @@ export default function Input({
 
 const S = {
   inputWrap: styled.div`
+    font-family: "Noto Sans KR";
     width: 100%;
     max-width: 52rem;
     display: flex;
@@ -139,6 +140,7 @@ const S = {
     font-weight: 400;
   `,
   input: styled.input`
+    font-family: "Noto Sans KR";
     width: 100%;
     padding: 15px 44px;
     border-radius: 10px;

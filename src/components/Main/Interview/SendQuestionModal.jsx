@@ -148,6 +148,7 @@ const FriendItemName = styled.span`
 `;
 
 const SendButton = styled.button`
+  font-family: "Noto Sans KR";
   width: 50px;
   height: 30px;
   font-size: 12px;
