@@ -10,7 +10,7 @@ export default function QuestionAll() {
   const fetchData = async () => {
     try {
       const response = await axios.get("/api/question");
-      setQuestions(response.data.body.question); 
+      setQuestions(response.data.body.question);
     } catch (error) {
       console.error("로드 실패 에러입니다!", error);
     }
@@ -23,8 +23,8 @@ export default function QuestionAll() {
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     const year = date.getFullYear();
-    const month = (date.getMonth() + 1).toString().padStart(2, '0');
-    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, "0");
+    const day = date.getDate().toString().padStart(2, "0");
     return `${year}.${month}.${day}`;
   };
 
@@ -42,9 +42,9 @@ export default function QuestionAll() {
           </Title>
           <ContentDiv>{data.questionName}</ContentDiv>
           <Profile
-           src={`${process.env.PUBLIC_URL}/images/profile.png`}
-           alt="logo"
-           />
+            src={`${process.env.PUBLIC_URL}/images/profile.png`}
+            alt="logo"
+          />
         </QuestionDiv>
       ))}
     </FormContainer>
@@ -52,26 +52,24 @@ export default function QuestionAll() {
 }
 
 const FormContainer = styled.div`
-  font-family: 'Noto Sans KR', sans-serif; 
+  font-family: "Noto Sans KR", sans-serif;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 30px;
   width: 400px;
   margin: 0 auto;
-  height: 800px; 
-  overflow-y: auto; 
+  height: 800px;
+  overflow-y: auto;
   &::-webkit-scrollbar {
-      display: none;
-    }
-  border-radius:10px;
-  padding: 20px; 
-  padding-top:50px;
+    display: none;
+  }
+  border-radius: 10px;
+  padding: 20px;
+  padding-top: 50px;
   color: #fff;
-  backdrop-filter: blur(10px); 
+  backdrop-filter: blur(10px);
 `;
-
-
 
 const ContentDiv = styled.div`
   color: #fff;
@@ -99,10 +97,9 @@ const ContentDiv = styled.div`
 const Profile = styled.img`
   width: 60px;
   height: 60px;
-  position: absolute; 
-  top:40px;
+  position: absolute;
+  top: 40px;
   margin-left: 0px;
-
 `;
 
 const Profile = styled.img`
@@ -119,23 +116,23 @@ const Title = styled.div`
 `;
 
 const DateDiv = styled.div`
-  color: #8E8E8E;
+  color: #8e8e8e;
   text-align: left;
   font-size: 12px;
-  width: 120px; 
-  height: 40px; 
-  font-weight: 100; 
-  margin-top: -5px; 
-  flex-shrink: 0; 
+  width: 120px;
+  height: 40px;
+  font-weight: 100;
+  margin-top: -5px;
+  flex-shrink: 0;
 `;
 
 const FriendDiv = styled.div`
-  color: #2E90AF;
+  color: #2e90af;
   text-align: left;
   font-size: 12px;
-  margin-left: 10px; 
-  margin-top: -25px; 
-  font-weight: bold; 
+  margin-left: 10px;
+  margin-top: -25px;
+  font-weight: bold;
 `;
 
 const QuestionDiv = styled.div`
@@ -145,7 +142,7 @@ const QuestionDiv = styled.div`
   padding: 15px;
   display: flex;
   flex-direction: column;
-  border: 1px solid #8E8E8E;
+  border: 1px solid #8e8e8e;
   background-color: #d9d9d930;
   border-radius: 10px;
   cursor: pointer;
@@ -153,9 +150,8 @@ const QuestionDiv = styled.div`
   height: 126px;
   position: relative;
 
-  
   &:hover {
-    background-color: rgba(66, 170, 203, 0.5); 
+    background-color: rgba(66, 170, 203, 0.5);
     ${DateDiv} {
       color: #fff;
     }
@@ -164,4 +160,3 @@ const QuestionDiv = styled.div`
     }
   }
 `;
-
