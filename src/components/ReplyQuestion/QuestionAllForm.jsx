@@ -40,13 +40,11 @@ export default function QuestionAll() {
             <DateDiv>{formatDate(data.createdAt)}</DateDiv>
             <FriendDiv>{data.friendName}</FriendDiv>
           </Title>
-          <Content>
-            <Profile
-              src={`${process.env.PUBLIC_URL}/images/profile.png`}
-              alt="logo"
-            />
-            <ContentDiv>{data.questionName}dkssud</ContentDiv>
-          </Content>
+          <ContentDiv>{data.questionName}</ContentDiv>
+          <Profile
+            src={`${process.env.PUBLIC_URL}/images/profile.png`}
+            alt="logo"
+          />
         </QuestionDiv>
       ))}
     </FormContainer>
@@ -75,34 +73,30 @@ const FormContainer = styled.div`
 
 const ContentDiv = styled.div`
   color: #fff;
-
   text-align: left;
   font-size: 16px;
-  // overflow: hidden;
-  // width: 270px;
-  // height: 52px;
-  // padding: 0 10px;
-  // line-height: 1.5;
-  // display: -webkit-box;
-  // -webkit-line-clamp: 2;
-  // -webkit-box-orient: vertical;
-  // text-overflow: ellipsis;
-  // white-space: normal;
-  // box-sizing: border-box;
-  // position: relative;
-  // top: -2px;
-  // left: 70px;
-`;
-
-const Content = styled.div`
-  display: flex;
-  flex-direction: row;
+  overflow: hidden;
+  width: 270px;
+  height: 52px;
+  padding: 0 10px;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  white-space: normal;
+  box-sizing: border-box;
+  position: relative;
+  top: -2px;
+  left: 70px;
 `;
 
 const Profile = styled.img`
-  width: 50px;
-  height: 50px;
-  margin: 5px;
+  width: 60px;
+  height: 60px;
+  position: absolute;
+  top: 40px;
+  margin-left: 0px;
 `;
 
 const Title = styled.div`
