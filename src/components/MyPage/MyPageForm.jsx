@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Input from "../Molcules/Input";
 import axios from "../../api/axios";
+import { useNavigate } from "react-router-dom";
 
 export default function MyPageForm() {
   const [name, setName] = useState("으깬 감자");
-  const [givenCount, setGivenCount] = useState(1);
-  const [givenTotalCount, setGivenTotalCount] = useState(4);
+  const navigate = useNavigate();
   const [email, setEmail] = useState("abc@naver.com");
 
   const fetchData = async () => {
@@ -18,6 +18,10 @@ export default function MyPageForm() {
     } catch (error) {
       console.error("마이페이지 데이터 로드 실패:", error);
     }
+  };
+
+  const goFriendList = () => {
+    navigate("/list");
   };
 
   useEffect(() => {
@@ -33,13 +37,7 @@ export default function MyPageForm() {
         src={`${process.env.PUBLIC_URL}/images/profile.png`}
         alt="logo"
       />
-      <InfoBox>
-        <CountDiv>
-          <CountTitle>도움을 준 횟수</CountTitle>
-          <CountNum>{givenCount}</CountNum>
-          <CountNumTotal>{givenTotalCount}회</CountNumTotal>
-        </CountDiv>
-      </InfoBox>
+      <SendButton onClick={goFriendList}>친구 목록</SendButton>
       <UserInfoBox>
         <InputBox>
           <Input
@@ -86,47 +84,6 @@ const Profile = styled.img`
   margin: 20px;
 `;
 
-const InfoBox = styled.div`
-  width: 200px;
-  border: 2px solid #42aacb;
-  border-radius: 16px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  background-color: #3d495430;
-`;
-
-const CountDiv = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  width: 50%;
-`;
-
-const CountTitle = styled.div`
-  color: white;
-  font-size: 18px;
-`;
-
-const CountNum = styled.div`
-  color: #42aacb;
-  font-size: 60px;
-`;
-
-const CountNumTotal = styled.div`
-  color: #8e8e8e;
-  font-size: 18px;
-`;
-
-const StyledLoginForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 30px;
-`;
-
 const UserInfoBox = styled.div`
   width: 400px;
   margin: 10px;
@@ -135,4 +92,17 @@ const UserInfoBox = styled.div`
 
 const InputBox = styled.div`
   margin: 20px 0px 10px 0px;
+`;
+const SendButton = styled.button`
+  padding: 12px;
+  width: 400px;
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #85b1bf;
+  color: #fff;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
 `;

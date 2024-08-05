@@ -9,6 +9,8 @@ export default function ListHeader() {
   const [friends, setFriends] = useState(["민교", "동호", "다현"]);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
 
+  const navigate = useNavigate();
+
   const [isInvitationModalOpen, setIsInvitationModalOpen] = useState(false);
 
   const openAddModal = () => {
@@ -28,6 +30,7 @@ export default function ListHeader() {
 
   const closeInvitationModal = () => {
     setIsInvitationModalOpen(false);
+    navigate("/list");
   };
 
   return (
