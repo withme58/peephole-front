@@ -57,7 +57,7 @@ export default function SendQuestionModal({
         )}
         {showFailModal && (
           <FailModal
-            closeModal={() => navigate("/interview")}
+            closeModal={() => navigate("/peephole")}
             userName={selectedUserName}
           />
         )}
