@@ -1,26 +1,40 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import Modal from "./OpenBook";  
+import Modal from "./OpenBook";
 
-export default function LibraryBook({ title, questionId, colorCode, receiverName }) { 
+export default function LibraryBook({ title, questionId, colorCode, receiverName }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const newReceiverName = receiverName.length > 8 ? `#${receiverName.slice(0, 8)}...` : `# ${receiverName}`;
+  const newReceiverName = receiverName ? 
+    (receiverName.length > 8 ? `#${receiverName.slice(0, 8)}...` : `# ${receiverName}`)
+    : '';
+
+  const handleClick = () => {
+    if (title && questionId) {
+      setIsModalOpen(true);
+    }
+  };
 
   return (
     <>
-      <BookContainer colorCode={colorCode} onClick={() => setIsModalOpen(true)}>
+      <BookContainer 
+        colorCode={title && colorCode ? colorCode : 'transparent'} 
+        hasData={!!title} 
+        onClick={handleClick}
+      >
         <ContentContainer>
-          <Title>{title.length > 10 ? `${title.slice(0, 10)}...?` : title}</Title>
-        <ReceiverName>{newReceiverName}</ReceiverName>
+          <Title>{title ? (title.length > 10 ? `${title.slice(0, 10)}...?` : title) : ''}</Title>
+          <ReceiverName>{newReceiverName}</ReceiverName>
         </ContentContainer>
       </BookContainer>
-      <Modal 
-        isOpen={isModalOpen} 
-        onClose={() => setIsModalOpen(false)} 
-        title={title} 
-        questionId={questionId} 
-      />
+      {isModalOpen && (
+        <Modal 
+          isOpen={isModalOpen} 
+          onClose={() => setIsModalOpen(false)} 
+          title={title} 
+          questionId={questionId} 
+        />
+      )}
     </>
   );
 }
@@ -28,16 +42,27 @@ export default function LibraryBook({ title, questionId, colorCode, receiverName
 const BookContainer = styled.div`
   width: 106px;
   height: 140px;
-  background: ${(props) => props.colorCode || 'rgba(255, 255, 255, 1)'};
+  background: ${(props) => (props.hasData ? props.colorCode : 'rgba(255, 255, 255, 0.1)')}; 
+  border: 2px solid rgba(255, 255, 255, 0.5); 
   display: flex;
   justify-content: center;
   align-items: flex-end; 
   border-radius: 30px 30px 10px 10px; 
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6); 
+  cursor: ${(props) => (props.hasData ? 'pointer' : 'default')}; 
   overflow: hidden;
-  transition: transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+
+  ${(props) =>
+    props.hasData &&
+    `
+    &:hover {
+      transform: translateY(-5px);  위로 이동
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.9); 
+    }
+  `}
 `;
+
 
 const ContentContainer = styled.div`
   display: flex;
@@ -55,8 +80,6 @@ const Title = styled.h1`
   padding-left:4px;
   padding-bottom:5px;
   font-family: 'Noto Sans KR', sans-serif;
-
-
 `;
 
 const ReceiverName = styled.p`
@@ -70,5 +93,4 @@ const ReceiverName = styled.p`
   text-overflow: ellipsis;
   white-space: nowrap;
   font-family: 'Noto Sans KR', sans-serif; 
-
 `;
