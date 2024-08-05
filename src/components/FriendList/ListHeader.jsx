@@ -57,38 +57,7 @@ const NavItem = styled.div`
   font-size: 20px;
   padding: 15px 50px;
   font-weight: ${({ selected }) => (selected ? "bold" : "none")};
-  border-bottom: ${({ selected }) => (selected ? "2px solid white" : "none")};
+  border-bottom: ${({ selected }) =>
+    selected ? "2px solid white" : "1px solid #acacac"};
   cursor: pointer;
-`;
-
-const AddButton = styled.button`
-  top: 30px;
-  left: 55%;
-  position: absolute;
-  background-color: #4caf50;
-  color: white;
-  border: none;
-  padding: 10px;
-  cursor: pointer;
-  border-radius: 5px;
-
-  &:hover {
-    background-color: #45a049;
-  }
-`;
-
-const InvitationButton = styled.button`
-  top: 30px;
-  left: 60%;
-  position: absolute;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 10px;
-  cursor: pointer;
-  border-radius: 5px;
-
-  &:hover {
-    background-color: #0056b3;
-  }
 `;

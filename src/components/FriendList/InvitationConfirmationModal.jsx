@@ -45,6 +45,7 @@ export default function InvitationConfirmationModal() {
 
   return (
     <InvitationList>
+      {invitations.length === 0 ? <Text>텅~</Text> : null}
       {invitations.map((invite) => (
         <InvitationItem key={invite.id}>
           <Profile
@@ -65,7 +66,15 @@ export default function InvitationConfirmationModal() {
     </InvitationList>
   );
 }
-
+const Text = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  color: #8e8e8e;
+  font-size: 20px;
+`;
 const Profile = styled.img`
   width: 45px;
   height: 45px;
