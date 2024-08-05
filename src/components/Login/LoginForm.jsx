@@ -8,7 +8,6 @@ import Input from "../Molcules/Input";
 import useToggle from "../../hooks/useToggle";
 
 export default function LoginForm() {
-  // const { setUser } = useUserStore();
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
   const [showPasswordError, setShowPasswordError, showPasswordToggle] =
@@ -21,9 +20,9 @@ export default function LoginForm() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const LocalStorage = localStorage.getItem("accessToken");
-    if (LocalStorage !== null) {
-      navigate("/");
+    const accessToken = localStorage.getItem("accessToken");
+    if (accessToken !== null) {
+      navigate("/peephole");
     }
   }, [navigate]);
 
@@ -37,17 +36,16 @@ export default function LoginForm() {
 
   async function login(data) {
     try {
-      const res = await axios.post("open-api/signin", data);
+      const res = await axios.post("/open-api/signin", data);
       console.log("Login response:", res); // 응답 데이터
       localStorage.setItem("accessToken", res.data.body.accessToken);
-      localStorage.setItem("refreshToken", res.data.body.refreshToken);
-      navigate("/");
+      navigate("/peephole");
     } catch (error) {
       setPasswordError(true);
       if (data.email !== "" && data.password !== "") {
         showPasswordToggle();
       }
-      console.error("로그인 실패:", error);
+      console.error("다시 로그인해 주세요!", error);
     }
   }
 

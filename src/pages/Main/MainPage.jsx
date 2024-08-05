@@ -1,11 +1,16 @@
 import styled from "styled-components";
-
-import MainPageHeader from "../../components/Main/MainPageHeader";
+import MainHeader from "../../components/Molcules/MainHeader";
+import AskBox from "../../components/Main/Main/AskBox";
+import ReplyBox from "../../components/Main/Main/ReplyBox";
+import LibraryBox from "../../components/Main/Main/LibraryBox";
 
 export default function MainPage() {
   return (
     <MainPageContainer>
-      <MainPageHeader />
+      <MainHeader text={"Peephole."} />
+      <AskBox />
+      <ReplyBox />
+      <LibraryBox />
     </MainPageContainer>
   );
 }
@@ -16,5 +21,5 @@ const MainPageContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 30px;
+  margin-bottom: 30px;
 `;
