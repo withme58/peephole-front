@@ -13,7 +13,6 @@ export default function LibraryPage() {
     const fetchBooks = async () => {
       try {
         const response = await axios.get("/api/answer/list");
-        console.log(response.data);
         if (Array.isArray(response.data.body)) {
           const booksData = response.data.body.map((item) => ({
             id: item.questionId,
@@ -21,8 +20,6 @@ export default function LibraryPage() {
             colorCode: item.colorCode,
             receiverName: item.receiverName,
           }));
-
-          // 받은 데이터로 books 상태 업데이트
           setBooks((prevBooks) => {
             const booksCount = booksData.length >= 12 ? booksData.length : 12;
             const updatedBooks = Array(booksCount).fill({});
@@ -116,7 +113,6 @@ const BookList = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-auto-rows: 190px;
-  // gap-bottom: 10px;
   width: calc(100% - 115px); 
   margin-left: 62px; 
   margin-bottom: 20px; 
@@ -137,5 +133,3 @@ const Heading = styled.h1`
   font-weight: bold;
   font-size: 24px;
 `;
-
-//질문 갯수 15개 이상일때와 3개 이하일때 체크 해야함!
