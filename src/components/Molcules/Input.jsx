@@ -3,6 +3,7 @@ import { IoMdEyeOff, IoMdEye } from "react-icons/io";
 import styled from "styled-components";
 import { IoMail } from "react-icons/io5";
 import { IoIosLock } from "react-icons/io";
+import { IoPersonSharp } from "react-icons/io5";
 
 export default function Input({
   data,
@@ -31,36 +32,51 @@ export default function Input({
     }
   }, [watchValue, name]);
 
+  const getIcon = () => {
+    switch (data) {
+      case "nickname":
+        return <IoPersonSharp size={20} color="#919597" />;
+      case "이메일":
+        return <IoMail size={20} color="#919597" />;
+      case "password":
+        return <IoIosLock size={20} color="#919597" />;
+      default:
+        return null;
+    }
+  };
+
   return (
     <>
       {data !== "password" ? (
         <S.inputWrap>
           <S.label htmlFor={data}>{title}</S.label>
           <S.inputInner>
-            <S.iconWrap>
-              <IoMail size={20} color="#919597" />
-            </S.iconWrap>
+            <S.iconWrap>{getIcon()}</S.iconWrap>
             <S.input
               {...hookform}
               onBlur={handleBlur}
+              onFocus={handleFocus}
               type={data === "이메일" ? "email" : "text"}
               id={data}
               placeholder={placeholder}
               value={value}
-              onFocus={handleFocus}
               errorMessage={errorMessage}
               name={name}
               disabled={disabled}
               defaultValue={defaultValue}
             />
-            {errorMessage && data === "이메일" && (
-              <S.errorMessage>{data} 형식으로 작성해 주세요.</S.errorMessage>
-            )}
-            {errorMessage && data === "이름" && (
-              <S.errorMessage>10자 이하로 작성해주세요.</S.errorMessage>
-            )}
             {name === "name" && <S.charCount>{charCount}/10</S.charCount>}
           </S.inputInner>
+          {errorMessage && data === "이메일" && (
+            <S.errorMessage visible={errorMessage}>
+              {data} 형식으로 작성해 주세요.
+            </S.errorMessage>
+          )}
+          {errorMessage && data === "nickname" && (
+            <S.errorMessage visible={errorMessage}>
+              10자 이하로 작성해주세요.
+            </S.errorMessage>
+          )}
         </S.inputWrap>
       ) : (
         <S.inputWrap>
@@ -75,8 +91,8 @@ export default function Input({
               id={data + title}
               placeholder={placeholder}
               onBlur={handleBlur}
-              value={value}
               onFocus={handleFocus}
+              value={value}
               errorMessage={errorMessage}
               name={name}
             />
@@ -90,9 +106,13 @@ export default function Input({
           </S.inputInner>
           {errorMessage &&
             (title === "비밀번호" ? (
-              <S.errorMessage>8자 이상 입력해 주세요.</S.errorMessage>
+              <S.errorMessage visible={errorMessage}>
+                8자 이상 입력해 주세요.
+              </S.errorMessage>
             ) : (
-              <S.errorMessage>비밀번호를 확인해 주세요.</S.errorMessage>
+              <S.errorMessage visible={errorMessage}>
+                비밀번호를 확인해 주세요.
+              </S.errorMessage>
             ))}
         </S.inputWrap>
       )}
@@ -106,11 +126,13 @@ const S = {
     max-width: 400px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 5px;
   `,
   inputInner: styled.div`
     position: relative;
     background: transparent;
+    display: flex;
+    align-items: center;
   `,
   label: styled.label`
     color: #919597;
@@ -144,9 +166,6 @@ const S = {
     position: absolute;
     right: 16px;
     cursor: pointer;
-    /* &:focus {
-      color: var(--main-blue);
-    } 어디로 들어가야하지.. */
   `,
   errorMessage: styled.div`
     color: var(--point-warning);
@@ -155,8 +174,6 @@ const S = {
     visibility: ${(props) => (props.visible ? "visible" : "hidden")};
   `,
   charCount: styled.div`
-    width: 2rem;
-    height: 2rem;
     position: absolute;
     color: #919597;
     font-size: 16px;

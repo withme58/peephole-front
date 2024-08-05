@@ -35,8 +35,11 @@ html,
     background-size: 498px auto; 
     background-repeat: no-repeat;
     background-position: center;
-    @media (max-width: 768px) {
-      background: #1a1e1d;
+  }
+
+  @media (max-width: 768px) {
+    html, body {
+      background: none;
       background-image: url('images/background_blue.png');
       background-size: cover; 
       background-repeat: no-repeat;
