@@ -181,9 +181,9 @@ export default function SignupForm() {
       <StyledSignupForm onSubmit={handleSubmit(onSubmit)}>
         <Input
           hookform={register("name")}
-          data="이름"
-          title="이름"
-          placeholder="이름을 입력해 주세요"
+          data="nickname"
+          title="닉네임"
+          placeholder="닉네임을 입력해 주세요"
           errorMessage={nameError}
           name="name"
           handleFocus={handleFocus("name")}
