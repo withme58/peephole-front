@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import axios from "../../api/axios";
+import { IoClose } from "react-icons/io5";
 
 export default function AddFriendModal({ onClose }) {
   const [nickname, setNickname] = useState("");
@@ -33,17 +34,58 @@ export default function AddFriendModal({ onClose }) {
   return (
     <ModalOverlay>
       <ModalContent>
-        <h2>친구 추가</h2>
-        <input
+        <Header>
+          <QuestionHeader>친구 추가</QuestionHeader>
+          <CloseButton>
+            <IoClose onClick={onClose} size={25} color="#5a786f" />
+          </CloseButton>
+        </Header>
+        <Input
           placeholder="닉네임 입력"
           value={nickname}
           onChange={(e) => setNickname(e.target.value)}
         />
-        <button onClick={onSubmit}>요청 보내기</button>
+        <SendButton type="button" onClick={onSubmit}>
+          보내기
+        </SendButton>
       </ModalContent>
     </ModalOverlay>
   );
 }
+
+const Header = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  svg {
+    position: absolute;
+    right: -90px;
+    top: -5px;
+  }
+`;
+
+const QuestionHeader = styled.div`
+  flex-grow: 1;
+  text-align: center;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+  text-align: center;
+  color: #535353;
+  margin: 0;
+`;
+
+const CloseButton = styled.div`
+  cursor: pointer;
+`;
+
+const Input = styled.input`
+  margin: 20px;
+  padding: 10px;
+  font-size: 20px;
+  // background-color: var(--light-gray);
+`;
 
 const ModalOverlay = styled.div`
   position: fixed;
@@ -61,19 +103,26 @@ const ModalOverlay = styled.div`
 const ModalContent = styled.div`
   background-color: white;
   padding: 20px;
-  height: 150px;
+  height: 200px;
   border-radius: 8px;
   text-align: center;
-
-  input {
-    margin-bottom: 10px;
-    padding: 8px;
-    width: calc(100% - 16px);
-    box-sizing: border-box;
-  }
-
-  button {
-    padding: 8px 16px;
-    cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+`;
+const SendButton = styled.button`
+  width: 50px;
+  height: 30px;
+  font-size: 12px;
+  display: flex;
+  background-color: var(--light-gray);
+  color: var(--deep-gray);
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  &:hover {
+    background-color: var(--hover-blue);
+    color: #fff;
   }
 `;

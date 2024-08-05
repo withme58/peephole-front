@@ -55,7 +55,7 @@ export default function ReplyForm() {
         console.error("질문 응답 로드 실패:", error);
       }
 
-      navigate("/"); // Navigate back to the root route
+      navigate("/peephole");
     }
   };
 

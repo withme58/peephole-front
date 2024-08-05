@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Header from "../../components/Molcules/Header";
-import TodayInterview from "../../components/Main/TodayInterview";
+import TodayInterview from "../../components/Main/Interview/TodayInterview";
 
 export default function InterviewPage() {
   return (

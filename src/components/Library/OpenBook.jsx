@@ -9,7 +9,7 @@ const Modal = ({ isOpen, onClose, questionId }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://52.78.139.165:8080/api/answer/one?questionId=${questionId}`);
+        const response = await axios.get(`/api/answer/one?questionId=${questionId}`);
         console.log(response.data);
         setData(response.data.body);
       } catch (error) {
@@ -22,28 +22,38 @@ const Modal = ({ isOpen, onClose, questionId }) => {
     }
   }, [isOpen, questionId]); 
 
-  // Modal 전체의 애니메이션 설정
   const springProps = useSpring({
     opacity: isOpen ? 1 : 0,
-    transform: isOpen ? "rotateY(0deg)" : "rotateY(-90deg)",
-    config: { tension: 300, friction: 20 },
+    transform: isOpen ? "translateY(0)" : "translateY(100%)",
+    config: { tension: 0, friction: 10 },
   });
 
   if (!isOpen) return null;
+
+  const formatReceiverName = (name) => {
+    return name.length > 10 ? `${name.slice(0, 10)}...` : name;
+  };
 
   return (
     <ModalOverlay onClick={onClose}>
       <animated.div style={springProps}>
         <ModalContent onClick={(e) => e.stopPropagation()}>
+          <CloseButton onClick={onClose}>×</CloseButton> 
           {data ? (
             <>
-              <Page height={100}>{data.questionTitle}</Page>
-              <Page height={350}>{data.content}</Page>
+              <Header>
+                <ReceiverName>{formatReceiverName(data.receiverName)}</ReceiverName> 님의 인터뷰
+              </Header> 
+              <QuestionTitle>{data.questionTitle}</QuestionTitle>
+              <Content>{data.content}</Content>
             </>
           ) : (
             <>
-              <Page height={100}>제목 로딩 중...</Page>
-              <Page height={350}>페이지 내용 로딩 중...</Page>
+              <Header>
+                <ReceiverName>닉네임</ReceiverName> 로딩 중...
+              </Header> 
+              <QuestionTitle>제목 로딩 중...</QuestionTitle>
+              <Content>페이지 내용 로딩 중...</Content>
             </>
           )}
         </ModalContent>
@@ -53,23 +63,23 @@ const Modal = ({ isOpen, onClose, questionId }) => {
 };
 
 const ModalOverlay = styled.div`
-  position: fixed;
-  top: 0;
+  position: fixed; 
+  top: 80px;
   left: 0;
   width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  background: none;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start; 
   z-index: 999;
 `;
 
 const ModalContent = styled.div`
-  width: 450px;
-  height: auto;
-  background: white;
-  border-radius: 8px;
+  width: 501px; 
+  height: 1001px;
+  background: #F8F8F8;
+  border-top-right-radius: 28px; 
+  border-top-left-radius: 28px; 
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -79,16 +89,70 @@ const ModalContent = styled.div`
   perspective: 1000px; 
 `;
 
-const Page = styled.div`
-  width: 100%;
-  height: ${(props) => props.height}px;
-  background: #f0f0f0;
-  border-radius: 8px;
+const CloseButton = styled.button`
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: transparent;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  font-family: 'Noto Sans KR', sans-serif;
+`;
+
+const Header = styled.h2`
+  font-family: 'Noto Sans KR', sans-serif;
+  position: absolute;
+  top: 59px; 
+  left: 55px; 
+  font-size: 21px;
+  font-weight: Normal;
+  color: #8E8E8E;
+`;
+
+
+const ReceiverName = styled.span`
+  font-family: 'Noto Sans KR', sans-serif;
+  color: #2E90AF;
+  font-size: 30px;
+  font-weight: Bold;
+`;
+
+const QuestionTitle = styled.div`
+  width: 388px;
+  height: 180px;
+  // background: #f0f0f0;
+  border-radius: 10px;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: flex-start;
+  font-size: 24px; 
+  font-family: 'Noto Sans KR', sans-serif;
+  font-weight: bold;
   backface-visibility: hidden;
-  margin-bottom: 10px; 
+  position: absolute; 
+  top: 150px; 
+`;
+
+const Content = styled.div`
+  width: 388px;
+  height: 550px;
+  // background: #f0f0f0;
+  border-radius: 10px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  font-size: 20px; 
+  font-weight: regular;
+
+  font-family: 'Noto Sans KR', sans-serif;
+  backface-visibility: hidden;
+  position: absolute; 
+  top: 330px; 
+  overflow-y: auto; /* 추가된 부분 */
+  &::-webkit-scrollbar {
+      display: none;
+    }
 `;
 
 export default Modal;

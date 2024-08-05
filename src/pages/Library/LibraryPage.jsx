@@ -12,16 +12,18 @@ export default function LibraryPage() {
   useEffect(() => {
     const fetchBooks = async () => {
       try {
-        const response = await axios.get('http://52.78.139.165:8080/api/answer/list');
-        console.log(response.data); 
+        const response = await axios.get("/api/answer/list");
+        console.log(response.data);
         if (Array.isArray(response.data.body)) {
           const booksData = response.data.body.map((item) => ({
             id: item.questionId,
             title: item.questionContent,
+            colorCode: item.colorCode,
+            receiverName: item.receiverName,
           }));
           setBooks(booksData);
         } else {
-          console.error('Expected an array in the body');
+          console.error("에러났다잉");
         }
       } catch (error) {
         console.log(error);
@@ -32,7 +34,7 @@ export default function LibraryPage() {
   }, []);
 
   const handleBackButtonClick = () => {
-    navigate('/'); // MainPage로 이동
+    navigate("/peephole"); // MainPage로 이동
   };
 
   return (
@@ -42,13 +44,21 @@ export default function LibraryPage() {
           <BackButton onClick={handleBackButtonClick}>
             <FaArrowLeft />
           </BackButton>
-          <Heading>피폴 응답</Heading>
+          <Heading>받은 응답</Heading>
         </HeadContainer>
-        <BookList>
-          {books.map((book) => (
-            <LibraryBook key={book.id} title={book.title} questionId={book.id} />
-          ))}
-        </BookList>
+        <ScrollableContainer>
+          <BookList>
+            {books.map((book) => (
+              <LibraryBook
+                key={book.id}
+                title={book.title}
+                questionId={book.id}
+                colorCode={book.colorCode}
+                receiverName={book.receiverName}
+              />
+            ))}
+          </BookList>
+        </ScrollableContainer>
       </PageContainer>
     </CenteredContainer>
   );
@@ -58,8 +68,6 @@ const CenteredContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  width: 100%;
 `;
 
 const PageContainer = styled.div`
@@ -70,35 +78,43 @@ const PageContainer = styled.div`
   gap: 10px;
   padding: 0 10px;
   border: 2px solid black;
-  overflow-y: auto;
-  overflow-x: hidden; 
-  &::-webkit-scrollbar {
-    display: none;
-  }
+  overflow: hidden;
 `;
 
 const HeadContainer = styled.div`
   width: 100%;
-  height: 256px;
+  height: 180px;
   color: #f0f0f0;
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
   padding-top: 77px;
-  padding-left:0px;
+  padding-left: 0px;
   flex-shrink: 0;
-  font-family: 'SF Pro Text', sans-serif;
+  font-family: "SF Pro Text", sans-serif;
   font-size: 10px;
   line-height: 30px;
+`;
+
+const ScrollableContainer = styled.div`
+  height: calc(100% - 256px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  margin-bottom: 100px;
 `;
 
 const BookList = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-auto-rows: 272px; 
-  gap: 10px;
-  width: calc(100% - 55px); 
-  margin-left: 35px; 
+  grid-auto-rows: 190px;
+  // gap-bottom: 10px;
+  width: calc(100% - 115px);
+  margin-left: 62px;
+  margin-bottom: 20px;
+  margin-top: 0px;
 `;
 
 const BackButton = styled.button`
@@ -107,11 +123,10 @@ const BackButton = styled.button`
   color: #ffffff;
   cursor: pointer;
   font-size: 24px;
-  &:hover {
-    color: #ffffff;
-  }
 `;
 
 const Heading = styled.h1`
-  margin-left: 150px; 
+  margin-left: 150px;
+  font-weight: bold;
+  font-size: 24px;
 `;

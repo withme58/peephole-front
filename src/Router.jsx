@@ -8,11 +8,13 @@ import ReplyQuestionPage from "./pages/ReplyQuestion/ReplyQuestionPage";
 import InterviewPage from "./pages/Main/InterviewPage";
 import MyPage from "./pages/MyPage/MyPage";
 import QuestionAll from "./pages/ReplyQuestion/QuestionAll";
+import LandingPage from "./pages/Landing/LandingPage";
 
 export default function Router() {
   return (
     <Routes>
-      <Route path="/" element={<MainPage />} />
+      <Route path="/" element={<LandingPage />} />
+      <Route path="/peephole" element={<MainPage />} />
       <Route path="/interview" element={<InterviewPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<SignupPage />} />
