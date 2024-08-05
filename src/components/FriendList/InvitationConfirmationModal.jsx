@@ -44,84 +44,93 @@ export default function InvitationConfirmationModal({ onClose }) {
   };
 
   return (
-    <ModalOverlay>
-      <ModalContent>
-        <Header>
-          <QuestionHeader>초대 목록</QuestionHeader>
-        </Header>
-        <InvitationList>
-          {invitations.map((invite) => (
-            <InvitationItem key={invite.id}>
-              <span>{invite.name}</span> {/* 여기서 invite.name을 렌더링 */}
-              <ButtonGroup>
-                <AcceptButton onClick={() => onAccept(invite.id)}>
-                  수락
-                </AcceptButton>
-                <RejectButton onClick={() => onDecline(invite.id)}>
-                  거절
-                </RejectButton>
-              </ButtonGroup>
-            </InvitationItem>
-          ))}
-        </InvitationList>
-        <SendButton onClick={onClose}>닫기</SendButton>
-      </ModalContent>
-    </ModalOverlay>
+    <InvitationList>
+      {invitations.map((invite) => (
+        <InvitationItem key={invite.id}>
+          <Profile
+            src={`${process.env.PUBLIC_URL}/images/profile.png`}
+            alt="logo"
+          />
+          <span>{invite.name}</span> {/* 여기서 invite.name을 렌더링 */}
+          <ButtonGroup>
+            <AcceptButton onClick={() => onAccept(invite.id)}>
+              수락
+            </AcceptButton>
+            <RejectButton onClick={() => onDecline(invite.id)}>
+              거절
+            </RejectButton>
+          </ButtonGroup>
+        </InvitationItem>
+      ))}
+    </InvitationList>
   );
 }
-const Header = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
 
-const QuestionHeader = styled.div`
-  flex-grow: 1;
-  text-align: center;
-  font-weight: 600;
-  font-size: 20px;
-  line-height: 24px;
-  text-align: center;
-  color: #535353;
-  margin: 0;
-`;
-const ModalOverlay = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 100000;
+const Profile = styled.img`
+  width: 45px;
+  height: 45px;
+  margin-right: 15px;
+  z-index: 1000;
 `;
 
 const ModalContent = styled.div`
-  background-color: white;
-  padding: 20px;
-  border-radius: 8px;
-  text-align: center;
-  width: 400px;
-  height: 500px;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
-  z-index: 100000;
+  position: relative;
+  width: 400px;
+  height: 700px;
+  border-radius: 20px;
+  background-color: #f3f3f330;
+  align-items: center;
+  margin-top: 20px;
 `;
 
+/* 스타일 컴포넌트로 스크롤바 커스터마이징 */
 const InvitationList = styled.div`
-  flex: 1;
-  margin: 20px 0px 20px 0px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 400px;
+  height: 700px;
+  border-radius: 20px;
+  background-color: #f3f3f330;
+  margin: 20px 0px;
+  padding: 10px;
+  overflow-y: auto; /* Enable vertical scrolling */
+
+  /* 스크롤바 스타일링 */
+  &::-webkit-scrollbar {
+    width: 10px; /* 스크롤바의 너비 */
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #888; /* 스크롤바의 색상 */
+    border-radius: 5px; /* 스크롤바의 둥근 모서리 */
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: #555; /* 스크롤바에 마우스를 올렸을 때 색상 */
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #f1f1f1; /* 스크롤바 트랙의 색상 */
+    border-radius: 5px; /* 스크롤바 트랙의 둥근 모서리 */
+  }
 `;
 
 const InvitationItem = styled.div`
   display: flex;
-  justify-content: space-between;
-  margin-bottom: 10px;
-  padding-left: 15px;
-  font-size: 20px;
+  font-size: 25px;
+  width: 370px;
+  padding: 20px;
+  color: #fff;
+  border-bottom: 1px solid #fff;
+  align-items: center;
+  justify-content: space-between; /* Ensure the button group is on the right */
+
+  span {
+    flex-grow: 1; /* Ensure the span takes up all available space */
+  }
 `;
 
 const ButtonGroup = styled.div`
@@ -158,21 +167,4 @@ const RejectButton = styled.button`
   border-radius: 5px;
   border: none;
   cursor: pointer;
-`;
-
-const SendButton = styled.button`
-  padding: 10px 10px;
-  font-size: 12px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: var(--light-gray);
-  color: var(--deep-gray);
-  border-radius: 5px;
-  border: none;
-  cursor: pointer;
-  &:hover {
-    background-color: var(--hover-blue);
-    color: #fff;
-  }
 `;
