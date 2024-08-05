@@ -57,7 +57,7 @@ const BookContainer = styled.div`
     props.hasData &&
     `
     &:hover {
-      transform: translateY(-5px);  위로 이동
+      transform: translateY(-5px);  
       box-shadow: 0 8px 16px rgba(0, 0, 0, 0.9); 
     }
   `}

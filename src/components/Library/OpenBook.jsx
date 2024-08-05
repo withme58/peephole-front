@@ -10,18 +10,15 @@ const Modal = ({ isOpen, onClose, questionId }) => {
     const fetchData = async () => {
       try {
         const response = await axios.get(`/api/answer/one?questionId=${questionId}`);
-        console.log(response.data);
         setData(response.data.body);
       } catch (error) {
         console.error("데이터 가져오기 실패:", error);
       }
     };
-
     if (isOpen) {
       fetchData();
     }
   }, [isOpen, questionId]); 
-
   const springProps = useSpring({
     opacity: isOpen ? 1 : 0,
     transform: isOpen ? "translateY(0)" : "translateY(100%)",
@@ -149,7 +146,7 @@ const Content = styled.div`
   backface-visibility: hidden;
   position: absolute; 
   top: 330px; 
-  overflow-y: auto; /* 추가된 부분 */
+  overflow-y: auto; 
   &::-webkit-scrollbar {
       display: none;
     }
