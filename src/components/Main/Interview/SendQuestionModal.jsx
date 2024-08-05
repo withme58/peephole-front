@@ -52,11 +52,14 @@ export default function SendQuestionModal({
         {showSuccessModal && (
           <SuccessModal
             closeModal={() => navigate("/peephole")}
-            userName={selectedUserName} // 추가된 부분
+            userName={selectedUserName}
           />
         )}
         {showFailModal && (
-          <FailModal closeModal={() => setShowFailModal(false)} />
+          <FailModal
+            closeModal={() => navigate("/interview")}
+            userName={selectedUserName}
+          />
         )}
         <Header>
           <QuestionHeader>피폴 목록</QuestionHeader>

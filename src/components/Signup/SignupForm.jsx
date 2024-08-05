@@ -46,7 +46,7 @@ export default function SignupForm() {
       if (error.response && error.response.status === 400) {
         openModal();
       } else {
-        console.error("닉네임 중복:", error);
+        alert("닉네임 중복!", error);
       }
     }
   };
