@@ -15,7 +15,6 @@ export default function LoginPage() {
 }
 
 const PageContainer = styled.div`
-  font-family: "Noto Sans KR";
   position: relative;
   display: flex;
   flex-direction: column;
