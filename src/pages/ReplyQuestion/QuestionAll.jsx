@@ -20,4 +20,5 @@ const PageContainer = styled.div`
   justify-content: center;
   gap: 30px;
   padding-top:30px;
+
 `;

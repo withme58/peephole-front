@@ -8,8 +8,12 @@ export default function DeleteConfirmationModal({ onConfirm, onCancel }) {
       <ModalContent>
         <p>삭제하시겠습니까?</p>
         <ButtonGroup>
-          <button onClick={onConfirm}>예</button>
-          <button onClick={onCancel}>아니요</button>
+          <AcceptButton type="button" onClick={onConfirm}>
+            예
+          </AcceptButton>
+          <RejectButton type="button" onClick={onCancel}>
+            아니오
+          </RejectButton>
         </ButtonGroup>
       </ModalContent>
     </ModalOverlay>
@@ -30,18 +34,47 @@ const ModalOverlay = styled.div`
 
 const ModalContent = styled.div`
   background-color: white;
-  padding: 20px;
+  padding: 30px;
   border-radius: 8px;
   text-align: center;
+  p {
+    font-size: 16px;
+  }
 `;
 
 const ButtonGroup = styled.div`
   display: flex;
   justify-content: space-around;
   margin-top: 20px;
-
   button {
-    padding: 10px 20px;
-    cursor: pointer;
+    margin: 0px 2px;
   }
+`;
+
+const AcceptButton = styled.button`
+  width: 55px;
+  height: 30px;
+  font-size: 12px;
+  display: flex;
+  background-color: var(--hover-blue);
+  color: #fff;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+`;
+
+const RejectButton = styled.button`
+  width: 55px;
+  height: 30px;
+  font-size: 12px;
+  display: flex;
+  background-color: var(--light-gray);
+  color: var(--deep-gray);
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
 `;
