@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import axios from "../../api/axios";
 
-export default function InvitationConfirmationModal({ onClose }) {
+export default function InvitationConfirmationModal() {
   const [invitations, setInvitations] = useState([]);
 
   // Fetch data from the API
@@ -71,18 +71,6 @@ const Profile = styled.img`
   height: 45px;
   margin-right: 15px;
   z-index: 1000;
-`;
-
-const ModalContent = styled.div`
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  width: 400px;
-  height: 700px;
-  border-radius: 20px;
-  background-color: #f3f3f330;
-  align-items: center;
-  margin-top: 20px;
 `;
 
 /* 스타일 컴포넌트로 스크롤바 커스터마이징 */
