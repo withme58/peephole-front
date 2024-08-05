@@ -8,11 +8,12 @@ export default function FailModal({ closeModal, userName }) {
       closeModal();
     }
   };
+
   return (
     <Background onClick={onClickBackground}>
       <ModalContainer>
-        <CloseButton>
-          <TfiClose onClick={closeModal} size={24} color="#8e8e8e" />
+        <CloseButton onClick={closeModal}>
+          <TfiClose size={24} color="#8e8e8e" />
         </CloseButton>
         <ImageContainer>
           <img src="images/fail.png" alt="fail" width={200} height={200} />
@@ -53,7 +54,7 @@ const ModalContainer = styled.div`
 
 const CloseButton = styled.div`
   display: flex;
-  margin-left: 340px;
+  justify-content: flex-end;
   cursor: pointer;
 `;
 
