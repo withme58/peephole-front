@@ -239,28 +239,30 @@ const StyledSignupForm = styled.form`
 `;
 
 const Button = styled.button`
-  width: 35.1rem;
-  height: 5rem;
+  font-family: "Noto Sans KR";
+  width: 400px;
+  height: 60px;
   margin-top: 70px;
   border: none;
-  border-radius: 0.8rem;
+  border-radius: 16px;
   background: #2e8daf;
   color: #fff;
   text-align: center;
-  font-size: 1.8rem;
+  font-size: 18px;
   font-weight: 500;
   cursor: pointer;
 `;
 
 const DisableButton = styled.button`
-  width: 35.1rem;
-  height: 5rem;
+  font-family: "Noto Sans KR";
+  width: 400px;
+  height: 60px;
   margin-top: 70px;
   border: none;
-  border-radius: 0.8rem;
+  border-radius: 16px;
   background: var(--deep-gray);
   color: #fff;
   text-align: center;
-  font-size: 1.8rem;
-  font-weight: 500;
+  font-size: 18px;
+  font-weight: 800;
 `;

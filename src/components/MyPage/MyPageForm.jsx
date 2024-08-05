@@ -44,6 +44,7 @@ export default function MyPageForm() {
             title="닉네임"
             placeholder={name}
             name="nickname"
+            data="nickname" // 추가된 부분
             disabled={true}
           />
         </InputBox>
@@ -52,6 +53,7 @@ export default function MyPageForm() {
             title="이메일"
             placeholder={email}
             name="email"
+            data="이메일" // 추가된 부분
             disabled={true}
           />
         </InputBox>
