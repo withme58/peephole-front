@@ -8,7 +8,6 @@ export default function LandingPage() {
   const [showModal, setShowModal] = useState(true);
 
   const handleCloseModal = () => {
-    console.log("Closing modal"); // 디버깅 로그 추가
     setShowModal(false);
   };
 
