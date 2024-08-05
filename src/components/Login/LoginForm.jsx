@@ -37,7 +37,6 @@ export default function LoginForm() {
   async function login(data) {
     try {
       const res = await axios.post("/open-api/signin", data);
-      console.log("Login response:", res); // 응답 데이터
       localStorage.setItem("accessToken", res.data.body.accessToken);
       navigate("/peephole");
     } catch (error) {
@@ -149,6 +148,7 @@ const StyledLoginForm = styled.form`
 `;
 
 const Button = styled.button`
+  font-family: "Noto Sans KR";
   width: 35.1rem;
   height: 5rem;
   margin-top: 70px;
@@ -163,6 +163,7 @@ const Button = styled.button`
 `;
 
 const DisableButton = styled.button`
+  font-family: "Noto Sans KR";
   width: 35.1rem;
   height: 5rem;
   margin-top: 70px;

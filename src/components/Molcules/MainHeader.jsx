@@ -2,19 +2,24 @@ import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { IoMdPerson } from "react-icons/io";
+import Nickname from "../Main/Main/Nickname";
 
-export default function MainHeader({ text }) {
+export default function MainHeader() {
   const navigate = useNavigate();
 
   return (
     <HeaderContainer>
-      <HeaderBox>{text}</HeaderBox>
-      <PersonIcon size={24} color="white" onClick={() => navigate("/mypage")} />
+      <HeaderBox>Peephole.</HeaderBox>
+      <MypageBox onClick={() => navigate("/mypage")}>
+        <PersonIcon size={24} color="white" />
+        <Nickname />
+      </MypageBox>
     </HeaderContainer>
   );
 }
 
 const HeaderContainer = styled.div`
+  font-family: "Noto Sans KR";
   display: flex;
   align-items: center;
   padding: 20px 20px 0;
@@ -31,4 +36,9 @@ const HeaderBox = styled.div`
 const PersonIcon = styled(IoMdPerson)`
   margin-left: auto;
   cursor: pointer;
+`;
+
+const MypageBox = styled.div`
+  display: flex;
+  gap: 10px;
 `;

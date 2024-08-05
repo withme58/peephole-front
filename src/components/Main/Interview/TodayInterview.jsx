@@ -16,7 +16,7 @@ export default function TodayInterview() {
       const response = await axios.get("/api");
       setQuestion(response.data.body.question);
       setQuestionId(response.data.body.questionId);
-      console.log("Question response:", response);
+      // console.log("Question response:", response);
     } catch (error) {
       console.error("Question 데이터 로드 실패:", error);
     }
@@ -30,7 +30,6 @@ export default function TodayInterview() {
     try {
       const response = await axios.get("/api/myfriends");
       setFriendList(response.data.body.friends);
-      console.log("FriendList response:", response);
     } catch (error) {
       console.error("FriendList 데이터 로드 실패:", error);
     }
@@ -70,6 +69,7 @@ export default function TodayInterview() {
 }
 
 const InterviewContainer = styled.div`
+  font-family: "Noto Sans KR";
   position: relative;
   display: flex;
   flex-direction: column;
@@ -79,6 +79,7 @@ const InterviewContainer = styled.div`
 `;
 
 const Logo = styled.div`
+  font-family: "Noto Sans KR";
   font-size: 24px;
   font-weight: 500;
   color: #fff;
@@ -106,6 +107,7 @@ const QuestionArea = styled.div`
 `;
 
 const FriendListButton = styled.button`
+  font-family: "Noto Sans KR";
   background: none;
   border: none;
   border-radius: 10px;
@@ -120,5 +122,6 @@ const FriendListButton = styled.button`
 `;
 
 const ButtonContainer = styled.div`
+  font-family: "Noto Sans KR";
   padding: 10px 0 40px 0;
 `;

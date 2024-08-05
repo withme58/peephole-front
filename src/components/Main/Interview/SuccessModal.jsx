@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { IoClose } from "react-icons/io5";
+import { TfiClose } from "react-icons/tfi";
 
 export default function SuccessModal({ closeModal, userName }) {
   const onClickBackground = (e) => {
@@ -11,48 +11,73 @@ export default function SuccessModal({ closeModal, userName }) {
   return (
     <Background onClick={onClickBackground}>
       <ModalContainer>
-        <img src="icons/success.svg" alt="success" />
         <CloseButton>
-          <IoClose onClick={closeModal} size={25} color="#5a786f" />
+          <TfiClose onClick={closeModal} size={24} color="#8e8e8e" />
         </CloseButton>
-        <SendMessage>{userName}에게 보냈습니다.</SendMessage>{" "}
-        {/* 수정된 부분 */}
+        <ImageContainer>
+          <img
+            src="images/gold-lemon-removebg.png"
+            alt="success"
+            width={200}
+            height={200}
+          />
+        </ImageContainer>
+        <SendMessage>
+          <p>
+            <span>{userName}</span>님에게
+          </p>
+          <p>인터뷰를 보냈습니다.</p>
+        </SendMessage>
       </ModalContainer>
     </Background>
   );
 }
 
-// Styled Components
 const Background = styled.div`
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(61, 73, 84, 0.3);
+  backdrop-filter: blur(5px);
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
 const ModalContainer = styled.div`
+  font-family: "Noto Sans KR";
   z-index: 10;
   background-color: white;
   border-radius: 10px;
-  width: 280px;
-  height: 334px;
+  width: 400px;
+  height: 369px;
   max-width: 90%;
   padding: 20px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 `;
 
 const CloseButton = styled.div`
+  font-family: "Noto Sans KR";
+  display: flex;
+  margin-left: 340px;
   cursor: pointer;
 `;
 
 const SendMessage = styled.div`
+  font-family: "Noto Sans KR";
   text-align: center;
   font-size: 18px;
-  color: #535353;
+  color: var(--title-text);
   margin-top: 20px;
+  span {
+    font-weight: 700;
+    color: var(--main-blue);
+  }
+`;
+
+const ImageContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;

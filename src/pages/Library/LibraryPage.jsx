@@ -7,13 +7,12 @@ import { useNavigate } from "react-router-dom";
 
 export default function LibraryPage() {
   const navigate = useNavigate();
-  const [books, setBooks] = useState([]);
+  const [books, setBooks] = useState([]); // 초기 books 상태를 빈 배열로 설정
 
   useEffect(() => {
     const fetchBooks = async () => {
       try {
         const response = await axios.get("/api/answer/list");
-        console.log(response.data);
         if (Array.isArray(response.data.body)) {
           const booksData = response.data.body.map((item) => ({
             id: item.questionId,
@@ -21,7 +20,11 @@ export default function LibraryPage() {
             colorCode: item.colorCode,
             receiverName: item.receiverName,
           }));
-          setBooks(booksData);
+          setBooks((prevBooks) => {
+            const booksCount = booksData.length >= 12 ? booksData.length : 12;
+            const updatedBooks = Array(booksCount).fill({});
+            return updatedBooks.map((book, index) => booksData[index] || book);
+          });
         } else {
           console.error("에러났다잉");
         }
@@ -44,17 +47,17 @@ export default function LibraryPage() {
           <BackButton onClick={handleBackButtonClick}>
             <FaArrowLeft />
           </BackButton>
-          <Heading>받은 응답</Heading>
+          <Heading>받은 인터뷰</Heading>
         </HeadContainer>
         <ScrollableContainer>
           <BookList>
-            {books.map((book) => (
-              <LibraryBook
-                key={book.id}
-                title={book.title}
-                questionId={book.id}
-                colorCode={book.colorCode}
-                receiverName={book.receiverName}
+            {books.map((book, index) => (
+              <LibraryBook 
+                key={index} 
+                title={book.title} 
+                questionId={book.id} 
+                colorCode={book.colorCode} 
+                receiverName={book.receiverName} 
               />
             ))}
           </BookList>
@@ -110,11 +113,11 @@ const BookList = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-auto-rows: 190px;
-  // gap-bottom: 10px;
-  width: calc(100% - 115px);
-  margin-left: 62px;
-  margin-bottom: 20px;
-  margin-top: 0px;
+  width: calc(100% - 115px); 
+  margin-left: 62px; 
+  margin-bottom: 20px; 
+  margin-top: 5px;
+
 `;
 
 const BackButton = styled.button`
@@ -129,4 +132,6 @@ const Heading = styled.h1`
   margin-left: 150px;
   font-weight: bold;
   font-size: 24px;
+  font-family: "SF Pro Text", sans-serif;
+
 `;

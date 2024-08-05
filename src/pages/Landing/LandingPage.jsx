@@ -1,21 +1,20 @@
 import LandingtoLogin from "../../components/Landing/LandingtoLogin";
 import React, { useState } from "react";
-import MainHeader from "../../components/Molcules/MainHeader";
 import styled from "styled-components";
 import LandingMain from "../../components/Landing/LandingMain";
+import LandingHeader from "../../components/Landing/LandingHeader";
 
 export default function LandingPage() {
   const [showModal, setShowModal] = useState(true);
 
   const handleCloseModal = () => {
-    console.log("Closing modal"); // 디버깅 로그 추가
     setShowModal(false);
   };
 
   return (
     <PageContainer>
       {showModal && <LandingModal onClose={handleCloseModal} />}
-      <MainHeader text={"Peephole."} />
+      <LandingHeader />
       <LandingtoLogin />
     </PageContainer>
   );
