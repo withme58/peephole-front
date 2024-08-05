@@ -42,8 +42,16 @@ export default function LibraryBook({ title, questionId, colorCode, receiverName
 const BookContainer = styled.div`
   width: 106px;
   height: 140px;
-  background: ${(props) => (props.hasData ? props.colorCode : 'rgba(255, 255, 255, 0.1)')}; 
-  border: 2px solid rgba(255, 255, 255, 0.5); 
+  background: ${(props) =>
+    props.hasData 
+      ? `linear-gradient(to bottom, rgba(255, 255, 255, 0.7) 10%, ${props.colorCode} 80%)` 
+      : 'rgba(255, 255, 255, 0.1)'
+  }; 
+  border: 1px solid rgba(255, 255, 255, 0.5); 
+  
+
+  
+
   display: flex;
   justify-content: center;
   align-items: flex-end; 
