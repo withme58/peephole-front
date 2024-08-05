@@ -7,7 +7,7 @@ import LibraryBox from "../../components/Main/Main/LibraryBox";
 export default function MainPage() {
   return (
     <MainPageContainer>
-      <MainHeader text={"Peephole."} />
+      <MainHeader />
       <AskBox />
       <ReplyBox />
       <LibraryBox />
