@@ -61,12 +61,11 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   background-image: url("images/background_blue.png");
-  background-size: 500px auto; /* 너비를 500px로 설정하고 높이를 화면 전체 높이로 설정 */
-
+  background-size: 498px auto; /* 너비를 500px로 설정하고 높이를 화면 전체 높이로 설정 */
   overflow: hidden;
   position: relative;
   width: 498px;
-  height: 100vh;
+  height: 100%;
 `;
 
 const SwipeContainer = styled.div`

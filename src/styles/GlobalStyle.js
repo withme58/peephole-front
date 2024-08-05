@@ -29,14 +29,19 @@ const GlobalStyle = createGlobalStyle`
 }
 html,
   body {
-    font-family: Pretendard;
-    font-size: 62.5%;
+    font-family: "Noto Sans KR", sans-serif;
     background: #1a1e1d;
     background-image: url('images/background_blue.png');
     background-size: 498px auto; 
     background-repeat: no-repeat;
     background-position: center;
-    background-blend-mode: overlay;
+    @media (max-width: 768px) {
+      background: #1a1e1d;
+      background-image: url('images/background_blue.png');
+      background-size: cover; 
+      background-repeat: no-repeat;
+      background-position: center;
+    }
   }
 
   a {
