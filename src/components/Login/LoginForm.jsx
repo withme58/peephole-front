@@ -148,7 +148,6 @@ const StyledLoginForm = styled.form`
 `;
 
 const Button = styled.button`
-  font-family: "Noto Sans KR";
   width: 35.1rem;
   height: 5rem;
   margin-top: 70px;
@@ -163,7 +162,6 @@ const Button = styled.button`
 `;
 
 const DisableButton = styled.button`
-  font-family: "Noto Sans KR";
   width: 35.1rem;
   height: 5rem;
   margin-top: 70px;
