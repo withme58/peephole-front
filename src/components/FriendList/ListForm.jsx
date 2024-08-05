@@ -7,7 +7,7 @@ import InvitationConfirmationModal from "./InvitationConfirmationModal";
 import axios from "../../api/axios";
 
 export default function ListForm() {
-  const [friends, setFriends] = useState(["민교", "동호", "다현"]);
+  const [friends, setFriends] = useState([]);
 
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [friendToDelete, setFriendToDelete] = useState(null);
@@ -52,6 +52,7 @@ export default function ListForm() {
   return (
     <>
       <FriendBox>
+        {friends.length === 0 ? <Text>피폴을 추가해볼까요?</Text> : null}
         {friends.map((friend, index) => (
           <FriendList key={index}>
             <Profile
@@ -82,6 +83,16 @@ const Profile = styled.img`
   height: 45px;
   margin-right: 15px;
   z-index: 1000;
+`;
+
+const Text = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  color: #8e8e8e;
+  font-size: 20px;
 `;
 
 const FriendBox = styled.div`

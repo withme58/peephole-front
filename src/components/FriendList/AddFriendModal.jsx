@@ -1,55 +1,71 @@
-// AddFriendModal.jsx
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import axios from "../../api/axios";
 import { IoClose } from "react-icons/io5";
+import { FiPlus } from "react-icons/fi";
+import ResponsModal from "./ResponseModal";
 
 export default function AddFriendModal({ onClose }) {
   const [nickname, setNickname] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
+  const [modalText, setModalText] = useState("전송을 실패했습니다.");
 
   const onSubmit = async () => {
     try {
       const response = await axios.post("/api/member/friend/request", {
         name: nickname,
       });
-      console.log("addFriend response:", response.data.body); // 응답 데이터
-      onClose();
+      console.log("addFriend response:", response.data.body); // 응답 데이터 확인
+      setModalText("전송되었습니다.");
+      setIsOpen(true);
     } catch (error) {
       console.error("친구추가 데이터 로드 실패:", error);
+      setIsOpen(true);
       if (error.response) {
-        // 서버에서 응답이 반환된 경우
         console.error("서버 에러:", error.response.status);
         console.error("응답 데이터:", error.response.data);
       } else if (error.request) {
-        // 요청이 만들어졌으나 서버에서 응답이 없었음
         console.error("서버 응답 없음:", error.request);
       } else {
-        // 요청을 만들기 전에 발생한 문제
         console.error("요청 에러:", error.message);
       }
-      onClose();
     }
+    onClose();
   };
 
+  useEffect(() => {
+    console.log("isOpen changed:", isOpen); // 상태 변화 로그
+  }, [isOpen]);
+
   return (
-    <ModalOverlay>
-      <ModalContent>
-        <Header>
-          <QuestionHeader>친구 추가</QuestionHeader>
-          <CloseButton>
-            <IoClose onClick={onClose} size={25} color="#5a786f" />
-          </CloseButton>
-        </Header>
-        <Input
-          placeholder="닉네임 입력"
-          value={nickname}
-          onChange={(e) => setNickname(e.target.value)}
-        />
-        <SendButton type="button" onClick={onSubmit}>
-          보내기
-        </SendButton>
-      </ModalContent>
-    </ModalOverlay>
+    <>
+      <ModalOverlay>
+        <ModalContent>
+          <Header>
+            <QuestionHeader>피폴 추가</QuestionHeader>
+            <CloseButton onClick={onClose}>
+              <IoClose size={30} color="#5a786f" />
+            </CloseButton>
+          </Header>
+          <InputContainer>
+            <Input
+              placeholder="추가하기..."
+              value={nickname}
+              onChange={(e) => setNickname(e.target.value)}
+            />
+            <PlusIcon onClick={onSubmit} isActive={nickname.length > 1}>
+              <FiPlus
+                size={30}
+                color={nickname.length > 1 ? "#42AACB" : "#acacac"}
+              />
+            </PlusIcon>
+          </InputContainer>
+        </ModalContent>
+      </ModalOverlay>
+      {isOpen && (
+        <ResponsModal onClose={() => setIsOpen(false)} text={modalText} />
+      )}
+    </>
   );
 }
 
@@ -58,16 +74,11 @@ const Header = styled.div`
   justify-content: space-between;
   align-items: center;
   position: relative;
-  svg {
-    position: absolute;
-    right: -90px;
-    top: -5px;
-  }
 `;
 
 const QuestionHeader = styled.div`
   flex-grow: 1;
-  text-align: center;
+  text-align: flex-start;
   font-weight: 600;
   font-size: 20px;
   line-height: 24px;
@@ -78,13 +89,31 @@ const QuestionHeader = styled.div`
 
 const CloseButton = styled.div`
   cursor: pointer;
+  position: relative;
+  right: -105px;
+  top: -30px;
+`;
+
+const InputContainer = styled.div`
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
 `;
 
 const Input = styled.input`
-  margin: 20px;
-  padding: 10px;
+  flex: 1;
+  padding: 10px 50px 10px 10px;
   font-size: 20px;
-  // background-color: var(--light-gray);
+  border-bottom: 3px solid #acacac;
+`;
+
+const PlusIcon = styled.div`
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
+  color: ${(props) => (props.isActive ? "#42AACB" : "#acacac")};
 `;
 
 const ModalOverlay = styled.div`
@@ -110,19 +139,4 @@ const ModalContent = styled.div`
   align-items: center;
   display: flex;
   flex-direction: column;
-`;
-const SendButton = styled.button`
-  width: 50px;
-  height: 30px;
-  font-size: 12px;
-  display: flex;
-  background-color: var(--light-gray);
-  color: var(--deep-gray);
-  border-radius: 5px;
-  border: none;
-  cursor: pointer;
-  &:hover {
-    background-color: var(--hover-blue);
-    color: #fff;
-  }
 `;
