@@ -51,13 +51,19 @@ export default function SendQuestionModal({
       <ModalContainer>
         {showSuccessModal && (
           <SuccessModal
-            closeModal={() => navigate("/peephole")}
+            closeModal={() => {
+              setShowSuccessModal(false);
+              closeModal();
+            }}
             userName={selectedUserName}
           />
         )}
         {showFailModal && (
           <FailModal
-            closeModal={() => navigate("/peephole")}
+            closeModal={() => {
+              setShowFailModal(false);
+              closeModal();
+            }}
             userName={selectedUserName}
           />
         )}
