@@ -157,7 +157,7 @@ const Button = styled.button`
   background: var(--main-blue);
   color: #fff;
   text-align: center;
-  font-size: 18pxs;
+  font-size: 18px;
   font-weight: 500;
   cursor: pointer;
 `;

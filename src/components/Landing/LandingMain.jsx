@@ -41,16 +41,13 @@ const LandingMain = ({ onClose }) => {
           &#9654;
         </ArrowButton>
       </ButtonContainer>
-      <DotsContainer>
-        <Dots>
-          {[...Array(3)].map((_, index) => (
-            <Dot key={index} active={index === currentIndex} />
-          ))}
-        </Dots>
-        <StartButton onClick={onClose} disabled={currentIndex !== 2}>
-          시작하기
-        </StartButton>
-      </DotsContainer>
+      {currentIndex === 2 && (
+        <StartButtonContainer>
+          <StartButton onClick={onClose} disabled={currentIndex !== 2}>
+            시작하기
+          </StartButton>
+        </StartButtonContainer>
+      )}
     </Container>
   );
 };
@@ -120,25 +117,12 @@ const ArrowButton = styled.button`
   pointer-events: ${({ disabled }) => (disabled ? "none" : "auto")};
 `;
 
-const DotsContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+const StartButtonContainer = styled.div`
   position: absolute;
   bottom: 20px;
-`;
-
-const Dots = styled.div`
+  width: 100%;
   display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
-`;
-
-const Dot = styled.div`
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background-color: ${({ active }) => (active ? "#fff" : "#888")};
+  justify-content: center;
 `;
 
 const StartButton = styled.button`
@@ -146,15 +130,19 @@ const StartButton = styled.button`
   height: 60px;
   border: none;
   border-radius: 16px;
-  background-color: ${({ disabled }) =>
-    disabled ? "rgba(175, 175, 175, 0.5)" : "var(--main-blue)"};
+  background-color: var(--main-blue);
   font-size: 24px;
   font-weight: 600;
   font-family: "Noto Sans KR";
   color: #fff;
-  cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
+  cursor: pointer;
   transition: opacity 0.3s ease, background-color 0.3s ease;
   z-index: 100; /* Ensure button is on top */
+
+  &:disabled {
+    background-color: rgba(175, 175, 175, 0.5);
+    cursor: not-allowed;
+  }
 `;
 
 export default LandingMain;

@@ -26,7 +26,7 @@ const PageContainer = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 30px;
-  height: 100vh;
+  height: 100%;
   overflow: hidden;
 `;
 
