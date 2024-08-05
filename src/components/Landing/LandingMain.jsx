@@ -27,7 +27,7 @@ const LandingMain = ({ onClose }) => {
           <Logo>Peephole.</Logo>
         </Slide>
         <Slide>
-          <Introduction>소개 1</Introduction>
+          <Introduction>Peephole.</Introduction>
         </Slide>
         <Slide>
           <Introduction>소개 2</Introduction>
@@ -41,14 +41,16 @@ const LandingMain = ({ onClose }) => {
           &#9654;
         </ArrowButton>
       </ButtonContainer>
-      <Dots>
-        {[...Array(3)].map((_, index) => (
-          <Dot key={index} active={index === currentIndex} />
-        ))}
-      </Dots>
-      <StartButton onClick={onClose} disabled={currentIndex !== 2}>
-        시작하기
-      </StartButton>
+      <DotsContainer>
+        <Dots>
+          {[...Array(3)].map((_, index) => (
+            <Dot key={index} active={index === currentIndex} />
+          ))}
+        </Dots>
+        <StartButton onClick={onClose} disabled={currentIndex !== 2}>
+          시작하기
+        </StartButton>
+      </DotsContainer>
     </Container>
   );
 };
@@ -58,10 +60,13 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* height: 100%;
-  width: 100%; */
-  background-color: #3d4954;
+  background-image: url("images/background_blue.png");
+  background-size: 500px auto; /* 너비를 500px로 설정하고 높이를 화면 전체 높이로 설정 */
+
   overflow: hidden;
+  position: relative;
+  width: 498px;
+  height: 100vh;
 `;
 
 const SwipeContainer = styled.div`
@@ -88,7 +93,8 @@ const Logo = styled.div`
 `;
 
 const Introduction = styled.div`
-  font-size: 24px;
+  font-size: 60px;
+  font-weight: bold;
   font-family: "Noto Sans KR";
   color: #fff;
 `;
@@ -108,41 +114,48 @@ const ButtonContainer = styled.div`
 const ArrowButton = styled.button`
   background: none;
   border: none;
-  font-size: 36px;
+  font-size: 20px;
   color: #fff;
   cursor: pointer;
-  opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
+  opacity: ${({ disabled }) => (disabled ? 0.3 : 1)};
   pointer-events: ${({ disabled }) => (disabled ? "none" : "auto")};
 `;
 
-const Dots = styled.div`
+const DotsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   position: absolute;
   bottom: 20px;
+`;
+
+const Dots = styled.div`
   display: flex;
   gap: 10px;
+  margin-bottom: 20px;
 `;
 
 const Dot = styled.div`
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
   background-color: ${({ active }) => (active ? "#fff" : "#888")};
 `;
 
 const StartButton = styled.button`
-  margin-top: 20px;
-  width: 140px;
+  width: 400px;
   height: 60px;
   border: none;
-  border-radius: 10px;
-  background-color: #fff;
-  font-size: 20px;
-  font-weight: medium;
+  border-radius: 16px;
+  background-color: ${({ disabled }) =>
+    disabled ? "rgba(175, 175, 175, 0.5)" : "var(--main-blue)"};
+  font-size: 24px;
+  font-weight: 600;
   font-family: "Noto Sans KR";
-  color: #3d4954;
+  color: #fff;
   cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
-  opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
-  transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease, background-color 0.3s ease;
+  z-index: 100; /* Ensure button is on top */
 `;
 
 export default LandingMain;
