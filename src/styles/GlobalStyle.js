@@ -31,7 +31,7 @@ html,
   body {
     font-family: Pretendard;
     font-size: 62.5%;
-    /* background: #3d4954; */
+    background: #1a1e1d;
     background-image: url('images/background_blue.png');
     background-size: 498px auto; 
     background-repeat: no-repeat;

@@ -1,19 +1,16 @@
 import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { IoMdPerson } from "react-icons/io";
-import Nickname from "../Main/Main/Nickname";
+// import { IoMdPerson } from "react-icons/io";
+import { FaLock } from "react-icons/fa";
 
-export default function MainHeader() {
+export default function LandingHeader() {
   const navigate = useNavigate();
 
   return (
     <HeaderContainer>
       <HeaderBox>Peephole.</HeaderBox>
-      <MypageBox onClick={() => navigate("/mypage")}>
-        <PersonIcon size={24} color="white" />
-        <Nickname />
-      </MypageBox>
+      <LockIcon size={24} color="white" onClick={() => navigate("/signup")} />
     </HeaderContainer>
   );
 }
@@ -32,12 +29,7 @@ const HeaderBox = styled.div`
   font-weight: bold;
 `;
 
-const PersonIcon = styled(IoMdPerson)`
+const LockIcon = styled(FaLock)`
   margin-left: auto;
   cursor: pointer;
-`;
-
-const MypageBox = styled.div`
-  display: flex;
-  gap: 10px;
 `;
