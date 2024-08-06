@@ -5,7 +5,7 @@ import TodayInterview from "../../components/Main/Interview/TodayInterview";
 export default function InterviewPage() {
   return (
     <PageContainer>
-      <Header text={"오늘의 인터뷰"} />
+      <Header text="오늘의 인터뷰" link="/peephole" />
       <TodayInterview />
     </PageContainer>
   );

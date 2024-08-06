@@ -6,7 +6,7 @@ import InterviewOne from "../../components/ReplyQuestion/InterviewOne";
 export default function QuestionOne() {
   return (
     <PageContainer>
-      <Header text={"받은 인터뷰"} />
+      <Header text="받은 인터뷰" link="/peephole" />
       <InterviewOne />
     </PageContainer>
   );

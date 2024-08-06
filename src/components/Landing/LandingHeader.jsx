@@ -1,21 +1,22 @@
 import React from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function LandingHeader() {
-  const navigate = useNavigate();
-
   return (
     <HeaderContainer>
       <HeaderBox>Peephole.</HeaderBox>
-      <SignupIcon onClick={() => navigate("/signup")}>
-        <img src="/icons/signup.svg" alt="signup" />
-      </SignupIcon>
+      <Link to="/signup">
+        <SignupIcon>
+          <img src="/icons/signup.svg" alt="signup" />
+        </SignupIcon>
+      </Link>
     </HeaderContainer>
   );
 }
 
 const HeaderContainer = styled.div`
+  /* width: 100%; */
   display: flex;
   align-items: center;
   padding: 20px 20px 0;

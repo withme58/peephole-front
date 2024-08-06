@@ -12,7 +12,7 @@ export default function FriendListPage() {
   return (
     <PageContainer>
       {/* <Header text={"친구 목록"} /> */}
-      <FriendListHeader text={"친구 목록"} />
+      <FriendListHeader text="친구 목록" />
       <ListHeader selected={selected} setSelected={setSelected} />
       {selected === 0 ? <ListForm /> : <InvitationConfirmationModal />}
     </PageContainer>
