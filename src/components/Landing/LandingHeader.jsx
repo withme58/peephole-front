@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 export default function LandingHeader() {
   return (
     <HeaderContainer>
-      <HeaderBox>Peephole.</HeaderBox>
+      <Logo src="images/Logo.png" alt="Peephole." />
       <Link to="/signup">
         <SignupIcon>
           <img src="/icons/signup.svg" alt="signup" />
@@ -24,10 +24,12 @@ const HeaderContainer = styled.div`
   gap: 240px;
 `;
 
-const HeaderBox = styled.div`
+const Logo = styled.img`
+  width: 120px;
+  height: auto;
+  margin-top: 30px;
+  margin-bottom: 20px;
   color: #fff;
-  font-size: 24px;
-  font-weight: bold;
 `;
 
 const SignupIcon = styled.div`

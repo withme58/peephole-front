@@ -48,7 +48,7 @@ export default function LibraryPage() {
           <BackButton onClick={handleBackButtonClick}>
             <FaArrowLeft />
           </BackButton>
-          <Heading>받은 인터뷰</Heading>
+          <Heading>받은 응답</Heading>
         </HeadContainer>
         <ScrollableContainer>
           <BookList>
@@ -133,5 +133,4 @@ const Heading = styled.h1`
   font-weight: bold;
   font-size: 24px;
   font-family: "SF Pro Text", sans-serif;
-
 `;

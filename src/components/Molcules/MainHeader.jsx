@@ -9,7 +9,7 @@ export default function MainHeader() {
 
   return (
     <HeaderContainer>
-      <HeaderBox>Peephole.</HeaderBox>
+      <Logo src="images/Logo.png" alt="Peephole." />
       <MypageBox onClick={() => navigate("/mypage")}>
         <PersonIcon size={24} color="white" />
         <Nickname />
@@ -26,18 +26,20 @@ const HeaderContainer = styled.div`
   gap: 240px;
 `;
 
-const HeaderBox = styled.div`
+const Logo = styled.img`
+  width: 120px;
+  height: auto;
+  margin-top: 30px;
+  margin-bottom: 20px;
   color: #fff;
-  font-size: 24px;
-  font-weight: bold;
 `;
 
 const PersonIcon = styled(IoMdPerson)`
   margin-left: auto;
-  cursor: pointer;
 `;
 
 const MypageBox = styled.div`
   display: flex;
   gap: 10px;
+  cursor: pointer;
 `;

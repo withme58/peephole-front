@@ -41,13 +41,13 @@ export default function InterviewOne() {
 
   return (
     <InterviewContainer>
-      <Logo>Peephole.</Logo>
+      <Logo src="images/Logo.png" alt="Peephole." />
       <QuestionContainer>
         <QuestionArea>{question}</QuestionArea>
         <CalculateDate />
       </QuestionContainer>
       <ButtonContainer onClick={openReplyModal}>
-        <FriendListButton onClick={goInterview}>인터뷰 하기</FriendListButton>
+        <FriendListButton onClick={goInterview}>인터뷰하기</FriendListButton>
       </ButtonContainer>
       {isReplyModalOpen && (
         <ReplyModal
@@ -70,9 +70,11 @@ const InterviewContainer = styled.div`
   gap: 30px;
 `;
 
-const Logo = styled.div`
-  font-size: 24px;
-  font-weight: 500;
+const Logo = styled.img`
+  width: 120px;
+  height: auto;
+  margin-top: 30px;
+  margin-bottom: 20px;
   color: #fff;
 `;
 
@@ -105,8 +107,8 @@ const FriendListButton = styled.button`
   height: 60px;
   background-color: var(--tapped-blue);
 
-  font-size: 18px;
-  font-weight: 400;
+  font-size: 24px;
+  font-weight: 800;
   color: #fff;
   cursor: pointer;
 `;

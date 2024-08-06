@@ -24,23 +24,29 @@ const LandingMain = ({ onClose }) => {
     <Container {...handlers}>
       <SwipeContainer currentIndex={currentIndex}>
         <Slide>
-          <Logo>Peephole.</Logo>
+          <Logo src="images/Logo.png" alt="Peephole." />
         </Slide>
         <Slide>
           <IntroductionWrapper>
-            <Introduction>Peephole.</Introduction>
+            <Logo src="images/Logo.png" alt="Peephole." />
           </IntroductionWrapper>
         </Slide>
         <Slide>
           <IntroductionWrapper>
-            <IntroductionTitle>이것은 메인페이지</IntroductionTitle>
-            <Image src="images/main-mock.png" alt="Main Mockup" />
+            {/* <IntroductionTitle>
+              <p>하루에 한 명,</p>
+              <p>인터뷰 하나</p>
+            </IntroductionTitle> */}
+            <ImageFirst src="images/main-mock-page.png" alt="Main Mockup" />
           </IntroductionWrapper>
         </Slide>
         <Slide>
           <IntroductionWrapper>
-            <IntroductionTitle>이것은 세부페이지</IntroductionTitle>
-            <Image src="images/detail-mock.png" alt="Detail Mockup" />
+            {/* <IntroductionTitle>질문으로 동기부여를</IntroductionTitle> */}
+            <ImageSecond
+              src="images/detail-mock-page.png"
+              alt="Detail Mockup"
+            />
             <StartButtonContainer>
               <StartButton onClick={onClose}>시작하기</StartButton>
             </StartButtonContainer>
@@ -90,10 +96,10 @@ const Slide = styled.div`
   flex-shrink: 0;
 `;
 
-const Logo = styled.div`
-  font-size: 48px;
-  font-weight: bold;
-  font-family: "Noto Sans KR";
+const Logo = styled.img`
+  width: 240px;
+  height: auto;
+  margin-bottom: 250px;
   color: #fff;
 `;
 
@@ -102,13 +108,17 @@ const IntroductionWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 30px;
   height: 100%; /* 내용이 중앙에 오도록 설정 */
+  margin-top: 100px;
+  padding: 30px;
 `;
 
 const IntroductionTitle = styled.div`
-  font-size: 24px;
+  font-size: 40px;
   font-weight: bold;
   font-family: "Noto Sans KR";
+  text-align: center;
   color: #fff;
   margin-bottom: 20px;
 `;
@@ -121,7 +131,14 @@ const Introduction = styled.div`
   margin-bottom: 20px; /* Peephole 텍스트를 위로 이동시키기 위해 추가된 여백 */
 `;
 
-const Image = styled.img`
+const ImageFirst = styled.img`
+  width: 400px;
+  height: auto;
+  max-width: 400px;
+  /* margin-top: 30px; */
+`;
+
+const ImageSecond = styled.img`
   width: 100%;
   max-width: 400px;
 `;
