@@ -47,7 +47,7 @@ export default function InterviewOne() {
         <CalculateDate />
       </QuestionContainer>
       <ButtonContainer onClick={openReplyModal}>
-        <FriendListButton onClick={goInterview}>인터뷰 하기</FriendListButton>
+        <FriendListButton onClick={goInterview}>인터뷰하기</FriendListButton>
       </ButtonContainer>
       {isReplyModalOpen && (
         <ReplyModal
@@ -107,8 +107,8 @@ const FriendListButton = styled.button`
   height: 60px;
   background-color: var(--tapped-blue);
 
-  font-size: 18px;
-  font-weight: 400;
+  font-size: 24px;
+  font-weight: 800;
   color: #fff;
   cursor: pointer;
 `;
