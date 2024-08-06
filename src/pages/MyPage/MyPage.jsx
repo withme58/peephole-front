@@ -5,7 +5,7 @@ import Header from "../../components/Molcules/Header";
 export default function MyPage() {
   return (
     <PageContainer>
-      <Header text={"마이페이지"} />
+      <Header text="마이페이지" link="/peephole" />
       <MyPageForm />
     </PageContainer>
   );

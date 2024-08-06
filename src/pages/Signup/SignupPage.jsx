@@ -7,7 +7,7 @@ import SignupToLogin from "../../components/Signup/SignupToLogin";
 export default function SignupPage() {
   return (
     <PageContainer>
-      <Header text={"회원가입"} />
+      <Header text="회원가입" link="/peephole" />
       <SignupForm />
       <SignupToLogin />
     </PageContainer>

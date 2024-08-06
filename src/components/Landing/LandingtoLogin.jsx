@@ -1,8 +1,7 @@
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function LandingtoLogin() {
-  const navigate = useNavigate();
   return (
     <AskBoxContainer>
       <AskBoxTitle>로그인/회원가입을 해주세요.</AskBoxTitle>
@@ -12,13 +11,9 @@ export default function LandingtoLogin() {
           <p>친구의 생각도 들어보고,</p>
           <p>스스로도 사고해 봅시다.</p>
         </AskBoxQuote>
-        <AskBoxButton
-          onClick={() => {
-            navigate("/login");
-          }}
-        >
-          로그인
-        </AskBoxButton>
+        <Link to="/login">
+          <AskBoxButton>로그인</AskBoxButton>
+        </Link>
       </AskBoxContent>
     </AskBoxContainer>
   );

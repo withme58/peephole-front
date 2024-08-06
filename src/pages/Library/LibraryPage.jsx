@@ -7,9 +7,10 @@ import { useNavigate } from "react-router-dom";
 
 export default function LibraryPage() {
   const navigate = useNavigate();
-  const [books, setBooks] = useState([]); // 초기 books 상태를 빈 배열로 설정
-
+  const [books, setBooks] = useState([]);
   useEffect(() => {
+    window.scrollTo(0, 0);
+
     const fetchBooks = async () => {
       try {
         const response = await axios.get("/api/answer/list");
@@ -37,7 +38,7 @@ export default function LibraryPage() {
   }, []);
 
   const handleBackButtonClick = () => {
-    navigate("/peephole"); // MainPage로 이동
+    navigate("/peephole"); 
   };
 
   return (
@@ -80,7 +81,6 @@ const PageContainer = styled.div`
   flex-direction: column;
   gap: 10px;
   padding: 0 10px;
-  border: 2px solid black;
   overflow: hidden;
 `;
 
