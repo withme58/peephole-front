@@ -96,7 +96,7 @@ const QuestionContainer = styled.div`
 const QuestionArea = styled.div`
   font-size: 20px;
   font-weight: bold;
-  color: #535353;
+  color: var(--title-text);
 `;
 
 const ModalOverlay = styled.div`
@@ -130,17 +130,23 @@ const ModalContent = styled.div`
 
 const SendButton = styled.button`
   width: 300px;
-  height: 40px;
-  font-size: 18px;
+  height: 55px;
+  font-size: 24px;
   display: flex;
-  background-color: var(--hover-blue);
+  background-color: var(--main-blue);
   color: #fff;
-  border-radius: 5px;
+  border-radius: 15px;
   border: none;
   cursor: pointer;
   align-items: center;
   justify-content: center;
   margin-top: 25px;
+  font-weight: bold;
+
+  &:disabled {
+    background-color: var(--disabled-gray);
+    cursor: not-allowed;
+  }
 `;
 
 const TextAreaContainer = styled.div`
@@ -157,27 +163,10 @@ const TextArea = styled.textarea`
   border-radius: 4px;
   box-sizing: border-box;
   resize: none;
+  font-family: "Noto sans KR";
   background-color: #acacac80;
   background-color: ${({ overLimit }) => (overLimit ? "#FFE1E1" : "#acacac80")};
   color: black;
-  /* 스크롤바 스타일링 */
-  &::-webkit-scrollbar {
-    width: 10px; /* 스크롤바의 너비 */
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: #888; /* 스크롤바의 색상 */
-    border-radius: 5px; /* 스크롤바의 둥근 모서리 */
-  }
-
-  &::-webkit-scrollbar-thumb:hover {
-    background: #555; /* 스크롤바에 마우스를 올렸을 때 색상 */
-  }
-
-  &::-webkit-scrollbar-track {
-    background: #f1f1f1; /* 스크롤바 트랙의 색상 */
-    border-radius: 5px; /* 스크롤바 트랙의 둥근 모서리 */
-  }
 `;
 
 const CharCount = styled.div`

@@ -35,6 +35,11 @@ export default function QuestionAll() {
 
   return (
     <FormContainer>
+      {questions.length === 0 ? (
+        <QuestionsList>
+          <Text>텅~</Text>
+        </QuestionsList>
+      ) : null}
       {questions.map((data, index) => (
         <QuestionDiv key={index} onClick={() => onClick(data)}>
           <Title>
@@ -51,6 +56,27 @@ export default function QuestionAll() {
     </FormContainer>
   );
 }
+
+const Text = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  color: #8e8e8e;
+  font-size: 20px;
+`;
+
+const QuestionsList = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  height: 700px;
+  border-radius: 20px;
+  background-color: #f3f3f330;
+  padding: 10px;
+  overflow-y: auto; /* Enable vertical scrolling */
+`;
 
 const FormContainer = styled.div`
   font-family: "Noto Sans KR", sans-serif;

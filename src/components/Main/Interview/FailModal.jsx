@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { TfiClose } from "react-icons/tfi";
 
-export default function FailModal({ closeModal, userName }) {
+export default function FailModal({ closeModal }) {
   const onClickBackground = (e) => {
     if (e.target === e.currentTarget) {
       closeModal();
@@ -16,13 +16,11 @@ export default function FailModal({ closeModal, userName }) {
           <TfiClose size={24} color="#8e8e8e" />
         </CloseButton>
         <ImageContainer>
-          <img src="images/fail.png" alt="fail" width={200} height={200} />
+          <img src="images/fail.png" alt="fail" width={200} />
         </ImageContainer>
         <SendMessage>
-          <p>
-            <span>{userName}</span>님에게
-          </p>
-          <p>인터뷰 전송을 실패했습니다.</p>
+          <p>오늘은 이미</p>
+          <p>인터뷰를 전송했어요.</p>
         </SendMessage>
       </ModalContainer>
     </Background>
