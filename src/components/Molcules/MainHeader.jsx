@@ -21,7 +21,6 @@ export default function MainHeader() {
 const HeaderContainer = styled.div`
   display: flex;
   align-items: center;
-  padding: 20px 20px 0;
   position: relative;
   gap: 240px;
 `;

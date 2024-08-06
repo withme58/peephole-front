@@ -94,6 +94,8 @@ const QuestionContainer = styled.div`
 `;
 
 const QuestionArea = styled.div`
+  margin-right: 30px;
+  margin-left: 30px;
   font-size: 24px;
   font-weight: bold;
   text-align: center;
