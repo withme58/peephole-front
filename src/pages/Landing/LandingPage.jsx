@@ -26,8 +26,8 @@ const PageContainer = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 30px;
-  /* height: 100%; */
   overflow: hidden;
+  height: 100vh;
 `;
 
 const LandingModal = ({ onClose }) => {
