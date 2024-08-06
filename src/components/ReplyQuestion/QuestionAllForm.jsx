@@ -68,7 +68,6 @@ const FormContainer = styled.div`
 	padding: 20px;
 	padding-top: 50px;
 	color: #fff;
-	backdrop-filter: blur(10px);
 `;
 
 const ContentDiv = styled.div`
@@ -141,6 +140,7 @@ const QuestionDiv = styled.div`
 	box-sizing: border-box;
 	height: 126px;
 	position: relative;
+	backdrop-filter: blur(10px);
 
 	&:hover {
 		background-color: rgba(66, 170, 203, 0.5);
