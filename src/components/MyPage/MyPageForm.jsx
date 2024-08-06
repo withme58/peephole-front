@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Input from "../Molcules/Input";
 import axios from "../../api/axios";
 import { useNavigate } from "react-router-dom";
+import Logout from "../Molcules/Logout";
 
 export default function MyPageForm() {
   const [name, setName] = useState("으깬 감자");
@@ -58,6 +59,7 @@ export default function MyPageForm() {
           />
         </InputBox>
       </UserInfoBox>
+      <Logout />
     </Form>
   );
 }
