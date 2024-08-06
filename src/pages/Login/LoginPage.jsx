@@ -7,7 +7,7 @@ import LoginToSignUp from "../../components/Login/LoginToSignUp";
 export default function LoginPage() {
   return (
     <PageContainer>
-      <Header text={"로그인"} />
+      <Header text={"로그인"} link="/" />
       <LoginForm />
       <LoginToSignUp />
     </PageContainer>
@@ -19,6 +19,7 @@ const PageContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  // justify-content: center;
   gap: 30px;
+  height: 100vh;
 `;

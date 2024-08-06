@@ -59,7 +59,7 @@ export default function ReplyModal({ onClose, question, answerId, friendId }) {
           />
           <CharCount>{replyText.length}/300</CharCount>
         </TextAreaContainer>
-        <SendButton type="button" onClick={handleSubmit}>
+        <SendButton type="button" onClick={handleSubmit} disabled={isOverLimit}>
           보내기
         </SendButton>
       </ModalContent>
