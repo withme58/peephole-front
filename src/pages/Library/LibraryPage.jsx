@@ -9,6 +9,8 @@ export default function LibraryPage() {
   const navigate = useNavigate();
   const [books, setBooks] = useState([]);
   useEffect(() => {
+    window.scrollTo(0, 0);
+
     const fetchBooks = async () => {
       try {
         const response = await axios.get("/api/answer/list");

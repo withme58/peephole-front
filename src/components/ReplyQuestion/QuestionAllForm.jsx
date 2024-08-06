@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 export default function QuestionAll() {
 	const navigate = useNavigate();
 	const [questions, setQuestions] = useState([]);
+	window.scrollTo(0, 0);
 
 	const fetchData = async () => {
 		try {
