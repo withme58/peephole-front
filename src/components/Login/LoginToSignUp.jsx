@@ -28,6 +28,6 @@ const AccountCheck = styled.div`
 
 const SignUpButton = styled.div`
   color: #2e8daf;
-  font-weight: 700;
+  font-weight: 800;
   cursor: pointer;
 `;

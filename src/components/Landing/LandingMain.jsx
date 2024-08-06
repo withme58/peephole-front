@@ -123,24 +123,17 @@ const IntroductionTitle = styled.div`
   margin-bottom: 20px;
 `;
 
-const Introduction = styled.div`
-  font-size: 60px;
-  font-weight: bold;
-  font-family: "Noto Sans KR";
-  color: #fff;
-  margin-bottom: 20px; /* Peephole 텍스트를 위로 이동시키기 위해 추가된 여백 */
-`;
-
 const ImageFirst = styled.img`
-  width: 400px;
+  width: 300px;
   height: auto;
   max-width: 400px;
   /* margin-top: 30px; */
 `;
 
 const ImageSecond = styled.img`
-  width: 100%;
-  max-width: 400px;
+  width: 300px;
+  /* width: 100%; */
+  /* max-width: 400px; */
 `;
 
 const ButtonContainer = styled.div`
