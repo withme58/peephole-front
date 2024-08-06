@@ -10,7 +10,7 @@ export default function MyPageHeader() {
     <Header>
       <BackButton
         onClick={() => {
-          navigate(-1);
+          navigate("/peephole");
         }}
       >
         <IoArrowBack size={24} color="white" />

@@ -17,7 +17,8 @@ const PageContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  // justify-content: center;
   gap: 30px;
   padding-top: 30px;
+  height: 100vh;
 `;

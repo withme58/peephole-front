@@ -22,7 +22,7 @@ const MainPageContainer = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  /* height: 100vh; */
+  // height: 100vh;
   padding: 0;
   margin: 0;
   box-sizing: border-box;

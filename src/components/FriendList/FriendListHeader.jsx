@@ -26,7 +26,7 @@ export default function FriendListHeader({ text }) {
       <HeaderContainer>
         <BackButton
           onClick={() => {
-            navigate(-1);
+            navigate("/mypage");
           }}
         >
           <IoArrowBack size={24} color="white" />
