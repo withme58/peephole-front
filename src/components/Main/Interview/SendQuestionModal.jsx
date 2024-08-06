@@ -64,7 +64,6 @@ export default function SendQuestionModal({
               setShowFailModal(false);
               closeModal();
             }}
-            userName={selectedUserName}
           />
         )}
         <Header>
