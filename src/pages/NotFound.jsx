@@ -1,11 +1,12 @@
 import styled from "styled-components";
+import Header from "../components/Molcules/Header";
 
 export default function NotFound() {
   return (
     <NotFoundContainer>
+      <Header text={"  "} link={-1} />
       <FzFError src="images/page-not-found.png" />
       <NotFoundQuote>앗! 여기가 아닌데요;;;</NotFoundQuote>
-      <ReturnButton>돌아가기</ReturnButton>
     </NotFoundContainer>
   );
 }
