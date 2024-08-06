@@ -3,14 +3,14 @@ import styled from "styled-components";
 import { IoArrowBack } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 
-export default function Header({ text }) {
+export default function Header({ text, link }) {
   const navigate = useNavigate();
 
   return (
     <HeaderContainer>
       <BackButton
         onClick={() => {
-          navigate(-1);
+          navigate(link);
         }}
       >
         <IoArrowBack size={24} color="white" />

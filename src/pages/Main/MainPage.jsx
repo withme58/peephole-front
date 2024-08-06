@@ -21,13 +21,11 @@ const MainPageContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center; /* 가운데 정렬 */
   width: 100%;
-  height: 100vh;
+  /* height: 100vh; */
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  background-color: #1a1e1d; /* 배경색 설정 */
 `;
 
 const MainContent = styled.div`
@@ -39,5 +37,4 @@ const MainContent = styled.div`
   gap: 20px;
   padding: 20px;
   box-sizing: border-box;
-  background-color: #1a1e1d; /* 배경색 설정 */
 `;
