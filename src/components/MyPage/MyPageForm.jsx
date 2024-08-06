@@ -102,9 +102,9 @@ const SendButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #85b1bf;
+  background-color: #42aacb;
   color: #fff;
-  border-radius: 5px;
+  border-radius: 15px;
   border: none;
   cursor: pointer;
 `;
