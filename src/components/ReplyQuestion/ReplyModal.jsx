@@ -107,9 +107,9 @@ const ModalOverlay = styled.div`
   bottom: 0;
   // background-color: rgba(0, 0, 0, 0.5);
   display: flex;
-  margin-top:250px;
-  
-  align-items: flex-start; /* Align items to the bottom */
+  /* margin-top:250px; */
+
+  align-items: flex-end; /* Align items to the bottom */
   justify-content: center;
   z-index: 100000;
 `;
