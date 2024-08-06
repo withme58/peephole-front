@@ -9,6 +9,7 @@ import MyPage from "./pages/MyPage/MyPage";
 import QuestionAll from "./pages/ReplyQuestion/QuestionAll";
 import LandingPage from "./pages/Landing/LandingPage";
 import QuestionOne from "./pages/ReplyQuestion/QuestionOne";
+import NotFound from "./pages/NotFound";
 
 export default function Router() {
   return (
@@ -23,6 +24,7 @@ export default function Router() {
       <Route path="/mypage" element={<MyPage />} />
       <Route path="/questionAll" element={<QuestionAll />} />
       <Route path="/questionOne" element={<QuestionOne />} />
+      <Route path="/*" element={<NotFound />} />
     </Routes>
   );
 }
