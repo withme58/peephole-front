@@ -3,7 +3,7 @@ import styled from "styled-components";
 import axios from "../../api/axios";
 import { IoClose } from "react-icons/io5";
 import { FiPlus } from "react-icons/fi";
-import ResponsModal from "./ResponseModal";
+import ResponseModal from "./ResponseModal"; // Fixed typo in import
 
 export default function AddFriendModal({ onClose }) {
   const [nickname, setNickname] = useState("");
@@ -20,22 +20,19 @@ export default function AddFriendModal({ onClose }) {
       setIsOpen(true);
     } catch (error) {
       console.error("친구추가 데이터 로드 실패:", error);
+      setModalText("전송을 실패했습니다.");
       setIsOpen(true);
-      if (error.response) {
-        console.error("서버 에러:", error.response.status);
-        console.error("응답 데이터:", error.response.data);
-      } else if (error.request) {
-        console.error("서버 응답 없음:", error.request);
-      } else {
-        console.error("요청 에러:", error.message);
-      }
     }
-    onClose();
   };
 
   useEffect(() => {
     console.log("isOpen changed:", isOpen); // 상태 변화 로그
   }, [isOpen]);
+
+  const handleCloseModal = () => {
+    setIsOpen(false);
+    onClose();
+  };
 
   return (
     <>
@@ -62,9 +59,7 @@ export default function AddFriendModal({ onClose }) {
           </InputContainer>
         </ModalContent>
       </ModalOverlay>
-      {isOpen && (
-        <ResponsModal onClose={() => setIsOpen(false)} text={modalText} />
-      )}
+      {isOpen && <ResponseModal onClose={handleCloseModal} text={modalText} />}
     </>
   );
 }

@@ -6,10 +6,10 @@ export default function ResponsModal({ onClose, text }) {
   return (
     <ModalOverlay>
       <ModalContent>
-        <QuestionHeader>{text}</QuestionHeader>
         <CloseButton onClick={onClose}>
           <IoClose size={30} color="#5a786f" />
         </CloseButton>
+        <QuestionHeader>{text}</QuestionHeader>
       </ModalContent>
     </ModalOverlay>
   );
@@ -17,11 +17,13 @@ export default function ResponsModal({ onClose, text }) {
 
 const QuestionHeader = styled.div`
   font-size: 20px;
-
   margin: 30px;
 `;
 
 const CloseButton = styled.div`
+  position: absolute;
+  top: 10px;
+  right: 10px;
   cursor: pointer;
 `;
 
@@ -49,4 +51,5 @@ const ModalContent = styled.div`
   align-items: center;
   display: flex;
   flex-direction: column;
+  position: relative;
 `;
