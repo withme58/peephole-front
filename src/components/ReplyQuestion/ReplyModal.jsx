@@ -108,6 +108,7 @@ const ModalOverlay = styled.div`
   // background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   margin-top:250px;
+  
   align-items: flex-start; /* Align items to the bottom */
   justify-content: center;
   z-index: 100000;
@@ -116,7 +117,7 @@ const ModalOverlay = styled.div`
 const ModalContent = styled.div`
   width: 498px;
   padding: 20px;
-  border-radius: 18px 18px 0 0; /* Round top corners */
+  border-radius: 18px 18px 18px 18px; /* Round top corners */
   text-align: center;
   justify-content: center;
   align-items: center;
