@@ -11,7 +11,6 @@ export default function FriendListPage() {
 
   return (
     <PageContainer>
-      {/* <Header text={"친구 목록"} /> */}
       <FriendListHeader text="친구 목록" />
       <ListHeader selected={selected} setSelected={setSelected} />
       {selected === 0 ? <ListForm /> : <InvitationConfirmationModal />}
@@ -24,6 +23,7 @@ const PageContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  // justify-content: center;
   margin-bottom: 30px;
+  height: 100vh;
 `;

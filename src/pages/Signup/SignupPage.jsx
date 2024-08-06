@@ -7,7 +7,7 @@ import SignupToLogin from "../../components/Signup/SignupToLogin";
 export default function SignupPage() {
   return (
     <PageContainer>
-      <Header text="회원가입" link="/peephole" />
+      <Header text="회원가입" link="/" />
       <SignupForm />
       <SignupToLogin />
     </PageContainer>
@@ -19,6 +19,7 @@ const PageContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  // justify-content: center;
   gap: 30px;
+  height: 100vh;
 `;
