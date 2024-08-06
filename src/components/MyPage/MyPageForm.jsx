@@ -99,6 +99,7 @@ const SendButton = styled.button`
   padding: 12px;
   width: 400px;
   font-size: 18px;
+  font-weight: bold;
   display: flex;
   justify-content: center;
   align-items: center;
