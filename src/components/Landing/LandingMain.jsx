@@ -24,11 +24,11 @@ const LandingMain = ({ onClose }) => {
     <Container {...handlers}>
       <SwipeContainer currentIndex={currentIndex}>
         <Slide>
-          <Logo>Peephole.</Logo>
+          <Logo src="images/Logo.png" alt="Peephole." />
         </Slide>
         <Slide>
           <IntroductionWrapper>
-            <Introduction>Peephole.</Introduction>
+            <Logo src="images/Logo.png" alt="Peephole." />
           </IntroductionWrapper>
         </Slide>
         <Slide>
@@ -90,10 +90,10 @@ const Slide = styled.div`
   flex-shrink: 0;
 `;
 
-const Logo = styled.div`
-  font-size: 48px;
-  font-weight: bold;
-  font-family: "Noto Sans KR";
+const Logo = styled.img`
+  width: 240px;
+  height: auto;
+  margin-bottom: 250px;
   color: #fff;
 `;
 

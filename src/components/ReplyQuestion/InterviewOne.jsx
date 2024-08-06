@@ -41,7 +41,7 @@ export default function InterviewOne() {
 
   return (
     <InterviewContainer>
-      <Logo>Peephole.</Logo>
+      <Logo src="images/Logo.png" alt="Peephole." />
       <QuestionContainer>
         <QuestionArea>{question}</QuestionArea>
         <CalculateDate />
@@ -70,9 +70,11 @@ const InterviewContainer = styled.div`
   gap: 30px;
 `;
 
-const Logo = styled.div`
-  font-size: 24px;
-  font-weight: 500;
+const Logo = styled.img`
+  width: 120px;
+  height: auto;
+  margin-top: 30px;
+  margin-bottom: 20px;
   color: #fff;
 `;
 
