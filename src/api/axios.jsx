@@ -26,7 +26,7 @@ instance.interceptors.response.use(
     if (error.response && error.response.status === 400) {
       // 400 에러일 경우 액세스 토큰 삭제 및 랜딩페이지로 리다이렉트
       localStorage.removeItem("accessToken");
-      window.location.href = "/";
+      window.location.href = "/login";
     }
     return Promise.reject(error);
   }
